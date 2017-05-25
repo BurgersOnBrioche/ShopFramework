@@ -41,7 +41,7 @@ $(document).ready(function() {
             case $inputText.length > 0:
                 $("#bagLetter2").css({ display: "none" })
                 $("#letter1").html($inputText.charAt(0).toUpperCase())
-                var newLetter1Path = window.baseUrl + "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
+                var newLetter1Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
                 $("#bagLetter1").attr("src", newLetter1Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
                 $("#bagLetter1").css({ display: "block", height: newHeight + "px" })
                     /* $("#bagLetter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
@@ -49,7 +49,7 @@ $(document).ready(function() {
 
                 if ($inputText.length > 1) {
                     $("#letter2").html($inputText.charAt(1).toUpperCase())
-                    var newLetter2Path = window.baseUrl + "assets/img/letters/" + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice + ".png"
+                    var newLetter2Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice + ".png"
                     $("#bagLetter2").attr("src", newLetter2Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
                     $("#bagLetter2").css({ display: "block", height: newHeight + "px" })
                     $("input").blur()
@@ -72,12 +72,12 @@ $(document).ready(function() {
         $(this).addClass("active")
         if ($("#letter1").hasClass("active")) {
             letter1Choice = $(this).data("material-swatch")
-            var newLetter1Path = window.baseUrl + "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
+            var newLetter1Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
             $("#bagLetter1").attr("src", newLetter1Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
 
         } else if ($("#letter2").hasClass("active")) {
             letter2Choice = $(this).data("material-swatch")
-            var newLetter2Path = window.baseUrl + "assets/img/letters/" + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice + ".png"
+            var newLetter2Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice + ".png"
             $("#bagLetter2").attr("src", newLetter2Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
 
             /* $("#bagLetter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
