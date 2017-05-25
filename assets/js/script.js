@@ -2,11 +2,23 @@ $(document).ready(function() {
     var letter1Choice = "black"
     var letter2Choice = "black"
 
+    var bagContainerHeight = $(".main-bag-container").width() * .7
+    $(".main-bag-container").height(bagContainerHeight)
+    var bagContainerHeight = $(".main-letters-container").width() * .7
+    $(".main-letters-container").height(bagContainerHeight)
+    var letterTabHeight = $(".swatch-row").height() / 2
+    $(".custom-letter-container").height(letterTabHeight)
+
     $(window).resize(function() {
         var newLetterHeight = $(".letters-wrapper ").height()
         $("#bagLetter1").css({ display: "block", height: newLetterHeight + "px" })
         $("#bagLetter2").css({ display: "block", height: newLetterHeight + "px" })
-
+        bagContainerHeight = $(".main-bag-container").width() * .7
+        $(".main-bag-container").height(bagContainerHeight)
+        bagContainerHeight = $(".main-letters-container").width() * .7
+        $(".main-letters-container").height(bagContainerHeight)
+        letterTabHeight = $(".swatch-row").height() / 2
+        $(".custom-letter-container").height(letterTabHeight)
 
     })
 

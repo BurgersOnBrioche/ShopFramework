@@ -45,7 +45,6 @@
    .main-bag-container {
        display: block;
        position: relative;
-       height: 70vw;
        width: 70%;
        left: 15%;
        background: url('../img/bags/danny2.png') no-repeat;
@@ -57,7 +56,6 @@
        display: block;
        position: relative;
        width: 100%;
-       height: 100%;
        text-align: center;
    }
    
@@ -130,7 +128,6 @@
    }
    
    .main-customization-container {
-       height: calc(100% - 70vw);
        width: 100%;
    }
    
@@ -161,7 +158,7 @@
    
    .custom-letter-container {
        display: table;
-       height: 20%;
+       height: 100%;
        width: 100%;
        table-layout: fixed;
    }
