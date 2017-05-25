@@ -193,6 +193,11 @@
        opacity: 1;
    }
    
+   .letter-color-letter img {
+       height: 100%;
+       width: auto;
+   }
+   
    .letter-table-buffer {
        display: table-cell;
        width: 40%;
@@ -223,7 +228,7 @@
    .swatch-image-wrapper {
        display: table;
        table-layout: fixed;
-       border-spacing: 20px 5px;
+       border-spacing: 30px 5px;
        width: 100%;
    }
    
