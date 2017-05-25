@@ -3,9 +3,10 @@ $(document).ready(function() {
     var letter2Choice = "black"
 
     $(window).resize(function() {
-        var newHeight = $(".letters-wrapper ").height()
-        $("#bagLetter1").css({ display: "block", height: newHeight + "px" })
-        $("#bagLetter2").css({ display: "block", height: newHeight + "px" })
+        var newLetterHeight = $(".letters-wrapper ").height()
+        $("#bagLetter1").css({ display: "block", height: newLetterHeight + "px" })
+        $("#bagLetter2").css({ display: "block", height: newLetterHeight + "px" })
+
 
     })
 
@@ -26,7 +27,6 @@ $(document).ready(function() {
         $(".swatch-image-border.active").removeClass("active")
         $(".swatch-image-border").each(function() {
             if ($(this).data("material-swatch") == letter2Choice) {
-
                 $(this).addClass("active")
             }
         })
@@ -40,19 +40,21 @@ $(document).ready(function() {
         switch (true) {
             case $inputText.length > 0:
                 $("#bagLetter2").css({ display: "none" })
-                $("#letter1").html($inputText.charAt(0).toUpperCase())
+
                 var newLetter1Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
+                $("#letter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
                 $("#bagLetter1").attr("src", newLetter1Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
                 $("#bagLetter1").css({ display: "block", height: newHeight + "px" })
                     /* $("#bagLetter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
                      $("#bagLetter2").css({ background: "none" })*/
-
+                $("#custombar-custom-info").val("Danny-Black / " + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice)
                 if ($inputText.length > 1) {
-                    $("#letter2").html($inputText.charAt(1).toUpperCase())
                     var newLetter2Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice + ".png"
                     $("#bagLetter2").attr("src", newLetter2Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
                     $("#bagLetter2").css({ display: "block", height: newHeight + "px" })
                     $("input").blur()
+                    $("#letter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
+                    $("#custombar-custom-info").val("Danny-Black / " + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + " / " + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice)
                 }
 
                 /*$("#bagLetter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
@@ -74,13 +76,20 @@ $(document).ready(function() {
             letter1Choice = $(this).data("material-swatch")
             var newLetter1Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
             $("#bagLetter1").attr("src", newLetter1Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
+            $("#letter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
+            if ($inputText.length > 1) {
+                $("#custombar-custom-info").val("Danny-Black / " + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + " / " + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice)
 
+            } else {
+                $("#custombar-custom-info").val("Danny-Black / " + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice)
+            }
         } else if ($("#letter2").hasClass("active")) {
             letter2Choice = $(this).data("material-swatch")
             var newLetter2Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice + ".png"
             $("#bagLetter2").attr("src", newLetter2Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
-
-            /* $("#bagLetter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
+                /* $("#bagLetter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
+            $("#letter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "50%", backgroundPosition: "center" })
+            $("#custombar-custom-info").val("Danny-Black / " + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + " / " + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice)
 
         }
     })
