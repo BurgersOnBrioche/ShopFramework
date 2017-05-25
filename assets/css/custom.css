@@ -13,7 +13,7 @@
    
    #customBarHeaderMain {
        display: block;
-       height: 20%;
+       height: 10%;
    }
    
    .custombar-header-text-wrapper {
@@ -32,18 +32,22 @@
    
    #customBarSectionMain {
        display: block;
-       height: 80%;
+       height: 90%;
    }
    
    .main-custombar-container {
        display: block;
-       height: 70%
+       width: 100%;
+       height: 100%;
+       text-align: center;
    }
    
    .main-bag-container {
        display: block;
-       height: 70%;
-       width: 100%;
+       position: relative;
+       height: 70vw;
+       width: 70%;
+       left: 15%;
        background: url('../img/bags/danny2.png') no-repeat;
        background-size: contain;
        background-position: center;
@@ -61,7 +65,7 @@
        display: block;
        position: relative;
        width: 100%;
-       height: 30%;
+       height: 26.25%;
        top: 30%;
        text-align: center;
        overflow: hidden;
@@ -126,7 +130,7 @@
    }
    
    .main-customization-container {
-       height: 40%;
+       height: calc(100% - 70vw);
        width: 100%;
    }
    
@@ -135,7 +139,7 @@
        width: 100%;
        display: table;
        text-align: center;
-       margin-bottom: 2vh;
+       margin-bottom: 5px;
    }
    
    #letters-input {
@@ -151,7 +155,7 @@
    .letters-customization-wrapper {
        display: block;
        width: 100%;
-       height: 100%;
+       height: 90%;
        background: white;
    }
    
@@ -206,7 +210,7 @@
    }
    
    .letter-swatch-container {
-       height: 100%;
+       height: 70%;
        width: 100%;
        display: block;
    }
@@ -215,7 +219,6 @@
        display: table;
        width: 100%;
        height: 20%;
-       margin-top: 5%;
        table-layout: fixed;
        overflow: hidden;
    }
