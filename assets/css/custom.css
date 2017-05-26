@@ -71,19 +71,15 @@
    
    .bag-letter-sub-wrapper {
        text-align: center;
-       display: table;
+       display: flex;
+       flex-direction: row;
+       justify-content: center;
        height: 100%;
        width: 100%;
        table-layout: fixed;
    }
    
-   .bag-letter-buffer {
-       display: table-cell;
-       width: 30%;
-   }
-   
    .bag-letter {
-       display: table-cell;
        text-align: center;
        width: 20%;
        height: 100%;
@@ -112,18 +108,11 @@
        display: none;
    }
    
-   .bag-letter-inner-buffer {
-       display: table-cell;
-       width: 5%;
-   }
-   
    #bagLetter1 {
-       float: right;
        display: none;
    }
    
    #bagLetter2 {
-       float: left;
        display: none;
    }
    

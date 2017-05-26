@@ -52,7 +52,6 @@ $(document).ready(function() {
         switch (true) {
             case $inputText.length > 0:
                 $("#bagLetter2").css({ display: "none" })
-
                 var newLetter1Path = "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
                 $("#letter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
                 $("#bagLetter1").attr("src", newLetter1Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
