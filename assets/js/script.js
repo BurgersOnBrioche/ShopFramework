@@ -66,13 +66,15 @@ $(document).ready(function() {
                     $("input").blur()
                     $("#letter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
                     $("#custombar-custom-info").val("Danny-Black / " + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + " / " + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice)
+                } else {
+                    $("#letter2").css({ background: "none" })
                 }
 
                 /*$("#bagLetter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
                 break;
             default:
-                $("#letter1").html("")
-                $("#letter2").html("")
+                $("#letter1").css({ background: "none" })
+                $("#letter2").css({ background: "none" })
                 $("#bagLetter1").css({ display: "none" })
                 $("#bagLetter2").css({ display: "none" })
                 break;
