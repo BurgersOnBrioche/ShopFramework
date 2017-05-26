@@ -10,16 +10,16 @@ $(document).ready(function() {
 
 function activate() {
   var el = {
-    input:          $('#letters-input'),
-    letterTabs:     $('.tab-letter-color-letter'),
-    letterTab1:     $('#tab-letter1'),
-    letterTab2:     $('#tab-letter2'),
+    input: $('#letters-input'),
+    letterTabs: $('.tab-letter-color-letter'),
+    letterTab1: $('#tab-letter1'),
+    letterTab2: $('#tab-letter2'),
     lettersWrapper: $('.tab-letter-wrapper.active'),
-    swatch:         $('.swatch-image-border'),
+    swatch: $('.swatch-image-border'),
   }
 
   Object.keys(el).forEach(function(key) {
-    if( !el[key].length ) { console.warn(`No element present for ${key}`); }
+    if (!el[key].length) { console.warn(`No element present for ${key}`); }
   })
 
   var bagContainerHeight = $(".main-bag-container").width() * .7
@@ -72,7 +72,7 @@ function activate() {
   el.input.on("input", function() {
     var $inputText = $(this).val()
 
-    if( $inputText.length > 0 ) {
+    if ($inputText.length > 0) {
       $("#bagLetter2").hide()
       renderLetter(1, $inputText.charAt(0), letter1Choice)
       if ($inputText.length > 1) {
@@ -107,17 +107,17 @@ function activate() {
   })
 
   function renderLetter(index, letter, swatch) {
-    var height     = $(".letters-wrapper").height()
+    var height = $(".letters-wrapper").height()
     var letterPath = (window.baseUrl || "") + "assets/img/letters/" + letter.toUpperCase() + "-" + swatch + ".png"
-    $("#tab-letter"+index).css({ background: "url(" + letterPath + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
-    $("#bagLetter"+index).attr("src", letterPath)
-    $("#bagLetter"+index).show().css({ height: height })
+    $("#tab-letter" + index).css({ background: "url(" + letterPath + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
+    $("#bagLetter" + index).attr("src", letterPath)
+    $("#bagLetter" + index).show().css({ height: height })
   }
 
   function updateCustomInfo() {
     var text = el.input.val()
 
-    if( !text.length ) { return; }
+    if (!text.length) { return; }
 
     if (text.length > 1) {
       $("#custombar-custom-info").val("Danny-Black / " + text[0].toUpperCase() + "-" + letter1Choice + " / " + text[1].toUpperCase() + "-" + letter2Choice)
