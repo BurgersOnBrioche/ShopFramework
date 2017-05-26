@@ -4,12 +4,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <meta name="viewport" content="width-device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="David Lichy">
     <link rel="icon" type="" href="assets/img/favicon.ico">
     <title>Custom Bar 2</title>
-    <link href="assets/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
@@ -181,37 +180,22 @@
         </div>
     </section>
     <!--customBarHeaderMain-->
+    <input type="text" placeholder="debugging input for shopify connection" id="custombar-custom-info" style="width: 100%"/>
     <section id="customBarSectionMain">
         <div class="main-custombar-container">
             <div class="main-bag-container">
                 <div class="main-letters-container">
                     <div class="letters-wrapper">
-
-                        <div class="bag-letter-sub-wrapper">
-                            <div class="bag-letter-buffer">
-                            </div>
-                            <div class="bag-letter">
-                                <div class="bag-letter-img-container">
-                                    <img src="" alt="" id="bagLetter1">
-                                    <div class="spinner" id="letter1Spinner">
-                                        <div class="dot1"></div>
-                                        <div class="dot2"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bag-letter">
-                                <div class="bag-letter-img-container"><img src="" alt="" id="bagLetter2"></div>
-                                <div class="spinner" id="letter2Spinner">
-                                    <div class="dot1"></div>
-                                    <div class="dot2"></div>
-                                </div>
-                            </div>
-                            <div class="bag-letter-buffer">
-
+                        <div class="bag-letter">
+                            <div class="bag-letter-img-container">
+                                <img src="" alt="" id="bagLetter1">
                             </div>
                         </div>
-
+                        <div class="bag-letter">
+                            <div class="bag-letter-img-container">
+                                <img src="" alt="" id="bagLetter2">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -221,25 +205,20 @@
                 </div>
                 <div class="letters-customization-wrapper">
                     <div class="custom-letter-container">
-
-                        <div class="letter-table-buffer">
-
+                        <div class="tab-letter-border-buffer"></div>
+                        <div class="tab-letter-wrapper active">
+                            <div id="tab-letter1" class="tab-letter-color-letter active">
+                            </div>
                         </div>
-                        <div id="letter1" class="letter-color-letter active">
-
+                        <div class="tab-letter-wrapper" id="tab-letter-wrapper">
+                            <div id="tab-letter2" class="tab-letter-color-letter active">
+                            </div>
                         </div>
-                        <div id="letter2" class="letter-color-letter">
-
-                        </div>
-
-                        <div class="letter-table-buffer">
-
-                        </div>
-
+                        <div class="tab-letter-border-buffer"></div>
                     </div>
 
-                    <div class="letter-swatch-container">
 
+                    <div class="letter-swatch-container">
                         <div class="swatch-row">
                             <div class="swatch-wrapper-buffer">
                             </div>
@@ -304,5 +283,4 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
-
 </html>
