@@ -106,7 +106,6 @@ function activate() {
 
     updateCustomInfo()
   })
-
   function renderLetter(index, letter, swatch) {
     var height = $(".letters-wrapper").height()
     var letterPath = (window.baseUrl || "") + "assets/img/letters/" + letter.toUpperCase() + "-" + swatch + ".png"
