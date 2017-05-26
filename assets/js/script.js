@@ -1,6 +1,16 @@
 $(document).ready(function() {
+  fetch((window.baseUrl || '') + '/assets/html/custombar.html').then(function(response) {
+    return response.text()
+  }).then(function(html) {
+    $('#custombar').before(html).remove()
+    activate()
+  })
+})
+
+function activate() {
   var el = {
     input:          $('#letters-input'),
+    bagLetters:     $('.bag-letter-image'),
     letterTabs:     $('.letter-color-letter'),
     letterTab1:     $('#letter1'),
     letterTab2:     $('#letter2'),
@@ -16,7 +26,7 @@ $(document).ready(function() {
   var letter2Choice = "black"
 
   $(window).resize(function() {
-    el.letters.height(
+    el.bagLetters.height(
       el.lettersWrapper.height()
     )
   })
@@ -98,4 +108,4 @@ $(document).ready(function() {
       $("#custombar-custom-info").val("Danny-Black / " + text[0].toUpperCase() + "-" + letter1Choice)
     }
   }
-})
+}
