@@ -14,7 +14,7 @@ function activate() {
     letterTabs: $('.tab-letter-color-letter'),
     letterTab1: $('#tab-letter1'),
     letterTab2: $('#tab-letter2'),
-    lettersWrapper: $('.tab-letter-wrapper.active'),
+    lettersWrapper: $('.tab-letter-wrapper'),
     swatch: $('.swatch-image-border'),
   }
 
@@ -52,6 +52,7 @@ function activate() {
   })
 
   el.letterTab1.on('click', function() {
+
     el.swatch.removeClass('active')
     el.swatch.each(function() {
       if ($(this).data("material-swatch") == letter1Choice) {
