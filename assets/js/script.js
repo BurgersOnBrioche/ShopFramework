@@ -2,6 +2,7 @@ $(document).ready(function() {
   fetch((window.baseUrl || '') + '/assets/html/custombar.html').then(function(response) {
     return response.text()
   }).then(function(html) {
+    html = html.replace(/assets\/img\//g, window.baseUrl + 'assets/img/')
     $('#custombar').before(html).remove()
     activate()
   })
@@ -101,6 +102,8 @@ function activate() {
 
   function updateCustomInfo() {
     var text = el.input.val()
+
+    if( !text.length ) { return; }
 
     if (text.length > 1) {
       $("#custombar-custom-info").val("Danny-Black / " + text[0].toUpperCase() + "-" + letter1Choice + " / " + text[1].toUpperCase() + "-" + letter2Choice)
