@@ -81,7 +81,6 @@
    
    .bag-letter {
        text-align: center;
-       width: 20%;
        height: 100%;
    }
    
@@ -94,7 +93,9 @@
    }
    
    .bag-letter-img-container {
-       display: block;
+       display: flex;
+       flex-direction: row;
+       justify-content: center;
        position: relative;
        width: 100%;
        text-align: center;
