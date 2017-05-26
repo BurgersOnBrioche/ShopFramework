@@ -22,12 +22,15 @@ $(document).ready(function() {
 
     })
 
-    $(".letter-color-letter").click(function() {
-        $(".letter-color-letter.active").removeClass("active")
+    $(".tab-letter-color-letter").click(function() {
+        $(".tab-letter-color-letter.active").removeClass("active")
+        $(".tab-letter-wrapper.active").removeClass("active")
         $(this).addClass("active")
+        $(this).parent().addClass("active")
+
     })
 
-    $("#letter1").click(function() {
+    $("#tab-letter1").click(function() {
         $(".swatch-image-border.active").removeClass("active")
         $(".swatch-image-border").each(function() {
             if ($(this).data("material-swatch") == letter1Choice) {
@@ -35,46 +38,51 @@ $(document).ready(function() {
             }
         })
     })
-    $("#letter2").click(function() {
+    $("#tab-letter2").click(function() {
         $(".swatch-image-border.active").removeClass("active")
         $(".swatch-image-border").each(function() {
             if ($(this).data("material-swatch") == letter2Choice) {
                 $(this).addClass("active")
+                $(this).parent().addClass("active")
             }
         })
     })
     $("#letters-input").on("input", function() {
-
-
         var $inputText = $(this).val()
         var newHeight = $(".letters-wrapper ").height()
 
         switch (true) {
             case $inputText.length > 0:
                 $("#bagLetter2").css({ display: "none" })
+<<<<<<< HEAD
                 var newLetter1Path = "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
+                $("#tab-letter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
+=======
+
+                var newLetter1Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
                 $("#letter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
+>>>>>>> a347e81736368537594d3164ff12437993df8515
                 $("#bagLetter1").attr("src", newLetter1Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
                 $("#bagLetter1").css({ display: "block", height: newHeight + "px" })
                     /* $("#bagLetter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
                      $("#bagLetter2").css({ background: "none" })*/
                 $("#custombar-custom-info").val("Danny-Black / " + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice)
                 if ($inputText.length > 1) {
-                    var newLetter2Path = "assets/img/letters/" + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice + ".png"
+                    var newLetter2Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice + ".png"
                     $("#bagLetter2").attr("src", newLetter2Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
                     $("#bagLetter2").css({ display: "block", height: newHeight + "px" })
                     $("input").blur()
-                    $("#letter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
+                    $("#tab-letter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
                     $("#custombar-custom-info").val("Danny-Black / " + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + " / " + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice)
                 } else {
-                    $("#letter2").css({ background: "none" })
+                    $("#tab-letter2").css({ background: "none" })
                 }
 
                 /*$("#bagLetter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
                 break;
             default:
-                $("#letter1").css({ background: "none" })
-                $("#letter2").css({ background: "none" })
+                $("#tab-letter1").css({ background: "none" })
+                $("#tab-letter2").css({ background: "none" })
                 $("#bagLetter1").css({ display: "none" })
                 $("#bagLetter2").css({ display: "none" })
                 break;
@@ -85,26 +93,38 @@ $(document).ready(function() {
         var $inputText = $("#letters-input").val()
         $(".swatch-image-border.active").removeClass("active")
         $(this).addClass("active")
-        if ($("#letter1").hasClass("active")) {
+        if ($("#tab-letter1").hasClass("active")) {
             letter1Choice = $(this).data("material-swatch")
-            var newLetter1Path = "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
+            var newLetter1Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
             $("#bagLetter1").attr("src", newLetter1Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
-            $("#letter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
+            $("#tab-letter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
             if ($inputText.length > 1) {
                 $("#custombar-custom-info").val("Danny-Black / " + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + " / " + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice)
 
             } else {
                 $("#custombar-custom-info").val("Danny-Black / " + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice)
             }
-        } else if ($("#letter2").hasClass("active")) {
+        } else if ($("#tab-letter2").hasClass("active")) {
             letter2Choice = $(this).data("material-swatch")
-            var newLetter2Path = "assets/img/letters/" + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice + ".png"
+            var newLetter2Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice + ".png"
             $("#bagLetter2").attr("src", newLetter2Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
                 /* $("#bagLetter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
-            $("#letter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "50%", backgroundPosition: "center" })
+            $("#tab-letter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "50%", backgroundPosition: "center" })
             $("#custombar-custom-info").val("Danny-Black / " + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + " / " + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice)
 
         }
+
     })
 
+<<<<<<< HEAD
+
+
+    function renderLetter(el) {
+
+    }
+
+
 })
+=======
+})
+>>>>>>> a347e81736368537594d3164ff12437993df8515
