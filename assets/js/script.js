@@ -2,7 +2,7 @@ $(document).ready(function() {
   fetch((window.baseUrl || '') + '/assets/html/custombar.html').then(function(response) {
     return response.text()
   }).then(function(html) {
-    html = html.replace(/assets\/img\//g, window.baseUrl + 'assets/img/')
+    html = html.replace(/assets\/img\//g, (window.baseUrl || '') + 'assets/img/')
     $('#custombar').before(html).remove()
     activate()
   })
@@ -25,12 +25,6 @@ function activate() {
 
   var letter1Choice = "black"
   var letter2Choice = "black"
-
-  $(window).resize(function() {
-    el.bagLetters.height(
-      el.lettersWrapper.height()
-    )
-  })
 
   el.letterTabs.on('click', function() {
     el.letterTabs.removeClass("active")

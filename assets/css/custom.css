@@ -43,14 +43,30 @@
    }
 
    .main-bag-container {
-       display: block;
-       position: relative;
+       display: flex;
+       margin: 0 auto;
        height: 70vw;
        width: 70%;
-       left: 15%;
        background: url('../img/bags/danny2.png') no-repeat;
        background-size: contain;
        background-position: center;
+   }
+
+   .letters {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 100%; 
+   }
+
+   .letter {
+     width: 33%;
+     text-align: center;
+   }
+
+   .letter img {
+     max-width: 100%;
+     max-height: 100%;
    }
 
    .main-letters-container {
@@ -120,12 +136,10 @@
    }
 
    #bagLetter1 {
-       float: right;
        display: none;
    }
 
    #bagLetter2 {
-       float: left;
        display: none;
    }
 
