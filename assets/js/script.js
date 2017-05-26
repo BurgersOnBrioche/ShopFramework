@@ -1,12 +1,16 @@
 $(document).ready(function() {
   var el = {
-    bagLetters:     $('.letter-color-letter'),
-    letterImages:   $('.bag-letter-image'),
     input:          $('#letters-input'),
+    letterTabs:     $('.letter-color-letter'),
     letterTab1:     $('#letter1'),
     letterTab2:     $('#letter2'),
     lettersWrapper: $('.letters-wrapper'),
+    swatch:         $('.swatch-image-border'),
   }
+
+  Object.keys(el).forEach(function(key) {
+    if( !el[key].length ) { console.warn(`No element present for ${key}`); }
+  })
 
   var letter1Choice = "black"
   var letter2Choice = "black"
@@ -17,25 +21,25 @@ $(document).ready(function() {
     )
   })
 
-  el.bagLetters.on('click', function() {
-    el.bagLetters.removeClass("active")
+  el.letterTabs.on('click', function() {
+    el.letterTabs.removeClass("active")
     $(this).addClass("active")
   })
 
   el.letterTab1.on('click', function() {
-    $(".swatch-image-border.active").removeClass("active")
-    $(".swatch-image-border").each(function() {
+    el.swatch.removeClass('active')
+    el.swatch.each(function() {
       if ($(this).data("material-swatch") == letter1Choice) {
-          $(this).addClass("active")
+        $(this).addClass("active")
       }
     })
   })
 
   el.letterTab2.on('click', function() {
-    $(".swatch-image-border.active").removeClass("active")
-    $(".swatch-image-border").each(function() {
+    el.swatch.removeClass('active')
+    el.swatch.each(function() {
       if ($(this).data("material-swatch") == letter2Choice) {
-          $(this).addClass("active")
+        $(this).addClass("active")
       }
     })
   })
@@ -59,6 +63,24 @@ $(document).ready(function() {
     }
   })
 
+  el.swatch.on('click', function() {
+    el.swatch.removeClass("active")
+    $(this).addClass("active")
+    var text = el.input.val()
+
+    if ($("#letter1").hasClass("active")) {
+      letter1Choice = $(this).data("material-swatch")
+      renderLetter(1, text.charAt(0).toUpperCase(), letter1Choice)
+    } else if ($("#letter2").hasClass("active")) {
+      letter2Choice = $(this).data("material-swatch")
+      renderLetter(2, text.charAt(1).toUpperCase(), letter2Choice)
+    } else {
+      console.warn('Unknown letter active')
+    }
+
+    updateCustomInfo()
+  })
+
   function renderLetter(index, letter, swatch) {
     var height     = $(".letters-wrapper").height()
     var letterPath = (window.baseUrl || "") + "assets/img/letters/" + letter.toUpperCase() + "-" + swatch + ".png"
@@ -76,22 +98,4 @@ $(document).ready(function() {
       $("#custombar-custom-info").val("Danny-Black / " + text[0].toUpperCase() + "-" + letter1Choice)
     }
   }
-
-  $(".swatch-image-border").click(function() {
-    $(".swatch-image-border.active").removeClass("active")
-    $(this).addClass("active")
-    var $inputText = el.input.val()
-
-    if ($("#letter1").hasClass("active")) {
-      letter1Choice = $(this).data("material-swatch")
-      renderLetter(1, $inputText.charAt(0).toUpperCase(), letter1Choice)
-    } else if ($("#letter2").hasClass("active")) {
-      letter2Choice = $(this).data("material-swatch")
-      renderLetter(2, $inputText.charAt(1).toUpperCase(), letter2Choice)
-    } else {
-      console.warn('Unknown letter active')
-    }
-
-    updateCustomInfo()
-  })
 })
