@@ -55,13 +55,10 @@ $(document).ready(function() {
             case $inputText.length > 0:
                 $("#bagLetter2").css({ display: "none" })
 
-                var newLetter1Path = "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
+                var newLetter1Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
                 $("#tab-letter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
-
                 $("#bagLetter1").attr("src", newLetter1Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
                 $("#bagLetter1").css({ display: "block", height: newHeight + "px" })
-                    /* $("#bagLetter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
-                     $("#bagLetter2").css({ background: "none" })*/
                 $("#custombar-custom-info").val("Danny-Black / " + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice)
                 if ($inputText.length > 1) {
                     var newLetter2Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(1).toUpperCase() + "-" + letter2Choice + ".png"
@@ -74,7 +71,6 @@ $(document).ready(function() {
                     $("#tab-letter2").css({ background: "none" })
                 }
 
-                /*$("#bagLetter2").css({ background: "url(" + newLetter2Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
                 break;
             default:
                 $("#tab-letter1").css({ background: "none" })
@@ -111,6 +107,4 @@ $(document).ready(function() {
         }
 
     })
-
-
 })

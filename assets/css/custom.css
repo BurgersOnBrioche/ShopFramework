@@ -2,7 +2,7 @@
            font-family: 'Sincerely';
            src: url('../fonts/Sincerely.woff');
        }
-       
+
        body,
        html {
            height: 100%;
@@ -10,38 +10,38 @@
            display: block;
            margin: 0;
        }
-       
+
        #customBarHeaderMain {
            display: block;
            height: 10%;
        }
-       
+
        .custombar-header-text-wrapper {
            height: 100%;
            width: 100%;
            text-align: center;
            display: table;
        }
-       
+
        .custombar-header-text-wrapper span {
            height: 100%;
            text-align: center;
            vertical-align: middle;
            display: table-cell;
        }
-       
+
        #customBarSectionMain {
            display: block;
            height: 90%;
        }
-       
+
        .main-custombar-container {
            display: block;
            width: 100%;
            height: 100%;
            text-align: center;
        }
-       
+
        .main-bag-container {
            display: block;
            position: relative;
@@ -51,14 +51,14 @@
            background-size: contain;
            background-position: center;
        }
-       
+
        .main-letters-container {
            display: block;
            position: relative;
            width: 100%;
            text-align: center;
        }
-       
+
        .letters-wrapper {
            text-align: center;
            display: flex;
@@ -71,20 +71,20 @@
            text-align: center;
            overflow: hidden;
        }
-       
+
        .bag-letter {
            text-align: center;
            height: 100%;
        }
-       
+
        .bag-letter:first-child {
            background: none;
        }
-       
+
        .bag-letter:last-child {
            background: none;
        }
-       
+
        .bag-letter-img-container {
            display: flex;
            flex-direction: row;
@@ -93,7 +93,7 @@
            width: 100%;
            text-align: center;
        }
-       
+
        .bag-letter img {
            position: relative;
            text-align: center;
@@ -101,19 +101,19 @@
            height: 100%;
            display: none;
        }
-       
+
        #bagLetter1 {
            display: none;
        }
-       
+
        #bagLetter2 {
            display: none;
        }
-       
+
        .main-customization-container {
            width: 100%;
        }
-       
+
        .letters-input-wrapper {
            height: 10%;
            width: 100%;
@@ -123,7 +123,7 @@
            text-align: center;
            margin-bottom: 5px;
        }
-       
+
        #letters-input {
            border: 1px solid black;
            display: block;
@@ -133,14 +133,14 @@
            text-transform: uppercase;
            text-indent: 0;
        }
-       
+
        .letters-customization-wrapper {
            display: block;
            width: 100%;
            height: 90%;
            background: white;
        }
-       
+
        .custom-letter-container {
            display: flex;
            flex-direction: row;
@@ -149,7 +149,7 @@
            width: 100%;
            table-layout: fixed;
        }
-       
+
        .tab-letter-wrapper {
            display: block;
            width: 10%;
@@ -170,7 +170,7 @@
            -o-border-top-left-radius: 10%;
            border-top-left-radius: 10%;
        }
-       
+
        .tab-letter-wrapper.active {
            border-top: 1px solid black;
            border-left: 1px solid black;
@@ -179,36 +179,36 @@
            background: white;
            opacity: 1;
        }
-       
+
        .tab-letter-border-buffer {
            display: block;
            height: 100%;
            width: 40%;
            border-bottom: 1px solid black;
        }
-       
+
        .tab-letter-color-letter {
            height: 100%;
        }
-       
+
        .letter-color-letter img {
            height: 100%;
            width: auto;
        }
-       
+
        .letter-table-buffer {
            display: table-cell;
            width: 40%;
            height: 100%;
            border-bottom: 1px solid black;
        }
-       
+
        .letter-swatch-container {
            height: 70%;
            width: 100%;
            display: block;
        }
-       
+
        .swatch-row {
            display: table;
            width: 100%;
@@ -217,19 +217,19 @@
            table-layout: fixed;
            overflow: hidden;
        }
-       
+
        .swatch-wrapper {
            display: table-cell;
            width: 100%;
            height: 20%;
            vertical-align: middle;
        }
-       
+
        .swatch-wrapper-buffer {
            display: table-cell;
            width: 50%;
        }
-       
+
        .swatch-image-wrapper {
            display: table;
            position: relative;
@@ -239,7 +239,7 @@
            left: 15%;
            text-align: center;
        }
-       
+
        .swatch-image-border {
            display: table-cell;
            width: 80%;
@@ -253,22 +253,22 @@
            background: black;
            border: 5px solid black;
        }
-       
+
        .swatch-image-border.active {
            border: 5px solid pink;
        }
-       
+
        .swatch-image-border img {
            display: block;
            width: 100%;
            height: auto;
        }
-       
+
        .custom-script {
            font-family: 'Sincerely', sans-serif;
            font-size: 2em;
        }
-       
+
        .reg-tm {
            font-size: 0.5em
        }
