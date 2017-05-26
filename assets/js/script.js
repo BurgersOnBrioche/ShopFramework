@@ -54,14 +54,10 @@ $(document).ready(function() {
         switch (true) {
             case $inputText.length > 0:
                 $("#bagLetter2").css({ display: "none" })
-<<<<<<< HEAD
+
                 var newLetter1Path = "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
                 $("#tab-letter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
-=======
 
-                var newLetter1Path = (window.baseUrl || "") + "assets/img/letters/" + $inputText.charAt(0).toUpperCase() + "-" + letter1Choice + ".png"
-                $("#letter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
->>>>>>> a347e81736368537594d3164ff12437993df8515
                 $("#bagLetter1").attr("src", newLetter1Path) /*css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })*/
                 $("#bagLetter1").css({ display: "block", height: newHeight + "px" })
                     /* $("#bagLetter1").css({ background: "url(" + newLetter1Path + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
@@ -116,15 +112,5 @@ $(document).ready(function() {
 
     })
 
-<<<<<<< HEAD
-
-
-    function renderLetter(el) {
-
-    }
-
 
 })
-=======
-})
->>>>>>> a347e81736368537594d3164ff12437993df8515
