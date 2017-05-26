@@ -11,7 +11,6 @@ $(document).ready(function() {
 function activate() {
   var el = {
     input:          $('#letters-input'),
-    bagLetters:     $('.bag-letter-image'),
     letterTabs:     $('.tab-letter-color-letter'),
     letterTab1:     $('#tab-letter1'),
     letterTab2:     $('#tab-letter2'),
