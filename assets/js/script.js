@@ -16,8 +16,11 @@ var state = {
 }
 
 $(document).on('input', '.js-input', function(evt) {
+  var letters = state.letters.split('')
+  letters.splice(state.activeLetter, 1, $(this).val())
+
   setState({
-    letters: $(this).val()
+    letters: letters.join(''),
   })
 })
 $(document).on('click', '.js-swatch-link', function(evt) {
@@ -118,6 +121,9 @@ function render() {
   // render active swatch
   $(`.js-swatch[data-color=${state.materials[state.activeLetter]}]`).addClass('active')
   updateCustomInfo()
+
+  // set value of input to the last value we read
+  $('.js-input').val(state.letters[state.activeLetter])
 }
 
 function letter(props) {

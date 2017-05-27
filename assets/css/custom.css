@@ -101,39 +101,6 @@ a { cursor: pointer; }
   opacity: 1;
   border: 2px solid #333 !important;
 }
-.tabs {
-  text-align: center;
-  border-bottom: 1px solid black;
-  margin: 1em 0;
-  display: flex;
-  justify-content: center;
-}
-.tabs a {
-  display: block;
-  width: 25vw;
-  height: 13vw;
-  position: relative;
-  top: 1px;
-  margin: 0 10px;
-  border-radius: 10px 10px 0 0;
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.5;
-}
-.tabs a img {
-  height: 40%;
-}
-.tabs a.active {
-  background-color: white;
-  border-bottom: 0;
-  opacity: 1;
-}
-.tabs a.active img {
-  height: 69%;
-}
-
 .custom-script {
   font-family: 'Sincerely', sans-serif;
   font-size: 2em;
