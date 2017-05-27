@@ -120,6 +120,10 @@ $(document).on('click', '.js-close-palette', function(evt) {
 function setState(newState) {
   lastState = Object.assign({}, state)
   state = Object.assign({}, state, newState)
+
+  if( window.location.href.match(/localhost/) ) {
+    console.log('set', newState, 'state is now', state)
+  }
   render()
 }
 
@@ -154,10 +158,10 @@ function render() {
   state.letters.split('').forEach(function(l, i) {
     var letter = Letter({ letter: l, material: state.materials[i], index: i})
     $('.js-loading').show()
+    $('.js-letters').append(letter)
     letter[0].onload = function() {
-      $('.js-letters').append(letter)
       $('.js-loading').hide()
-      if( state.activeLetter === 0 ) {
+      if( state.activeLetter === i ) {
         $('.js-preview').append(letter.clone())
       }
     }
