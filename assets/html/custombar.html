@@ -6,32 +6,34 @@
   <a class="add-letter js-add-letter">+ add letter</a>
 
   <div class="palette js-palette">
-    <div class="preview-cnr">
-      <label>
-        Letter:
-        <input class="js-input letters-input" type="text" maxLength="1" pattern="[A-Z]" placeholder="A-Z"/>
-      </label>
-      <div class="js-preview-letter preview"></div>
-      <a class="remove-letter js-remove-letter">&times;</a>
-    </div>
-    <div class="swatches">
-      <div class="swatch js-swatch" data-color="black">
-        <img src="assets/img/material-swatches/swatch-black.png" alt="black" class="js-swatch-link" data-color="black"/>
+    <label class="letter-label">
+      Letter:
+      <input class="js-input letters-input" type="text" maxLength="1" pattern="[A-Z]" placeholder="A-Z"/>
+    </label>
+    <div class="panels">
+      <div class="preview-cnr">
+        <div class="js-preview preview"></div>
+        <a class="remove-letter js-remove-letter">&times;</a>
       </div>
-      <div class="swatch js-swatch" data-color="white">
-        <img src="assets/img/material-swatches/swatch-white.png" alt="white" class="js-swatch-link" data-color="white" />
-      </div>
-      <div class="swatch js-swatch" data-color="hotpink">
-        <img src="assets/img/material-swatches/swatch-hotpink.png" alt="hotpink" class="js-swatch-link" data-color="hotpink" />
-      </div>
-      <div class="swatch js-swatch" data-color="lightturquoise">
-        <img src="assets/img/material-swatches/swatch-lightturquoise.png" alt="lightturquoise" class="js-swatch-link" data-color="lightturquoise" />
-      </div>
-      <div class="swatch js-swatch" data-color="silver-metallic">
-        <img src="assets/img/material-swatches/swatch-silver-metallic.png" alt="silver-metallic" class="js-swatch-link" data-color="silver-metallic" />
-      </div>
-      <div class="swatch js-swatch" data-color="gold-metallic">
-        <img src="assets/img/material-swatches/swatch-gold-metallic.png" alt="gold-metallic" class="js-swatch-link" data-color="gold-metallic" />
+      <div class="swatches">
+        <div class="swatch js-swatch" data-color="black">
+          <img src="assets/img/material-swatches/swatch-black.png" alt="black" class="js-swatch-link" data-color="black"/>
+        </div>
+        <div class="swatch js-swatch" data-color="white">
+          <img src="assets/img/material-swatches/swatch-white.png" alt="white" class="js-swatch-link" data-color="white" />
+        </div>
+        <div class="swatch js-swatch" data-color="hotpink">
+          <img src="assets/img/material-swatches/swatch-hotpink.png" alt="hotpink" class="js-swatch-link" data-color="hotpink" />
+        </div>
+        <div class="swatch js-swatch" data-color="lightturquoise">
+          <img src="assets/img/material-swatches/swatch-lightturquoise.png" alt="lightturquoise" class="js-swatch-link" data-color="lightturquoise" />
+        </div>
+        <div class="swatch js-swatch" data-color="silver-metallic">
+          <img src="assets/img/material-swatches/swatch-silver-metallic.png" alt="silver-metallic" class="js-swatch-link" data-color="silver-metallic" />
+        </div>
+        <div class="swatch js-swatch" data-color="gold-metallic">
+          <img src="assets/img/material-swatches/swatch-gold-metallic.png" alt="gold-metallic" class="js-swatch-link" data-color="gold-metallic" />
+        </div>
       </div>
     </div>
     <a class="close-palette js-close-palette"><i class="fa fa-angle-down"></i></a>

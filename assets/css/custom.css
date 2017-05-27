@@ -60,19 +60,38 @@ a { cursor: pointer; }
   text-align: center;
 }
 .palette {
-  display: flex;
   width: 100%;
   position: absolute;
   background-color: white;
   bottom: 0;
   z-index: 1;
 }
+.preview-cnr, .swatches {
+  height: 100px;
+}
 .preview-cnr {
-  flex: .333;
   position: relative;
+  background: url(https://s-media-cache-ak0.pinimg.com/originals/1a/10/05/1a10050a924b649c1d5859a74f226328.gif) repeat;
+  border: 1px solid #afd7ff;
+  border-width: 1px 0;
+  width: 100px;
+}
+.preview {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .preview img {
-  width: 100%;
+  height: 90%;
+}
+.letter-label {
+  margin-bottom: 1em;
+  display: block;
+}
+
+.panels {
+  display: flex;
 }
 .close-palette {
   position: absolute;
@@ -93,11 +112,10 @@ a { cursor: pointer; }
 }
 .swatches {
   display: flex;
-  width: 100%;
   flex-wrap: wrap;
   align-items: center;
   padding: 0 10%;
-  flex: .666
+  flex: 1;
 }
 .swatch {
   width: 33.3333%;

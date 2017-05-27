@@ -102,7 +102,7 @@ function render() {
   // reset
   $('.js-letters').html('')
   $('.js-tab').html('')
-  $('.js-preview-letter').html('')
+  $('.js-preview').html('')
   $('.js-tab').removeClass('active')
   $('.js-swatch').removeClass('active')
   $('.js-add-letter').hide()
@@ -114,7 +114,7 @@ function render() {
     $('.js-letters').append(letter1)
     $('.js-tab:eq(0)').append(letter1.clone())
     if( state.activeLetter === 0 ) {
-      $('.js-preview-letter').append(letter1.clone())
+      $('.js-preview').append(letter1.clone())
     }
   }
   if( state.letters.length > 1 ) {
@@ -122,7 +122,7 @@ function render() {
     $('.js-letters').append(letter2)
     $('.js-tab:eq(1)').append(letter2.clone())
     if( state.activeLetter === 1 ) {
-      $('.js-preview-letter').append(letter2.clone())
+      $('.js-preview').append(letter2.clone())
     }
   }
 
