@@ -1,11 +1,13 @@
 $(document).ready(function() {
   // hide contact us form
-  var interval = setInterval(function() {
-    var contactUs = $('body').find('img[src*="icf.improvely.com"]')
-    if( !contactUs.length ) { return; }
-    contactUs.hide()
-    clearInterval(interval)
-  }, 200)
+  if( !window.location.href.match(/localhost/) ) {
+    var interval = setInterval(function() {
+      var contactUs = $('body').find('img[src*="icf.improvely.com"]')
+      if( !contactUs.length ) { return; }
+      contactUs.hide()
+      clearInterval(interval)
+    }, 200)
+  }
 
   fetch((window.baseUrl || '') + '/assets/html/custombar.html').then(function(response) {
     return response.text()
@@ -17,14 +19,21 @@ $(document).ready(function() {
 })
 
 var state = {
+  bag:          'black',
   letters:      '',
   materials:    ['white', 'white'],
   activeLetter: 0,
-  editing:      false,
+  editing:      true,
+  editingBag:   true,
 }
 
 var lastState = Object.assign({}, state);
 
+//
+// EVENT HANDLING
+//
+
+// input to change a single letter
 $(document).on('input', '.js-input', function(evt) {
   var letters = state.letters.split('')
   letters.splice(state.activeLetter, 1, $(this).val())
@@ -33,6 +42,31 @@ $(document).on('input', '.js-input', function(evt) {
     letters: letters.join(''),
   })
 })
+$(document).on('focus', '.js-input', function(evt) {
+  $(this).select()
+})
+$(document).on('click', '.js-input', function(evt) {
+  $(this).select()
+})
+
+// select material swatch for individual letter
+$(document).on('click', '.js-swatch-link', function(evt) {
+  var materials = state.materials.concat([]);
+  materials[state.activeLetter] = $(this).data('color')
+
+  setState({
+    materials: materials
+  })
+})
+
+// select bag type
+$(document).on('click', '.js-bag-link', function(evt) {
+  setState({
+    bag: $(this).data('color')
+  })
+})
+
+// remove individual letter from bag
 $(document).on('click', '.js-remove-letter', function(evt) {
   var letters = state.letters.split('')
   letters.splice(state.activeLetter, 1)
@@ -43,41 +77,28 @@ $(document).on('click', '.js-remove-letter', function(evt) {
   })
 })
 
-$(document).on('click', '.js-swatch-link', function(evt) {
-  var materials = state.materials.concat([]);
-  materials[state.activeLetter] = $(this).data('color')
-
-  setState({
-    materials: materials
-  })
-})
-$(document).on('click', '.js-tab', function(evt) {
-  setState({
-    activeLetter: $(this).data('index'),
-  })
-})
-$(document).on('click', '.js-letter', function(evt) {
-  setState({
-    editing: true,
-    activeLetter: $(this).data('index'),
-  })
-})
+// add individual letter
 $(document).on('click', '.js-add-letter', function(evt) {
   setState({
     editing: true,
     activeLetter: state.letters.length,
   })
 })
+
+// edit individual letter
+$(document).on('click', '.js-letter', function(evt) {
+  setState({
+    editing: true,
+    activeLetter: $(this).data('index'),
+  })
+})
+
+// stop editing
 $(document).on('click', '.js-close-palette', function(evt) {
   setState({
     editing: false,
+    editingBag: false,
   })
-})
-$(document).on('focus', '.js-input', function(evt) {
-  $(this).select()
-})
-$(document).on('click', '.js-input', function(evt) {
-  $(this).select()
 })
 
 function setState(newState) {
@@ -107,6 +128,11 @@ function render() {
   $('.js-swatch').removeClass('active')
   $('.js-add-letter').hide()
   $('.js-palette').hide()
+  $('.js-bag-editor').hide()
+  $('.js-letter-editor').hide()
+
+  // render bag color
+  $('.js-bag').css({backgroundImage: "url("+(window.baseUrl || '')+"assets/img/bags/danny-"+state.bag+".png)"})
 
   // render letters in bag and preview
   if( state.letters.length > 0 ) {
@@ -131,16 +157,21 @@ function render() {
     $('.js-add-letter').show()
   }
 
-  // show letter palette
+  // show editor palette
   if( state.editing ) {
     $('.js-palette').show()
+
+    if( state.editingBag ) {
+      $('.js-bag-editor').show()
+    } else {
+      $('.js-letter-editor').show()
+    }
   }
 
   // select input if we're showing a new input
   if( state.editing !== lastState.editing || (state.activeLetter !== lastState.activeLetter && state.activeLetter === state.letters.length) ) {
     $('.js-input').select()
   }
-
 
   // render active tab
   $(`.js-tab[data-index=${state.activeLetter}]`).addClass('active')

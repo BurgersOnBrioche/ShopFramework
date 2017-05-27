@@ -14,7 +14,7 @@
 a { cursor: pointer; }
 
 .bag {
-  background: url('../img/bags/danny2.png') no-repeat center;
+  background: url('../img/bags/danny-black.png') no-repeat center;
   background-size: contain;
   width: 70%;
   margin: 0 auto;
@@ -66,15 +66,17 @@ a { cursor: pointer; }
   bottom: 0;
   z-index: 1;
 }
-.preview-cnr, .swatches {
+.left-cnr, .right-cnr {
   height: 100px;
+}
+.left-cnr {
+  width: 100px;
 }
 .preview-cnr {
   position: relative;
-  background: url(https://s-media-cache-ak0.pinimg.com/originals/1a/10/05/1a10050a924b649c1d5859a74f226328.gif) repeat;
+  background: url(../img/graphpaper.gif) repeat;
   border: 1px solid #afd7ff;
   border-width: 1px 0;
-  width: 100px;
 }
 .preview {
   height: 100%;
@@ -110,12 +112,14 @@ a { cursor: pointer; }
   border-radius: 50%;
   line-height: 15px;
 }
+.right-cnr {
+  flex: 1;
+}
 .swatches {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   padding: 0 10%;
-  flex: 1;
 }
 .swatch {
   width: 33.3333%;
@@ -134,4 +138,16 @@ a { cursor: pointer; }
 .custom-script {
   font-family: 'Sincerely', sans-serif;
   font-size: 2em;
+}
+.bags {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; 
+}
+.bag-thumb {
+  width: 40%;
+}
+.bag-thumb img {
+  width: 100%;
 }
