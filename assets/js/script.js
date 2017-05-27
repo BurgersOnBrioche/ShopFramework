@@ -20,7 +20,7 @@ $(document).ready(function() {
 
 var state = {
   bag:          'black',
-  letters:      '',
+  letters:      'AA',
   materials:    ['white', 'white'],
   activeLetter: 0,
   editing:      true,
@@ -145,6 +145,7 @@ function render() {
   $('.js-palette').hide()
   $('.js-bag-editor').hide()
   $('.js-letter-editor').hide()
+  $('.js-loading').hide()
 
   // render bag color
   $('.js-bag').css({backgroundImage: "url("+(window.baseUrl || '')+"assets/img/bags/danny-"+state.bag+".png)"})
@@ -154,13 +155,11 @@ function render() {
     var letter = Letter({ letter: l, material: state.materials[i], index: i})
     $('.js-loading').show()
     letter[0].onload = function() {
-      setTimeout(function() {
-        $('.js-letters').append(letter)
-        $('.js-loading').hide()
-        if( state.activeLetter === 0 ) {
-          $('.js-preview').append(letter.clone())
-        }
-      }, 500)
+      $('.js-letters').append(letter)
+      $('.js-loading').hide()
+      if( state.activeLetter === 0 ) {
+        $('.js-preview').append(letter.clone())
+      }
     }
   })
 
