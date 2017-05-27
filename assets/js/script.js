@@ -33,6 +33,21 @@ var lastState = Object.assign({}, state);
 // EVENT HANDLING
 //
 
+// tap bag to modify
+$(document).on('click', '.js-bag', function(evt) {
+  setState({
+    editing:    true,
+    editingBag: true,
+  })
+})
+
+// input to change both letters
+$(document).on('input', '.js-bag-input', function(evt) {
+  setState({
+    letters: $(this).val()
+  })
+})
+
 // input to change a single letter
 $(document).on('input', '.js-input', function(evt) {
   var letters = state.letters.split('')
@@ -51,8 +66,13 @@ $(document).on('click', '.js-input', function(evt) {
 
 // select material swatch for individual letter
 $(document).on('click', '.js-swatch-link', function(evt) {
-  var materials = state.materials.concat([]);
-  materials[state.activeLetter] = $(this).data('color')
+  var materials = state.materials.concat([])
+  var color     = $(this).data('color')
+  if( state.editingBag ) {
+    materials = materials.map(function(m) { return color })
+  } else {
+    materials[state.activeLetter] = $(this).data('color')
+  }
 
   setState({
     materials: materials
@@ -87,8 +107,11 @@ $(document).on('click', '.js-add-letter', function(evt) {
 
 // edit individual letter
 $(document).on('click', '.js-letter', function(evt) {
+  evt.stopPropagation()
+
   setState({
-    editing: true,
+    editing:      true,
+    editingBag:   false,
     activeLetter: $(this).data('index'),
   })
 })
@@ -179,7 +202,8 @@ function render() {
   // render active swatch
   $(`.js-swatch[data-color=${state.materials[state.activeLetter]}]`).addClass('active')
 
-  // set value of input to the last value we read
+  // set value of inputs
+  $('.js-bag-input').val(state.letters)
   $('.js-input').val(state.letters[state.activeLetter])
 
   // update shopify hidden input
