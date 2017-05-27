@@ -63,15 +63,21 @@ a { cursor: pointer; }
   width: 100%;
   position: absolute;
   background-color: white;
+  border-top: 1px solid #dedede;
   bottom: 0;
   z-index: 1;
+  padding: 1em;
 }
 .left-cnr, .right-cnr {
   height: 100px;
 }
-.left-cnr {
+.right-cnr {
   width: 100px;
 }
+.left-cnr {
+  flex: 1;
+}
+
 .preview-cnr {
   position: relative;
   background: url(../img/graphpaper.gif) repeat;
@@ -97,8 +103,8 @@ a { cursor: pointer; }
 }
 .close-palette {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 1em;
+  top: 1em;
   font-size: 20px;
 }
 .remove-letter {
@@ -111,9 +117,6 @@ a { cursor: pointer; }
   font-weight: bold;
   border-radius: 50%;
   line-height: 15px;
-}
-.right-cnr {
-  flex: 1;
 }
 .swatches {
   display: flex;
@@ -143,11 +146,12 @@ a { cursor: pointer; }
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100%;
 }
 .bag-thumb {
-  width: 40%;
+  height: 50%;
 }
 .bag-thumb img {
-  width: 100%;
+  height: 90%;
 }

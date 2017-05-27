@@ -97,13 +97,6 @@ $(document).on('click', '.js-remove-letter', function(evt) {
   })
 })
 
-// add individual letter
-$(document).on('click', '.js-add-letter', function(evt) {
-  setState({
-    editing: true,
-    activeLetter: state.letters.length,
-  })
-})
 
 // edit individual letter
 $(document).on('click', '.js-letter', function(evt) {
@@ -149,7 +142,6 @@ function render() {
   $('.js-preview').html('')
   $('.js-tab').removeClass('active')
   $('.js-swatch').removeClass('active')
-  $('.js-add-letter').hide()
   $('.js-palette').hide()
   $('.js-bag-editor').hide()
   $('.js-letter-editor').hide()
@@ -173,11 +165,6 @@ function render() {
     if( state.activeLetter === 1 ) {
       $('.js-preview').append(letter2.clone())
     }
-  }
-
-  // show add button
-  if( state.letters.length < 2 ) {
-    $('.js-add-letter').show()
   }
 
   // show editor palette
@@ -216,4 +203,17 @@ function letter(props) {
   return $(`
     <img src="${src}" alt="${alt}" class="js-letter" data-index="${props.index}"/>
   `)
+}
+
+var imageCache = {}
+
+function loadImage(src, cb) {
+  if( !imageCache[src] ) {
+    imageCache[src] = new Image
+    imageCache[src].src = src
+  }
+  imageCache[src].onload = function() {
+    imageCache[src].loaded = true
+    cb()
+  }
 }
