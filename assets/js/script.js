@@ -1,4 +1,12 @@
 $(document).ready(function() {
+  // hide contact us form
+  var interval = setInterval(function() {
+    var contactUs = $('body').find('img[src*="icf.improvely.com"]')
+    if( !contactUs.length ) { return; }
+    contactUs.hide()
+    clearInterval(interval)
+  }, 200)
+
   fetch((window.baseUrl || '') + '/assets/html/custombar.html').then(function(response) {
     return response.text()
   }).then(function(html) {
