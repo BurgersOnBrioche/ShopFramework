@@ -23,6 +23,8 @@ var state = {
   editing:      false,
 }
 
+var lastState = Object.assign({}, state);
+
 $(document).on('input', '.js-input', function(evt) {
   var letters = state.letters.split('')
   letters.splice(state.activeLetter, 1, $(this).val())
@@ -69,6 +71,7 @@ $(document).on('click', '.js-input', function(evt) {
 })
 
 function setState(newState) {
+  lastState = Object.assign({}, state)
   state = Object.assign({}, state, newState)
   render()
 }
@@ -123,15 +126,23 @@ function render() {
     $('.js-palette').show()
   }
 
+  // select input if we're showing a new input
+  if( state.editing !== lastState.editing || (state.activeLetter !== lastState.activeLetter && state.activeLetter === state.letters.length) ) {
+    $('.js-input').select()
+  }
+
+
   // render active tab
   $(`.js-tab[data-index=${state.activeLetter}]`).addClass('active')
 
   // render active swatch
   $(`.js-swatch[data-color=${state.materials[state.activeLetter]}]`).addClass('active')
-  updateCustomInfo()
 
   // set value of input to the last value we read
   $('.js-input').val(state.letters[state.activeLetter])
+
+  // update shopify hidden input
+  updateCustomInfo()
 }
 
 function letter(props) {
