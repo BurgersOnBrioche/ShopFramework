@@ -51,15 +51,13 @@ function updateCustomInfo() {
 }
 
 function render() {
-  console.log('rendering')
-
   // reset
   $('.js-letters').html('')
   $('.js-tab').html('')
   $('.js-tab').removeClass('active')
   $('.js-swatch').removeClass('active')
 
-  // render
+  // render letters
   if( state.letters.length > 0 ) {
     var letter1 = letter({ letter: state.letters[0], material: state.materials[0]})
     $('.js-letters').append(letter1)
@@ -71,7 +69,10 @@ function render() {
     $('.js-tab:eq(1)').append(letter2.clone())
   }
 
+  // render active tab
   $(`.js-tab[data-index=${state.activeLetter}]`).addClass('active')
+
+  // render active swatch
   $(`.js-swatch[data-color=${state.materials[state.activeLetter]}]`).addClass('active')
   updateCustomInfo()
 }
