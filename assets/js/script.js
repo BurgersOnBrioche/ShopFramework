@@ -12,6 +12,7 @@ var state = {
   letters:      '',
   materials:    ['white', 'white'],
   activeLetter: 0,
+  editing:      false,
 }
 
 $(document).on('input', '.js-input', function(evt) {
@@ -29,7 +30,13 @@ $(document).on('click', '.js-swatch-link', function(evt) {
 })
 $(document).on('click', '.js-tab', function(evt) {
   setState({
-    activeLetter: $(this).data('index')
+    activeLetter: $(this).data('index'),
+  })
+})
+$(document).on('click', '.js-letter', function(evt) {
+  setState({
+    editing: true,
+    activeLetter: $(this).data('index'),
   })
 })
 
@@ -59,12 +66,12 @@ function render() {
 
   // render letters
   if( state.letters.length > 0 ) {
-    var letter1 = letter({ letter: state.letters[0], material: state.materials[0]})
+    var letter1 = letter({ letter: state.letters[0], material: state.materials[0], index: 0})
     $('.js-letters').append(letter1)
     $('.js-tab:eq(0)').append(letter1.clone())
   }
   if( state.letters.length > 1 ) {
-    var letter2 = letter({ letter: state.letters[1], material: state.materials[1]})
+    var letter2 = letter({ letter: state.letters[1], material: state.materials[1], index: 1})
     $('.js-letters').append(letter2)
     $('.js-tab:eq(1)').append(letter2.clone())
   }
@@ -80,5 +87,7 @@ function render() {
 function letter(props) {
   var alt = `${props.letter} in ${props.material}`
   var src = `${window.baseUrl || ''}assets/img/letters/${props.letter.toUpperCase()}-${props.material}.png`;
-  return $(`<img src="${src}" alt="${alt}"/>`)
+  return $(`
+    <img src="${src}" alt="${alt}" class="js-letter" data-index="${props.index}"/>
+  `)
 }
