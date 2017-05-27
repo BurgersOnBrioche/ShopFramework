@@ -68,7 +68,8 @@ a { cursor: pointer; }
   z-index: 1;
 }
 .preview-cnr {
-  flex: .333
+  flex: .333;
+  position: relative;
 }
 .preview img {
   width: 100%;
@@ -78,6 +79,17 @@ a { cursor: pointer; }
   right: 0;
   top: 0;
   font-size: 20px;
+}
+.remove-letter {
+  color: white;
+  background-color: black;
+  padding: 5px 8px;
+  position: absolute;
+  top: -11px;
+  right: -8px;
+  font-weight: bold;
+  border-radius: 50%;
+  line-height: 15px;
 }
 .swatches {
   display: flex;

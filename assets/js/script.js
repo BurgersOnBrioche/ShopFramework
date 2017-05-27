@@ -33,6 +33,16 @@ $(document).on('input', '.js-input', function(evt) {
     letters: letters.join(''),
   })
 })
+$(document).on('click', '.js-remove-letter', function(evt) {
+  var letters = state.letters.split('')
+  letters.splice(state.activeLetter, 1)
+
+  setState({
+    letters: letters.join(''),
+    editing: false,
+  })
+})
+
 $(document).on('click', '.js-swatch-link', function(evt) {
   var materials = state.materials.concat([]);
   materials[state.activeLetter] = $(this).data('color')
