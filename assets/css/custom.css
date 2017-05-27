@@ -40,18 +40,52 @@ a { cursor: pointer; }
 
 .letters-input {
   border: 1px solid black;
-  display: block;
-  margin: 0 auto;
+  display: inline-block;
   text-align: center;
   text-transform: uppercase;
   text-indent: 0;
+  width: 2.5em;
+  padding: .5em 0;
 }
 
+.add-letter {
+  display: block;
+  background-color: black;
+  color: white;
+  padding: .5em 1em;
+  text-transform: uppercase;
+  margin: 0 auto;
+  font-family: 'Questrial', Helvetica, sans-serif;
+  width: 50%;
+  text-align: center;
+}
+.palette {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  background-color: white;
+  bottom: 0;
+  z-index: 1;
+}
+.preview-cnr {
+  flex: .333
+}
+.preview img {
+  width: 100%;
+}
+.close-palette {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 20px;
+}
 .swatches {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  align-items: center;
   padding: 0 10%;
+  flex: .666
 }
 .swatch {
   width: 33.3333%;

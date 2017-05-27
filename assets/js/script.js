@@ -50,6 +50,12 @@ $(document).on('click', '.js-close-palette', function(evt) {
     editing: false,
   })
 })
+$(document).on('focus', '.js-input', function(evt) {
+  $(this).select()
+})
+$(document).on('click', '.js-input', function(evt) {
+  $(this).select()
+})
 
 function setState(newState) {
   state = Object.assign({}, state, newState)
@@ -72,21 +78,28 @@ function render() {
   // reset
   $('.js-letters').html('')
   $('.js-tab').html('')
+  $('.js-preview-letter').html('')
   $('.js-tab').removeClass('active')
   $('.js-swatch').removeClass('active')
   $('.js-add-letter').hide()
   $('.js-palette').hide()
 
-  // render letters
+  // render letters in bag and preview
   if( state.letters.length > 0 ) {
     var letter1 = letter({ letter: state.letters[0], material: state.materials[0], index: 0})
     $('.js-letters').append(letter1)
     $('.js-tab:eq(0)').append(letter1.clone())
+    if( state.activeLetter === 0 ) {
+      $('.js-preview-letter').append(letter1.clone())
+    }
   }
   if( state.letters.length > 1 ) {
     var letter2 = letter({ letter: state.letters[1], material: state.materials[1], index: 1})
     $('.js-letters').append(letter2)
     $('.js-tab:eq(1)').append(letter2.clone())
+    if( state.activeLetter === 1 ) {
+      $('.js-preview-letter').append(letter2.clone())
+    }
   }
 
   // show add button
