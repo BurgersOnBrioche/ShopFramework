@@ -1,3 +1,10 @@
+/* Shopify overrides */
+
+.active { background: none; }
+.active img { border: 0 !important }
+
+/* Our styles */
+
 @font-face {
   font-family: 'Sincerely';
   src: url('../fonts/Sincerely.woff');
@@ -16,6 +23,13 @@ a { cursor: pointer; }
   align-items: center;
   justify-content: center;
 }
+@media only screen and (min-width: 769px) {
+  .bag {
+    width: calc(40vh * 1.46);
+    height: 40vh;
+  }
+}
+
 
 .letters {
   height: 30%;
@@ -51,7 +65,7 @@ a { cursor: pointer; }
 }
 .swatch.active img {
   opacity: 1;
-  border-color: hotpink;
+  border: 5px solid hotpink !important;
 }
 .tabs {
   text-align: center;
