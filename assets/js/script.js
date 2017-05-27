@@ -137,7 +137,7 @@ function updateCustomInfo() {
 
 function render() {
   // reset
-  $('.js-letters').html('')
+  $('.js-letters').find('.js-letter').remove()
   $('.js-tab').html('')
   $('.js-preview').html('')
   $('.js-tab').removeClass('active')
@@ -150,22 +150,19 @@ function render() {
   $('.js-bag').css({backgroundImage: "url("+(window.baseUrl || '')+"assets/img/bags/danny-"+state.bag+".png)"})
 
   // render letters in bag and preview
-  if( state.letters.length > 0 ) {
-    var letter1 = letter({ letter: state.letters[0], material: state.materials[0], index: 0})
-    $('.js-letters').append(letter1)
-    $('.js-tab:eq(0)').append(letter1.clone())
-    if( state.activeLetter === 0 ) {
-      $('.js-preview').append(letter1.clone())
+  state.letters.split('').forEach(function(l, i) {
+    var letter = Letter({ letter: l, material: state.materials[i], index: i})
+    $('.js-loading').show()
+    letter[0].onload = function() {
+      setTimeout(function() {
+        $('.js-letters').append(letter)
+        $('.js-loading').hide()
+        if( state.activeLetter === 0 ) {
+          $('.js-preview').append(letter.clone())
+        }
+      }, 500)
     }
-  }
-  if( state.letters.length > 1 ) {
-    var letter2 = letter({ letter: state.letters[1], material: state.materials[1], index: 1})
-    $('.js-letters').append(letter2)
-    $('.js-tab:eq(1)').append(letter2.clone())
-    if( state.activeLetter === 1 ) {
-      $('.js-preview').append(letter2.clone())
-    }
-  }
+  })
 
   // show editor palette
   if( state.editing ) {
@@ -197,7 +194,7 @@ function render() {
   updateCustomInfo()
 }
 
-function letter(props) {
+function Letter(props) {
   var alt = `${props.letter} in ${props.material}`
   var src = `${window.baseUrl || ''}assets/img/letters/${props.letter.toUpperCase()}-${props.material}.png`;
   return $(`
