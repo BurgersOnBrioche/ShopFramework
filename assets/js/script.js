@@ -4,124 +4,80 @@ $(document).ready(function() {
   }).then(function(html) {
     html = html.replace(/assets\/img\//g, (window.baseUrl || '') + 'assets/img/')
     $('#custombar').before(html).remove()
-    activate()
+    render()
   })
 })
 
-function activate() {
-  var el = {
-    input: $('#letters-input'),
-    letterTabs: $('.tab-letter-color-letter'),
-    letterTab1: $('#tab-letter1'),
-    letterTab2: $('#tab-letter2'),
-    lettersWrapper: $('.tab-letter-wrapper.active'),
-    swatch: $('.swatch-image-border'),
+var state = {
+  letters:      '',
+  materials:    ['white', 'white'],
+  activeLetter: 0,
+}
+
+$(document).on('input', '.js-input', function(evt) {
+  setState({
+    letters: $(this).val()
+  })
+})
+$(document).on('click', '.js-swatch-link', function(evt) {
+  var materials = state.materials.concat([]);
+  materials[state.activeLetter] = $(this).data('color')
+
+  setState({
+    materials: materials
+  })
+})
+$(document).on('click', '.js-tab', function(evt) {
+  setState({
+    activeLetter: $(this).data('index')
+  })
+})
+
+function setState(newState) {
+  state = Object.assign({}, state, newState)
+  render()
+}
+
+function updateCustomInfo() {
+  var productDescription = 'Danny-Black'
+  if( state.letters.length > 0 ) {
+    productDescription += ` / ${state.letters[0].toUpperCase()}-${state.materials[0]}`
+  }
+  if( state.letters.length > 1 ) {
+    productDescription += ` / ${state.letters[1].toUpperCase()}-${state.materials[1]}`
   }
 
-  Object.keys(el).forEach(function(key) {
-    if (!el[key].length) { console.warn(`No element present for ${key}`); }
-  })
+  $("#custombar-custom-info").val(productDescription);
+}
 
-  var bagContainerHeight = $(".main-bag-container").width() * .7
-  $(".main-bag-container").height(bagContainerHeight)
-  var bagContainerHeight = $(".main-letters-container").width() * .7
-  $(".main-letters-container").height(bagContainerHeight)
-  var letterTabHeight = $(".swatch-row").height() / 2
-  $(".custom-letter-container").height(letterTabHeight)
+function render() {
+  console.log('rendering')
 
-  $(window).resize(function() {
-    var newLetterHeight = $(".letters-wrapper ").height()
-    $("#bagLetter1").css({ display: "block", height: newLetterHeight + "px" })
-    $("#bagLetter2").css({ display: "block", height: newLetterHeight + "px" })
-    bagContainerHeight = $(".main-bag-container").width() * .7
-    $(".main-bag-container").height(bagContainerHeight)
-    bagContainerHeight = $(".main-letters-container").width() * .7
-    $(".main-letters-container").height(bagContainerHeight)
-    letterTabHeight = $(".swatch-row").height() / 2
-    $(".custom-letter-container").height(letterTabHeight)
-  })
+  // reset
+  $('.js-letters').html('')
+  $('.js-tab').html('')
+  $('.js-tab').removeClass('active')
+  $('.js-swatch').removeClass('active')
 
-  var letter1Choice = "black"
-  var letter2Choice = "black"
-
-  el.letterTabs.on('click', function() {
-    el.letterTabs.removeClass("active")
-    el.lettersWrapper.removeClass('active')
-    $(this).addClass("active")
-    $(this).parent().addClass('active')
-  })
-
-  el.letterTab1.on('click', function() {
-    el.swatch.removeClass('active')
-    el.swatch.each(function() {
-      if ($(this).data("material-swatch") == letter1Choice) {
-        $(this).addClass("active")
-      }
-    })
-  })
-
-  el.letterTab2.on('click', function() {
-    el.swatch.removeClass('active')
-    el.swatch.each(function() {
-      if ($(this).data("material-swatch") == letter2Choice) {
-        $(this).addClass("active")
-      }
-    })
-  })
-
-  el.input.on("input", function() {
-    var $inputText = $(this).val()
-
-    if ($inputText.length > 0) {
-      $("#bagLetter2").hide()
-      renderLetter(1, $inputText.charAt(0), letter1Choice)
-      if ($inputText.length > 1) {
-        renderLetter(2, $inputText.charAt(1), letter2Choice)
-        $("input").blur()
-      }
-      updateCustomInfo()
-    } else {
-      $("#tab-letter1").html("")
-      $("#tab-letter2").html("")
-      $("#bagLetter1").css({ display: "none" })
-      $("#bagLetter2").css({ display: "none" })
-    }
-  })
-
-  el.swatch.on('click', function() {
-    el.swatch.removeClass("active")
-    $(this).addClass("active")
-    var text = el.input.val()
-
-    if ($("#tab-letter1").hasClass("active")) {
-      letter1Choice = $(this).data("material-swatch")
-      renderLetter(1, text.charAt(0).toUpperCase(), letter1Choice)
-    } else if ($("#tab-letter2").hasClass("active")) {
-      letter2Choice = $(this).data("material-swatch")
-      renderLetter(2, text.charAt(1).toUpperCase(), letter2Choice)
-    } else {
-      console.warn('Unknown letter active')
-    }
-
-    updateCustomInfo()
-  })
-  function renderLetter(index, letter, swatch) {
-    var height = $(".letters-wrapper").height()
-    var letterPath = (window.baseUrl || "") + "assets/img/letters/" + letter.toUpperCase() + "-" + swatch + ".png"
-    $("#tab-letter" + index).css({ background: "url(" + letterPath + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
-    $("#bagLetter" + index).attr("src", letterPath)
-    $("#bagLetter" + index).show().css({ height: height })
+  // render
+  if( state.letters.length > 0 ) {
+    var letter1 = letter({ letter: state.letters[0], material: state.materials[0]})
+    $('.js-letters').append(letter1)
+    $('.js-tab:eq(0)').append(letter1.clone())
+  }
+  if( state.letters.length > 1 ) {
+    var letter2 = letter({ letter: state.letters[1], material: state.materials[1]})
+    $('.js-letters').append(letter2)
+    $('.js-tab:eq(1)').append(letter2.clone())
   }
 
-  function updateCustomInfo() {
-    var text = el.input.val()
+  $(`.js-tab[data-index=${state.activeLetter}]`).addClass('active')
+  $(`.js-swatch[data-color=${state.materials[state.activeLetter]}]`).addClass('active')
+  updateCustomInfo()
+}
 
-    if (!text.length) { return; }
-
-    if (text.length > 1) {
-      $("#custombar-custom-info").val("Danny-Black / " + text[0].toUpperCase() + "-" + letter1Choice + " / " + text[1].toUpperCase() + "-" + letter2Choice)
-    } else {
-      $("#custombar-custom-info").val("Danny-Black / " + text[0].toUpperCase() + "-" + letter1Choice)
-    }
-  }
+function letter(props) {
+  var alt = `${props.letter} in ${props.material}`
+  var src = `${window.baseUrl || ''}assets/img/letters/${props.letter.toUpperCase()}-${props.material}.png`;
+  return $(`<img src="${src}" alt="${alt}"/>`)
 }
