@@ -9,10 +9,12 @@ $(document).ready(function() {
     }, 200)
   }
 
+  // get template html and embed it in the page
   fetch((window.baseUrl || '') + '/assets/html/custombar.html').then(function(response) {
     return response.text()
   }).then(function(html) {
     html = html.replace(/assets\/img\//g, (window.baseUrl || '') + 'assets/img/')
+    $('#custombar').parent().css({position: 'relative', overflow: 'hidden'})
     $('#custombar').before(html).remove()
     render()
   })
@@ -146,9 +148,6 @@ function render() {
   $('.js-preview').html('')
   $('.js-tab').removeClass('active')
   $('.js-swatch').removeClass('active')
-  $('.js-palette').hide()
-  $('.js-bag-editor').hide()
-  $('.js-letter-editor').hide()
   $('.js-loading').hide()
 
   // render bag color
@@ -169,13 +168,17 @@ function render() {
 
   // show editor palette
   if( state.editing ) {
-    $('.js-palette').show()
+    $('.js-palette').show().removeClass('closed')
 
     if( state.editingBag ) {
       $('.js-bag-editor').show()
+      $('.js-letter-editor').hide()
     } else {
       $('.js-letter-editor').show()
+      $('.js-bag-editor').hide()
     }
+  } else if( lastState.editing ) {
+    $('.js-palette').addClass('closed')
   }
 
   // select input if we're showing a new input
