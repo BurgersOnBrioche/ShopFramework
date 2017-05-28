@@ -49,6 +49,8 @@ $(document).on('input', '.js-bag-input', function(evt) {
     letters: $(this).val()
   })
 })
+$(document).on('focus', '.js-bag-input', autoselect)
+$(document).on('click', '.js-bag-input', autoselect)
 
 // input to change a single letter
 $(document).on('input', '.js-input', function(evt) {
@@ -59,12 +61,8 @@ $(document).on('input', '.js-input', function(evt) {
     letters: letters.join(''),
   })
 })
-$(document).on('focus', '.js-input', function(evt) {
-  $(this).select()
-})
-$(document).on('click', '.js-input', function(evt) {
-  $(this).select()
-})
+$(document).on('focus', '.js-input', autoselect)
+$(document).on('click', '.js-input', autoselect)
 
 // select material swatch for individual letter
 $(document).on('click', '.js-swatch-link', function(evt) {
@@ -198,6 +196,10 @@ function render() {
 
   // update shopify hidden input
   updateCustomInfo()
+}
+
+function autoselect() {
+  $(this).select()
 }
 
 function Letter(props) {
