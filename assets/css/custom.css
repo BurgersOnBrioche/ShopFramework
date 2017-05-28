@@ -1,205 +1,64 @@
-/* Shopify overrides */
+/*
+
+  Shopify overrides
+
+  */
 
 .active { background: none; }
-.active img { border: 0 !important }
-
-/* Our styles */
-
-@font-face {
-  font-family: 'Sincerely';
-  src: url('../fonts/Sincerely.woff');
-}
+.active img { border: 0 !important; }
 
 * { box-sizing: border-box; }
 a { cursor: pointer; }
 
-.bag {
-  background: url('../img/bags/danny-black.png') no-repeat center;
-  background-size: contain;
-  width: 70%;
-  margin: 0 auto;
-  height: 70vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-@media only screen and (min-width: 769px) {
-  .bag {
-    width: calc(40vh * 1.46);
-    height: 40vh;
-  }
-}
+/*
 
+  Our styles
 
-.letters {
-  height: 30%;
-}
-.letters img {
-  height: 100%;
-}
+*/
 
-.letters-input {
-  border: 1px solid black;
-  display: inline-block;
-  text-align: center;
-  text-transform: uppercase;
-  text-indent: 0;
-  width: 2.5em;
-  padding: .5em 0;
-}
+@font-face { font-family: 'Sincerely'; src: url('../fonts/Sincerely.woff'); }
+.custom-script { font-family: 'Sincerely', sans-serif; font-size: 2em; }
 
-.add-letter {
-  display: block;
-  background-color: black;
-  color: white;
-  padding: .5em 1em;
-  text-transform: uppercase;
-  margin: 0 auto;
-  font-family: 'Questrial', Helvetica, sans-serif;
-  width: 50%;
-  text-align: center;
-}
-.palette {
-  width: 100%;
-  position: absolute;
-  background-color: white;
-  border-top: 1px solid #dedede;
-  bottom: 0;
-  z-index: 1;
-  padding: 1em;
-}
-.left-cnr, .right-cnr {
-  height: 100px;
-}
-.right-cnr {
-  width: 100px;
-}
-.left-cnr {
-  flex: 1;
-}
+/* Displayed Bag */
+.bag { background: url('../img/bags/danny-black.png') no-repeat center; background-size: contain; width: 70%; margin: 0 auto; height: 70vw; display: flex; align-items: center; justify-content: center; position: relative; }
+@media only screen and (min-width: 769px) { .bag {   width: calc(40vh * 1.46);   height: 40vh; } }
+.letters { height: 30%; }
+.letters img { height: 100%; }
 
-.preview-cnr {
-  position: relative;
-  background: url(../img/graphpaper.gif) repeat;
-  border: 1px solid #afd7ff;
-  border-width: 1px 0;
-}
-.preview {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.preview img {
-  height: 90%;
-}
-.letter-label {
-  margin-bottom: 1em;
-  display: block;
-}
+input[type="text"].letters-input { border: 1px solid black; display: inline-block; text-align: center; text-transform: uppercase; text-indent: 0; width: 2.5em; padding: .5em 0; }
 
-.panels {
-  display: flex;
-}
-.close-palette {
-  position: absolute;
-  right: 1em;
-  top: 1em;
-  font-size: 20px;
-}
-.remove-letter {
-  color: white;
-  background-color: black;
-  padding: 5px 8px;
-  position: absolute;
-  top: -11px;
-  right: -8px;
-  font-weight: bold;
-  border-radius: 50%;
-  line-height: 15px;
-}
-.swatches {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 0 10%;
-}
-.swatch {
-  width: 33.3333%;
-  text-align: center;
-}
-.swatch img {
-  border-radius: 50%;
-  border: 2px solid white;
-  width: 80%;
-  cursor: pointer;
-}
-.swatch.active img {
-  opacity: 1;
-  border: 2px solid #333 !important;
-}
-.custom-script {
-  font-family: 'Sincerely', sans-serif;
-  font-size: 2em;
-}
-.bags {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-}
-.bag-thumb {
-  height: 50%;
-}
-.bag-thumb img {
-  height: 90%;
-}
+/* Editing palette */
+.palette { width: 100%; position: absolute; background-color: white; border-top: 1px solid #dedede; bottom: 0; z-index: 1; padding: 1em; transition: transform 200ms; -webkit-transition: transform: 200ms; }
+.palette.closed { transform: translateY(100%); -webkit-transform: translateY(100%); }
+.left-cnr, .right-cnr { height: 100px; }
+.right-cnr { width: 100px; }
+.left-cnr { flex: 1; }
+.panels { display: flex; }
+.close-palette { position: absolute; right: 1em; top: 1em; font-size: 20px; }
+.letter-label { margin-bottom: 1em; display: block; text-align: left; }
+
+/* Swatches */
+.swatches { display: flex; flex-wrap: wrap; align-items: center; padding: 0 10%; }
+.swatch { width: 33.3333%; text-align: center; }
+.swatch img { border-radius: 50%; border: 2px solid white; width: 80%; cursor: pointer; }
+.swatch.active img { opacity: 1; border: 2px solid #333 !important; }
+
+/* Letter Preview */
+.preview-cnr { position: relative; background: url(../img/graphpaper.gif) repeat; border: 1px solid #afd7ff; border-width: 1px 0; }
+.preview { height: 100%; display: flex; align-items: center; justify-content: center; }
+.preview img { height: 90%; }
+.remove-letter { color: white; background-color: black; padding: 5px 8px; position: absolute; top: -11px; right: -8px; font-weight: bold; border-radius: 50%; line-height: 15px; }
+
+/* Bag Switcher */
+.bags { display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100%; }
+.bag-thumb { height: 50%; }
+.bag-thumb img { height: 90%; }
 
 /* Loader from http://tobiasahlin.com/spinkit/ */
-
-.spinner {
-  width: 70px;
-  text-align: center;
-}
-.spinner {
-  position: absolute; left: 0; top: 0; bottom: 0; right: 0; height: 22px; margin: auto; z-index: 1;
-}
-
-.spinner > div {
-  width: 18px;
-  height: 18px;
-  background-color: white;
-  border: 1px solid #dad9d9;
-
-  border-radius: 100%;
-  display: inline-block;
-  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-}
-
-.spinner .bounce1 {
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
-}
-
-.spinner .bounce2 {
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
-}
-
-@-webkit-keyframes sk-bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0) }
-  40% { -webkit-transform: scale(1.0) }
-}
-
-@keyframes sk-bouncedelay {
-  0%, 80%, 100% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  } 40% {
-    -webkit-transform: scale(1.0);
-    transform: scale(1.0);
-  }
-}
+.spinner { width: 70px; text-align: center; }
+.spinner { position: absolute; left: 0; top: 0; bottom: 0; right: 0; height: 22px; margin: auto; z-index: 1; }
+.spinner > div { width: 18px; height: 18px; background-color: white; border: 1px solid #dad9d9; border-radius: 100%; display: inline-block; -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both; animation: sk-bouncedelay 1.4s infinite ease-in-out both; }
+.spinner .bounce1 { -webkit-animation-delay: -0.32s; animation-delay: -0.32s; }
+.spinner .bounce2 { -webkit-animation-delay: -0.16s; animation-delay: -0.16s; }
+@-webkit-keyframes sk-bouncedelay { 0%, 80%, 100% { -webkit-transform: scale(0) } 40% { -webkit-transform: scale(1.0) } }
+@keyframes sk-bouncedelay { 0%, 80%, 100% {   -webkit-transform: scale(0);   transform: scale(0); } 40% {   -webkit-transform: scale(1.0);   transform: scale(1.0); } }
