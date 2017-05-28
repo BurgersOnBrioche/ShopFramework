@@ -9,6 +9,11 @@ $(document).ready(function() {
     }, 200)
   }
 
+  // fix odd safari bug where the delegated click is not being recognized, but only for the bag
+  setTimeout(function() {
+    $('.js-bag').on('click', function(){})
+  }, 1000)
+
   // get template html and embed it in the page
   fetch((window.baseUrl || '') + '/assets/html/custombar.html').then(function(response) {
     return response.text()
@@ -177,6 +182,7 @@ function render() {
     }
   } else if( lastState.editing ) {
     $('.js-palette').addClass('closed')
+    $('input').blur()
   }
 
   // select input if we're showing a new input
