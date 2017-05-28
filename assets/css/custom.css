@@ -7,6 +7,8 @@
 .active { background: none; }
 .active img { border: 0 !important; }
 
+.section-title { padding: 0; border: 0; margin-bottom: 0; }
+
 * { box-sizing: border-box; }
 a { cursor: pointer; }
 
@@ -17,7 +19,7 @@ a { cursor: pointer; }
 */
 
 @font-face { font-family: 'Sincerely'; src: url('../fonts/Sincerely.woff'); }
-.custom-script { font-family: 'Sincerely', sans-serif; font-size: 2em; }
+.section-title h1, .custom-script { font-family: 'Sincerely', sans-serif; font-size: 2em; }
 
 @media only screen and (min-width: 769px) {
   #customBarSectionMain { display: flex; }
@@ -29,7 +31,7 @@ a { cursor: pointer; }
 }
 
 /* Displayed Bag */
-.bag { background: url('../img/bags/danny-black.png') no-repeat center; background-size: contain; width: 70%; margin: 0 auto; height: 70vw; display: flex; align-items: center; justify-content: center; position: relative; }
+.bag { background: url('../img/bags/danny-black.png') no-repeat center; background-size: contain; width: 70%; margin: 0 auto; height: 40vw; display: flex; align-items: center; justify-content: center; position: relative; }
 .letters { height: 30%; }
 .letters img { height: 100%; }
 @media only screen and (min-width: 769px) {
