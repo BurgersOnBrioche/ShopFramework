@@ -1,106 +1,274 @@
-/* Shopify overrides */
-
-.active { background: none; }
-.active img { border: 0 !important }
-
-/* Our styles */
-
 @font-face {
   font-family: 'Sincerely';
   src: url('../fonts/Sincerely.woff');
 }
 
-* { box-sizing: border-box; }
-a { cursor: pointer; }
+body,
+html {
+  height: 100%;
+  width: 100%;
+  display: block;
+  margin: 0;
+}
 
-.bag {
-  background: url('../img/bags/danny2.png') no-repeat center;
-  background-size: contain;
+#customBarHeaderMain {
+  display: block;
+  height: 10%;
+}
+
+.custombar-header-text-wrapper {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: table;
+}
+
+.custombar-header-text-wrapper span {
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+#customBarSectionMain {
+  display: block;
+  height: 90%;
+}
+
+.main-custombar-container {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.main-bag-container {
+  display: block;
+  position: relative;
   width: 70%;
-  margin: 0 auto;
-  height: 70vw;
+  left: 15%;
+  background: url('../img/bags/danny2.png') no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.main-letters-container {
+  display: block;
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+.letters-wrapper {
+  text-align: center;
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
-}
-@media only screen and (min-width: 769px) {
-  .bag {
-    width: calc(40vh * 1.46);
-    height: 40vh;
-  }
+  position: relative;
+  width: 100%;
+  height: 26.25%;
+  top: 30%;
+  text-align: center;
+  overflow: hidden;
 }
 
-
-.letters {
-  height: 30%;
-}
-.letters img {
+.bag-letter {
+  text-align: center;
   height: 100%;
 }
 
-.letters-input {
+.bag-letter:first-child {
+  background: none;
+}
+
+.bag-letter:last-child {
+  background: none;
+}
+
+.bag-letter-img-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+.bag-letter img {
+  position: relative;
+  text-align: center;
+  width: auto;
+  height: 100%;
+  display: none;
+}
+
+#bagLetter1 {
+  display: none;
+}
+
+#bagLetter2 {
+  display: none;
+}
+
+.main-customization-container {
+  width: 100%;
+}
+
+.letters-input-wrapper {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+#letters-input {
   border: 1px solid black;
   display: block;
-  margin: 0 auto;
+  height: 100%;
+  width: 20%;
   text-align: center;
   text-transform: uppercase;
   text-indent: 0;
 }
 
-.swatches {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  padding: 0 10%;
-}
-.swatch {
-  width: 33.3333%;
-  text-align: center;
-}
-.swatch img {
-  border-radius: 50%;
-  border: 2px solid white;
-  width: 80%;
-  cursor: pointer;
-}
-.swatch.active img {
-  opacity: 1;
-  border: 2px solid #333 !important;
-}
-.tabs {
-  text-align: center;
-  border-bottom: 1px solid black;
-  margin: 1em 0;
-  display: flex;
-  justify-content: center;
-}
-.tabs a {
+.letters-customization-wrapper {
   display: block;
-  width: 25vw;
-  height: 13vw;
-  position: relative;
-  top: 1px;
-  margin: 0 10px;
-  border-radius: 10px 10px 0 0;
-  border: 1px solid black;
+  width: 100%;
+  height: 90%;
+  background: white;
+}
+
+.custom-letter-container {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
-  opacity: 0.5;
+  height: 100%;
+  width: 100%;
+  table-layout: fixed;
 }
-.tabs a img {
-  height: 40%;
+
+.tab-letter-wrapper {
+  display: block;
+  width: 10%;
+  height: 100%;
+  background: black;
+  color: white;
+  z-index: 1200;
+  opacity: 0.9;
+  border-bottom: 1px solid black;
+  -webkit-border-top-right-radius: 10%;
+  -moz-border-top-right-radius: 10%;
+  -ms-border-top-right-radius: 10%;
+  -o-border-top-right-radius: 10%;
+  border-top-right-radius: 10%;
+  -webkit-border-top-left-radius: 10%;
+  -moz-border-top-left-radius: 10%;
+  -ms-border-top-left-radius: 10%;
+  -o-border-top-left-radius: 10%;
+  border-top-left-radius: 10%;
 }
-.tabs a.active {
-  background-color: white;
-  border-bottom: 0;
+
+.tab-letter-wrapper.active {
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: none;
+  background: white;
   opacity: 1;
 }
-.tabs a.active img {
-  height: 69%;
+
+.tab-letter-border-buffer {
+  display: block;
+  height: 100%;
+  width: 40%;
+  border-bottom: 1px solid black;
+}
+
+.tab-letter-color-letter {
+  height: 100%;
+}
+
+.letter-color-letter img {
+  height: 100%;
+  width: auto;
+}
+
+.letter-table-buffer {
+  display: table-cell;
+  width: 40%;
+  height: 100%;
+  border-bottom: 1px solid black;
+}
+
+.letter-swatch-container {
+  height: 70%;
+  width: 100%;
+  display: block;
+}
+
+.swatch-row {
+  display: table;
+  width: 100%;
+  height: 20%;
+  margin-top: 5%;
+  table-layout: fixed;
+  overflow: hidden;
+}
+
+.swatch-wrapper {
+  display: table-cell;
+  width: 100%;
+  height: 20%;
+  vertical-align: middle;
+}
+
+.swatch-wrapper-buffer {
+  display: table-cell;
+  width: 50%;
+}
+
+.swatch-image-wrapper {
+  display: table;
+  position: relative;
+  table-layout: fixed;
+  height: 50%;
+  width: 70%;
+  left: 15%;
+  text-align: center;
+}
+
+.swatch-image-border {
+  display: table-cell;
+  width: 80%;
+  height: 50%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+  overflow: hidden;
+  background: black;
+  border: 5px solid black;
+}
+
+.swatch-image-border.active {
+  border: 5px solid pink;
+}
+
+.swatch-image-border img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .custom-script {
   font-family: 'Sincerely', sans-serif;
   font-size: 2em;
+}
+
+.reg-tm {
+  font-size: 0.5em
 }
