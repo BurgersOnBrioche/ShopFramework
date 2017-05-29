@@ -110,11 +110,15 @@ $(document).on('click', '.js-remove-letter', function(evt) {
 $(document).on('click', '.js-letter', function(evt) {
   evt.stopPropagation()
 
-  setState({
-    editing: true,
-    editingBag: false,
-    activeLetter: $(this).data('index'),
-  })
+  if ($(this).data('index') > -1) {
+    setState({
+      editing: true,
+      editingBag: false,
+      activeLetter: $(this).data('index'),
+    })
+  }
+
+
 })
 
 $(document).on('click', '.js-tab', function(evt) {
