@@ -95,13 +95,11 @@ $(document).on('click', '.js-bag-link', function(evt) {
 $(document).on('click', '.js-remove-letter', function(evt) {
   var letters = state.letters.split('')
   letters.splice(state.activeLetter, 1)
-
   setState({
     letters: letters.join(''),
     editing: false,
   })
 })
-
 
 // edit individual letter
 $(document).on('click', '.js-letter', function(evt) {
@@ -117,11 +115,21 @@ $(document).on('click', '.js-letter', function(evt) {
 $(document).on('click', '.js-tab', function(evt) {
   evt.stopPropagation()
 
-  setState({
-    editing: true,
-    editingBag: false,
-    activeLetter: $(this).data('index'),
-  })
+  if ($(this).data('index') > -1) {
+    setState({
+      editing: true,
+      editingBag: false,
+      activeLetter: $(this).data('index'),
+    })
+  } else {
+    setState({
+      editing: false,
+      editingBag: true,
+      activeLetter: $(this).data('index'),
+    })
+  }
+
+
 })
 
 // stop editing
@@ -143,7 +151,7 @@ function setState(newState) {
 }
 
 function updateCustomInfo() {
-  var productDescription = 'Danny-Black'
+  var productDescription = 'Danny-' + state.bag
   if (state.letters.length > 0) {
     productDescription += ` / ${state.letters[0].toUpperCase()}-${state.materials[0]}`
   }
@@ -167,10 +175,16 @@ function render() {
   // render bag color
 
   $('.js-bag').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/danny-" + state.bag + ".png)" })
-  $('.js-tab').each(function() {
 
-      var src = `${window.baseUrl || ''}assets/img/letters/${state.letters[0].toUpperCase()}-${state.materials[0]}.png`;
-      $(this).css({ background: "url(" + (window.baseUrl || '') + src + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
+  $('.js-tab').each(function() {
+      if ($(this).data('index') != -1) {
+        var ind = $(this).data('index')
+        var src = `${window.baseUrl || ''}assets/img/letters/` + state.letters[ind].toUpperCase() + `-` + state.materials[ind] + `.png`;
+        $(this).css({ background: "url(" + (window.baseUrl || '') + src + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
+
+      } else {
+        $(this).html('All')
+      }
     })
     // render letters in bag and preview
   state.letters.split('').forEach(function(l, i) {
@@ -186,6 +200,8 @@ function render() {
   })
 
   // show editor palette
+
+  /*
   if (state.editing) {
     $('.js-palette').show().removeClass('closed')
 
@@ -200,6 +216,7 @@ function render() {
     $('.js-palette').addClass('closed')
     $('input').blur()
   }
+  */
 
   // select input if we're showing a new input
   if (state.editing !== lastState.editing || (state.activeLetter !== lastState.activeLetter && state.activeLetter === state.letters.length)) {
@@ -207,6 +224,7 @@ function render() {
   }
 
   // render active tab
+
   $(`.js-tab[data-index=${state.activeLetter}]`).addClass('active')
   $(`.js-tab[data-index=${state.activeLetter}]`).parent().addClass('active')
 
