@@ -21,20 +21,25 @@
       <div class="bounce3"></div>
     </div>
   </div>
+  <label class="letter-label">
+        <input class="js-bag-input letters-input" type="text" maxLength="2" pattern="[A-Z]" placeholder="A-Z"/>
+  </label>
   <div class="tab-cnr">
-    <div class="tab-back active">
-      <div class="tab js-tab"></div>
+    <div class="tab-buffer">
+
     </div>
-    <div class="tab-back">
-      <div class="tab js-tab"></div>
+    <div class="tab-back js-tab-back active">
+      <div class="tab js-tab" data-index="0"></div>
+    </div>
+    <div class="tab-back js-tab-back">
+      <div class="tab js-tab" data-index="1"></div>
+    </div>
+    <div class="tab-buffer">
+
     </div>
   </div>
   <div class="palette js-palette">
     <div class="bag-editor js-bag-editor">
-      <label class="letter-label">
-        Letters:
-        <input class="js-bag-input letters-input" type="text" maxLength="2" pattern="[A-Z]" placeholder="A-Z"/>
-      </label>
       <div class="panels">
         <div class="left-cnr">
           <div class="swatches js-swatches">
@@ -62,10 +67,6 @@
     </div>
 
     <div class="letter-editor js-letter-editor" style="display:none">
-      <label class="letter-label">
-        Letter:
-        <input class="js-input letters-input" type="text" maxLength="1" pattern="[A-Z]" placeholder="A-Z"/>
-      </label>
       <div class="panels">
         <div class="swatches left-cnr">
           <div class="swatch js-swatch" data-color="black">

@@ -114,6 +114,16 @@ $(document).on('click', '.js-letter', function(evt) {
   })
 })
 
+$(document).on('click', '.js-tab', function(evt) {
+  evt.stopPropagation()
+
+  setState({
+    editing: true,
+    editingBag: false,
+    activeLetter: $(this).data('index'),
+  })
+})
+
 // stop editing
 $(document).on('click', '.js-close-palette', function(evt) {
   setState({
@@ -150,13 +160,19 @@ function render() {
   $('.js-tab').html('')
   $('.js-preview').html('')
   $('.js-tab').removeClass('active')
+  $('.js-tab').parent().removeClass('active')
   $('.js-swatch').removeClass('active')
   $('.js-loading').hide()
 
   // render bag color
-  $('.js-bag').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/danny-" + state.bag + ".png)" })
 
-  // render letters in bag and preview
+  $('.js-bag').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/danny-" + state.bag + ".png)" })
+  $('.js-tab').each(function() {
+
+      var src = `${window.baseUrl || ''}assets/img/letters/${state.letters[0].toUpperCase()}-${state.materials[0]}.png`;
+      $(this).css({ background: "url(" + (window.baseUrl || '') + src + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
+    })
+    // render letters in bag and preview
   state.letters.split('').forEach(function(l, i) {
     var letter = Letter({ letter: l, material: state.materials[i], index: i })
     $('.js-loading').show()
@@ -192,6 +208,7 @@ function render() {
 
   // render active tab
   $(`.js-tab[data-index=${state.activeLetter}]`).addClass('active')
+  $(`.js-tab[data-index=${state.activeLetter}]`).parent().addClass('active')
 
   // render active swatch
   $(`.js-swatch[data-color=${state.materials[state.activeLetter]}]`).addClass('active')
