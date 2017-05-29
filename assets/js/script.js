@@ -26,7 +26,12 @@ $(document).ready(function() {
 })
 
 var state = {
-  bag: 'black',
+  bag: {
+    color: 'black',
+    style: 'danny',
+    height: 8.5,
+    width: 12
+  },
   letters: 'AA',
   materials: ['white', 'white'],
   activeLetter: 0,
@@ -87,7 +92,7 @@ $(document).on('click', '.js-swatch-link', function(evt) {
 // select bag type
 $(document).on('click', '.js-bag-link', function(evt) {
   setState({
-    bag: $(this).data('color')
+    bag: { color: $(this).data('color'), style: $(this).data('style') }
   })
 })
 
@@ -113,8 +118,6 @@ $(document).on('click', '.js-letter', function(evt) {
 })
 
 $(document).on('click', '.js-tab', function(evt) {
-  evt.stopPropagation()
-
   if ($(this).data('index') > -1) {
     setState({
       editing: true,
@@ -136,14 +139,13 @@ $(document).on('click', '.js-tab', function(evt) {
 $(document).on('click', '.js-close-palette', function(evt) {
   setState({
     editing: false,
-    editingBag: false,
+    editingBag: false
   })
 })
 
 function setState(newState) {
   lastState = Object.assign({}, state)
   state = Object.assign({}, state, newState)
-
   if (window.location.href.match(/localhost/)) {
     console.log('set', newState, 'state is now', state)
   }
@@ -151,14 +153,13 @@ function setState(newState) {
 }
 
 function updateCustomInfo() {
-  var productDescription = 'Danny-' + state.bag
+  var productDescription = state.bag.style + "-" + state.bag.color
   if (state.letters.length > 0) {
     productDescription += ` / ${state.letters[0].toUpperCase()}-${state.materials[0]}`
   }
   if (state.letters.length > 1) {
     productDescription += ` / ${state.letters[1].toUpperCase()}-${state.materials[1]}`
   }
-
   $("#custombar-custom-info").val(productDescription);
 }
 
@@ -168,22 +169,21 @@ function render() {
   $('.js-tab').html('')
   $('.js-preview').html('')
   $('.js-tab').removeClass('active')
-  $('.js-tab').parent().removeClass('active')
+  $('.js-tab-back').removeClass('active')
   $('.js-swatch').removeClass('active')
   $('.js-loading').hide()
 
   // render bag color
+  $('.js-bag').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/" + state.bag.style + "-" + state.bag.color + ".png)" })
 
-  $('.js-bag').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/danny-" + state.bag + ".png)" })
-
+  // render tabs
   $('.js-tab').each(function() {
-      if ($(this).data('index') != -1) {
+      if ($(this).data('index') == -1) {
+        $(this).html('All')
+      } else {
         var ind = $(this).data('index')
         var src = `${window.baseUrl || ''}assets/img/letters/` + state.letters[ind].toUpperCase() + `-` + state.materials[ind] + `.png`;
         $(this).css({ background: "url(" + (window.baseUrl || '') + src + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
-
-      } else {
-        $(this).html('All')
       }
     })
     // render letters in bag and preview
@@ -226,7 +226,7 @@ function render() {
   // render active tab
 
   $(`.js-tab[data-index=${state.activeLetter}]`).addClass('active')
-  $(`.js-tab[data-index=${state.activeLetter}]`).parent().addClass('active')
+  $(`.js-tab[data-index=${state.activeLetter}]`).parents('.js-tab-back').addClass('active')
 
   // render active swatch
   $(`.js-swatch[data-color=${state.materials[state.activeLetter]}]`).addClass('active')
