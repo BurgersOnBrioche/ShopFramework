@@ -8,13 +8,11 @@ $(document).ready(function() {
       clearInterval(interval)
     }, 200)
   }
-
   // fix odd safari bug where the delegated click is not being recognized, but only for the bag
   setTimeout(function() {
-    $('.js-bag').on('click', function() {})
-  }, 1000)
-
-  // get template html and embed it in the page
+      $('.js-bag').on('click', function() {})
+    }, 1000)
+    // get template html and embed it in the page
   fetch((window.baseUrl || '') + '/assets/html/custombar.html').then(function(response) {
     return response.text()
   }).then(function(html) {
@@ -33,7 +31,8 @@ var state = {
     width: 12
   },
   letters: 'AA',
-  materials: ['white', 'white'],
+  materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
+  positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
   activeLetter: 0,
   editing: true,
   editingBag: true,
@@ -170,6 +169,7 @@ function updateCustomInfo() {
 function render() {
   // reset
   $('.js-letters').find('.js-letter').remove()
+  $('.js-tab-cnr').find('.js-tab:not([data-index=-1])').parents('.js-tab-back').remove()
   $('.js-tab').html('')
   $('.js-preview').html('')
   $('.js-tab').removeClass('active')
@@ -180,7 +180,25 @@ function render() {
   // render bag color
   $('.js-bag').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/" + state.bag.style + "-" + state.bag.color + ".png)" })
 
-  // render tabs
+
+  // render letters in bag and preview and adds tabs
+
+  state.letters.split('').forEach(function(l, i) {
+
+      var letter = Letter({ letter: l, material: state.materials[i], index: i })
+      var tab = Tab({ index: i })
+
+      $('.js-loading').show()
+      $('.js-letters').append(letter)
+      $(`.js-tab[data-index=${i-1}]`).parents('.js-tab-back').after(tab)
+      letter[0].onload = function() {
+        $('.js-loading').hide()
+        if (state.activeLetter === i) {
+          $('.js-preview').append(letter.clone())
+        }
+      }
+    })
+    // render tabs
   $('.js-tab').each(function() {
       if ($(this).data('index') == -1) {
         $(this).html('All')
@@ -190,20 +208,7 @@ function render() {
         $(this).css({ background: "url(" + (window.baseUrl || '') + src + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
       }
     })
-    // render letters in bag and preview
-  state.letters.split('').forEach(function(l, i) {
-    var letter = Letter({ letter: l, material: state.materials[i], index: i })
-    $('.js-loading').show()
-    $('.js-letters').append(letter)
-    letter[0].onload = function() {
-      $('.js-loading').hide()
-      if (state.activeLetter === i) {
-        $('.js-preview').append(letter.clone())
-      }
-    }
-  })
-
-  // show editor palette
+    // show editor palette
 
   /*
   if (state.editing) {
@@ -255,6 +260,13 @@ function Letter(props) {
   `)
 }
 
+function Tab(props) {
+  return $(`
+    <div class="tab-back js-tab-back">
+      <div class="tab js-tab" data-index="${props.index}"></div>
+    </div>
+  `)
+}
 var imageCache = {}
 
 function loadImage(src, cb) {
