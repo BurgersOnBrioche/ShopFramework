@@ -10,7 +10,7 @@ $(document).ready(function() {
   }
   // fix odd safari bug where the delegated click is not being recognized, but only for the bag
   setTimeout(function() {
-      $('.js-bag').on('click', function() {})
+      $('.js-bag-color').on('click', function() {})
     }, 1000)
     // get template html and embed it in the page
   fetch((window.baseUrl || '') + '/assets/html/custombar.html').then(function(response) {
@@ -32,10 +32,11 @@ var state = {
   },
   letters: 'AA',
   materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
-  positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+  positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   activeLetter: 0,
-  editing: true,
-  editingBag: true,
+  editing: false,
+  editingBag: false,
+  step: "style"
 }
 
 var lastState = Object.assign({}, state);
@@ -88,11 +89,37 @@ $(document).on('click', '.js-swatch-link', function(evt) {
   })
 })
 
-// select bag type
-$(document).on('click', '.js-bag-link', function(evt) {
+
+// select bag style
+$(document).on('click', '.js-bag-style-link', function(evt) {
   setState({
-    bag: { color: $(this).data('color'), style: $(this).data('style') }
+    bag: { color: state.bag.color, style: $(this).data('style') }
   })
+
+})
+
+// select bag color
+$(document).on('click', '.js-bag-color-link', function(evt) {
+  setState({
+    bag: { color: $(this).data('color'), style: state.bag.style }
+  })
+})
+
+// show custom bar customization step
+$(document).on('click', '.show-custom-bar', function(evt) {
+    setState({
+      step: "custom-bar"
+    })
+
+
+  })
+  // show style selector step
+$(document).on('click', '.back-to-bag-styles', function(evt) {
+  setState({
+    step: "style"
+  })
+
+
 })
 
 // remove individual letter from bag
@@ -108,7 +135,6 @@ $(document).on('click', '.js-remove-letter', function(evt) {
 // edit individual letter
 $(document).on('click', '.js-letter', function(evt) {
   evt.stopPropagation()
-
   if ($(this).data('index') > -1) {
     setState({
       editing: true,
@@ -116,8 +142,6 @@ $(document).on('click', '.js-letter', function(evt) {
       activeLetter: $(this).data('index'),
     })
   }
-
-
 })
 
 $(document).on('click', '.js-tab', function(evt) {
@@ -167,27 +191,48 @@ function updateCustomInfo() {
 }
 
 function render() {
-  // reset
-  $('.js-letters').find('.js-letter').remove()
-  $('.js-tab-cnr').find('.js-tab:not([data-index=-1])').parents('.js-tab-back').remove()
-  $('.js-tab').html('')
-  $('.js-preview').html('')
-  $('.js-tab').removeClass('active')
-  $('.js-tab-back').removeClass('active')
-  $('.js-swatch').removeClass('active')
-  $('.js-loading').hide()
-
-  // render bag color
-  $('.js-bag').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/" + state.bag.style + "-" + state.bag.color + ".png)" })
 
 
-  // render letters in bag and preview and adds tabs
 
-  state.letters.split('').forEach(function(l, i) {
+  if (state.step == "style") {
+    // show style selector step
+    $("#styleViewSection").css({ display: "block" })
+    $("#customBarSectionMain").css({ display: "none" })
+    $(".show-custom-bar").css({ display: "flex" })
+    $(".back-to-bag-styles").css({ display: "none" })
+    $(".check-my-custom-out").css({ display: "none" })
+  }
 
+  if (state.step == "custom-bar") {
+
+
+    // reset
+    $('.js-letters').find('.js-letter').remove()
+    $('.js-tab-cnr').find('.js-tab:not([data-index=-1])').parents('.js-tab-back').remove()
+    $('.js-tab').html('')
+    $('.js-preview').html('')
+    $('.js-tab').removeClass('active')
+    $('.js-tab-back').removeClass('active')
+    $('.js-swatch').removeClass('active')
+    $('.js-loading').hide()
+
+    // show custom-bar step 
+    $("#styleViewSection").css({ display: "none" })
+    $("#customBarSectionMain").css({ display: "block" })
+    $(".show-custom-bar").css({ display: "none" })
+    $(".back-to-bag-styles").css({ display: "flex" })
+    $(".check-my-custom-out").css({ display: "flex" })
+
+
+    // render bag color
+    $('.js-bag-custom').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/" + state.bag.style + "-" + state.bag.color + ".png)" })
+
+
+    // render letters in bag and preview and adds tabs
+
+    state.letters.split('').forEach(function(l, i) {
       var letter = Letter({ letter: l, material: state.materials[i], index: i })
-      var tab = Tab({ index: i })
-
+      var tab = Tab({ letter: l, material: state.materials[i], index: i })
       $('.js-loading').show()
       $('.js-letters').append(letter)
       $(`.js-tab[data-index=${i-1}]`).parents('.js-tab-back').after(tab)
@@ -198,8 +243,9 @@ function render() {
         }
       }
     })
+
     // render tabs
-  $('.js-tab').each(function() {
+    $('.js-tab').each(function() {
       if ($(this).data('index') == -1) {
         $(this).html('All')
       } else {
@@ -208,42 +254,24 @@ function render() {
         $(this).css({ background: "url(" + (window.baseUrl || '') + src + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
       }
     })
-    // show editor palette
 
-  /*
-  if (state.editing) {
-    $('.js-palette').show().removeClass('closed')
-
-    if (state.editingBag) {
-      $('.js-bag-editor').show()
-      $('.js-letter-editor').hide()
-    } else {
-      $('.js-letter-editor').show()
-      $('.js-bag-editor').hide()
+    // select input if we're showing a new input
+    if (state.editing !== lastState.editing || (state.activeLetter !== lastState.activeLetter && state.activeLetter === state.letters.length)) {
+      $('.js-input').select()
     }
-  } else if (lastState.editing) {
-    $('.js-palette').addClass('closed')
-    $('input').blur()
+
+    // render active tab
+
+    $(`.js-tab[data-index=${state.activeLetter}]`).addClass('active')
+    $(`.js-tab[data-index=${state.activeLetter}]`).parents('.js-tab-back').addClass('active')
+
+    // render active swatch
+    $(`.js-swatch[data-color=${state.materials[state.activeLetter]}]`).addClass('active')
+
+    // set value of inputs
+    $('.js-bag-input').val(state.letters)
+    $('.js-input').val(state.letters[state.activeLetter])
   }
-  */
-
-  // select input if we're showing a new input
-  if (state.editing !== lastState.editing || (state.activeLetter !== lastState.activeLetter && state.activeLetter === state.letters.length)) {
-    $('.js-input').select()
-  }
-
-  // render active tab
-
-  $(`.js-tab[data-index=${state.activeLetter}]`).addClass('active')
-  $(`.js-tab[data-index=${state.activeLetter}]`).parents('.js-tab-back').addClass('active')
-
-  // render active swatch
-  $(`.js-swatch[data-color=${state.materials[state.activeLetter]}]`).addClass('active')
-
-  // set value of inputs
-  $('.js-bag-input').val(state.letters)
-  $('.js-input').val(state.letters[state.activeLetter])
-
   // update shopify hidden input
   updateCustomInfo()
 }
@@ -261,9 +289,12 @@ function Letter(props) {
 }
 
 function Tab(props) {
+  var alt = `${props.letter} in ${props.material}`
+  var src = `${window.baseUrl || ''}assets/img/letters/${props.letter.toUpperCase()}-${props.material}.png`;
+
   return $(`
     <div class="tab-back js-tab-back">
-      <div class="tab js-tab" data-index="${props.index}"></div>
+         <img src="${src}" alt="${alt}" class="tab js-tab" data-index="${props.index}"/> 
     </div>
   `)
 }
