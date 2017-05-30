@@ -47,7 +47,7 @@ a {
 
 @font-face {
   font-family: AvenirLT-Heavy;
-  src: url('../fonts/AvenirNextRegular.eot?#iefix') format('embedded-opentype'), url('../fonts/AvenirNextRegular.woff') format('woff'), url('../fonts/AvenirNextRegular.ttf') format('truetype'), url('../fonts/AvenirNextRegular.svg#AvenirNextRegular') format('svg');
+  src: url('../fonts/Ave-Heavy.eot?#iefix') format('embedded-opentype'), url('../fonts/Ave-Heavy.woff') format('woff'), url('../fonts/Ave-Heavy.ttf') format('truetype'), url('../fonts/Ave-Heavy.svg#Ave-Heavy') format('svg');
   font-weight: bold;
   font-style: normal;
 }
