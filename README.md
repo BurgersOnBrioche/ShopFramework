@@ -5,7 +5,11 @@ This is the source for the javascript that is embedded into the shopframework.co
 
 ## Setup
 
-    $ npm install -g gh-pages
+    $ npm install -g gh-pages http-server
+
+## Running Locally
+
+    $ http-server -p 8000 --cors
 
 ## Deploy
 
