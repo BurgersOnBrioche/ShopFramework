@@ -197,6 +197,13 @@ input[type="text"].letters-input {
   width: 20%;
   color: white;
   font-family: AvenirLT-Heavy;
+  margin: 0 !important;
+  padding: 0!important;
+}
+
+.tab-back-all span {
+  position: relative;
+  top: -20px;
 }
 
 .tab-back-all.active {
@@ -217,6 +224,9 @@ input[type="text"].letters-input {
 }
 
 .tab-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
 }
 
