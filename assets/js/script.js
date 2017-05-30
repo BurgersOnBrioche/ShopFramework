@@ -10,9 +10,10 @@ $(document).ready(function() {
   }
   // fix odd safari bug where the delegated click is not being recognized, but only for the bag
   setTimeout(function() {
-      $('.js-bag-color').on('click', function() {})
-    }, 1000)
-    // get template html and embed it in the page
+    $('.js-click').on('click', function() {})
+  }, 1000)
+
+  // get template html and embed it in the page
   fetch((window.baseUrl || '') + '/assets/html/custombar.html').then(function(response) {
     return response.text()
   }).then(function(html) {
@@ -106,20 +107,17 @@ $(document).on('click', '.js-bag-color-link', function(evt) {
 })
 
 // show custom bar customization step
-$(document).on('click', '.show-custom-bar', function(evt) {
-    setState({
-      step: "custom-bar"
-    })
-
-
+$(document).on('click', '.js-show-custom-bar', function(evt) {
+  setState({
+    step: "custom-bar"
   })
-  // show style selector step
-$(document).on('click', '.back-to-bag-styles', function(evt) {
+})
+
+// show style selector step
+$(document).on('click', '.js-back-to-bag-styles', function(evt) {
   setState({
     step: "style"
   })
-
-
 })
 
 // remove individual letter from bag
@@ -216,7 +214,7 @@ function render() {
     $('.js-swatch').removeClass('active')
     $('.js-loading').hide()
 
-    // show custom-bar step 
+    // show custom-bar step
     $("#styleViewSection").css({ display: "none" })
     $("#customBarSectionMain").css({ display: "block" })
     $(".show-custom-bar").css({ display: "none" })
@@ -294,7 +292,7 @@ function Tab(props) {
 
   return $(`
     <div class="tab-back js-tab-back">
-         <img src="${src}" alt="${alt}" class="tab js-tab" data-index="${props.index}"/> 
+         <img src="${src}" alt="${alt}" class="tab js-tab" data-index="${props.index}"/>
     </div>
   `)
 }
