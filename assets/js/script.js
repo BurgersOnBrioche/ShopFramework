@@ -151,11 +151,6 @@ $(document).on('click', '.js-letter', function(evt) {
   }
 })
 
-
-$(document).on('click', '.js-tab-back-all', function(evt) {
-  alert("")
-})
-
 $(document).on('click', '.js-tab', function(evt) {
   if ($(this).data('index') > -1) {
     setState({
