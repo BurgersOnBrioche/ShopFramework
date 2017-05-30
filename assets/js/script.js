@@ -204,9 +204,9 @@ function resize() {
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-cnr").height() * 0.75) + "px" })
   $(".js-swatch").height(($(".js-palette").height() / 3) + "px")
   $(".palette").css({
-    height: "calc(" + ($("#customBarSectionMain").height() - $(".js-tab-cnr ").height() - $(".js-bag-color-thumbs-cnr").height() - $(".js-bag-custom").height() - $("js-letter-label").height()) + "px - 40%)"
+    //height: "calc(" + ($("#customBarSectionMain").height() - $(".js-tab-cnr ").height() - $(".js-bag-color-thumbs-cnr").height() - $(".js-bag-custom").height() - $("js-letter-label").height()) + "px - 40%)"
   })
-  $(".js-letters").height($(".js-bag-custom").height * state.letterAspectHeight + "px")
+  $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
 }
 
 
