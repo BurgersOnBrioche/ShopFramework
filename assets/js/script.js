@@ -200,7 +200,7 @@ function updateCustomInfo() {
 }
 
 function resize() {
-  $("#customBarSectionMain").height("calc(" + $("#customBarSectionMain").parent().height() + "px - 10% )")
+  $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
   $(".js-tab-cnr").height($(".js-tab-back:not(.js-tab-back-all)").width())
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-cnr").height() * 0.75) + "px" })
   $(".js-swatch").height(($(".js-palette").height() / 3) + "px")
