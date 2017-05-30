@@ -20,6 +20,7 @@ $(document).ready(function() {
     $('#custombar').parent().css({ position: 'relative', overflow: 'hidden' })
     $('#custombar').before(html).remove()
     render()
+    resize()
   })
 })
 
@@ -36,7 +37,8 @@ var state = {
   activeLetter: 0,
   editing: false,
   editingBag: false,
-  step: "style"
+  step: "custom-bar",
+  navActive: false
 }
 
 var lastState = Object.assign({}, state);
@@ -110,8 +112,6 @@ $(document).on('click', '.show-custom-bar', function(evt) {
     setState({
       step: "custom-bar"
     })
-
-
   })
   // show style selector step
 $(document).on('click', '.back-to-bag-styles', function(evt) {
@@ -170,6 +170,8 @@ $(document).on('click', '.js-close-palette', function(evt) {
   })
 })
 
+$(window).on('resize', resize)
+
 function setState(newState) {
   lastState = Object.assign({}, state)
   state = Object.assign({}, state, newState)
@@ -190,10 +192,16 @@ function updateCustomInfo() {
   $("#custombar-custom-info").val(productDescription);
 }
 
+function resize() {
+  $(".js-tab-cnr").height($(".js-tab-back:not(.js-tab-back-all)").width())
+  $(".js-tab-back-all").css({ fontSize: ($(".js-tab-cnr").height() * 0.75) + "px" })
+  $(".js-swatch").height(($(".js-tab-cnr").height() * 1.5) + "px")
+  $(".palette").css({
+    height: "calc(" + ($("#customBarSectionMain").height() - $(".js-tab-cnr ").height() - $(".js-bag-color-thumbs-cnr").height() - $(".js-bag-custom").height() - $("js-letter-label").height()) + "px - 40%)"
+  })
+}
+
 function render() {
-
-
-
   if (state.step == "style") {
     // show style selector step
     $("#styleViewSection").css({ display: "block" })
@@ -204,8 +212,6 @@ function render() {
   }
 
   if (state.step == "custom-bar") {
-
-
     // reset
     $('.js-letters').find('.js-letter').remove()
     $('.js-tab-cnr').find('.js-tab:not([data-index=-1])').parents('.js-tab-back').remove()
@@ -219,9 +225,12 @@ function render() {
     // show custom-bar step 
     $("#styleViewSection").css({ display: "none" })
     $("#customBarSectionMain").css({ display: "block" })
-    $(".show-custom-bar").css({ display: "none" })
-    $(".back-to-bag-styles").css({ display: "flex" })
-    $(".check-my-custom-out").css({ display: "flex" })
+    if (state.navActive == true) {
+      $(".show-custom-bar").css({ display: "none" })
+      $(".back-to-bag-styles").css({ display: "flex" })
+      $(".check-my-custom-out").css({ display: "flex" })
+
+    }
 
 
     // render bag color
@@ -275,6 +284,8 @@ function render() {
   // update shopify hidden input
   updateCustomInfo()
 }
+
+
 
 function autoselect() {
   $(this).select()
