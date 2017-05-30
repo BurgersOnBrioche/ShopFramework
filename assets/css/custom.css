@@ -183,8 +183,8 @@ input[type="text"].letters-input {
   width: 20%;
   color: white;
   font-family: AvenirLT-Heavy;
-  margin: 0 !important;
-  padding: 0!important;
+  margin: 0;
+  padding: 0;
 }
 
 .tab-back-all span {
