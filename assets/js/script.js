@@ -243,7 +243,6 @@ function render() {
       $(".show-custom-bar").css({ display: "none" })
       $(".back-to-bag-styles").css({ display: "flex" })
       $(".check-my-custom-out").css({ display: "flex" })
-
     }
 
 
