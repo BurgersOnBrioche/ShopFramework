@@ -1,3 +1,5 @@
+var isSale = true
+
 $(document).ready(function() {
   // hide contact us form
   if (!window.location.href.match(/localhost/)) {
@@ -37,7 +39,7 @@ var state = {
   activeLetter: 0,
   editing: false,
   editingBag: false,
-  step: "style"
+  step: isSale ? 'custom-bar' : "style"
 }
 
 var lastState = Object.assign({}, state);
@@ -56,6 +58,8 @@ $(document).on('click', '.js-bag', function(evt) {
 
 // input to change both letters
 $(document).on('input', '.js-bag-input', function(evt) {
+  if( $(this).val().match(/[^A-z]/) ) { return $(this).val(state.letters) }
+
   setState({
     letters: $(this).val()
   })
@@ -190,7 +194,7 @@ function updateCustomInfo() {
 
 function render() {
 
-
+  if( isSale ) { $('#custombarNav').hide() }
 
   if (state.step == "style") {
     // show style selector step
