@@ -152,7 +152,7 @@ $(document).on('click', '.js-letter', function(evt) {
 })
 
 
-$(document).on('click', '.js-tab-all', function(evt) {
+$(document).on('click', '.js-tab-back-all', function(evt) {
   alert("")
 })
 
