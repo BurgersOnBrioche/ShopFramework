@@ -133,20 +133,6 @@ body {
   height: 100%;
 }
 
-
-/*
-@media only screen and (min-width: 769px) {
-  .bag-custom {
-    width: calc(40vh * 1.46);
-    height: 40vh;
-  }
-  .letters {
-    width: 100%;
-    text-align: center;
-  }
-}
-*/
-
 input[type="text"].letters-input {
   border: 1px solid black;
   display: inline-block;
