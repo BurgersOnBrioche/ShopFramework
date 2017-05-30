@@ -233,7 +233,7 @@ function render() {
 
     // show custom-bar step
     $("#styleViewSection").css({ display: "none" })
-      //$("#customBarSectionMain").css({ display: "block" })
+    $("#customBarSectionMain").css({ display: "block" })
     if (state.navActive == true) {
       $(".show-custom-bar").css({ display: "none" })
       $(".back-to-bag-styles").css({ display: "flex" })
