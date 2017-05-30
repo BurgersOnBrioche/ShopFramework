@@ -1,3 +1,5 @@
+var isSale = true
+
 $(document).ready(function() {
   // hide contact us form
   if (!window.location.href.match(/localhost/)) {
@@ -10,9 +12,10 @@ $(document).ready(function() {
   }
   // fix odd safari bug where the delegated click is not being recognized, but only for the bag
   setTimeout(function() {
-      $('.js-bag-color').on('click', function() {})
-    }, 1000)
-    // get template html and embed it in the page
+    $('.js-click').on('click', function() {})
+  }, 1000)
+
+  // get template html and embed it in the page
   fetch((window.baseUrl || '') + '/assets/html/custombar.html').then(function(response) {
     return response.text()
   }).then(function(html) {
@@ -20,6 +23,7 @@ $(document).ready(function() {
     $('#custombar').parent().css({ position: 'relative', overflow: 'hidden' })
     $('#custombar').before(html).remove()
     render()
+    resize()
   })
 })
 
@@ -31,12 +35,14 @@ var state = {
     width: 12
   },
   letters: 'AA',
+  letterAspectHeight: 0.26,
   materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
   positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   activeLetter: 0,
   editing: false,
   editingBag: false,
-  step: "style"
+  step: "custom-bar",
+  navActive: false
 }
 
 var lastState = Object.assign({}, state);
@@ -55,6 +61,8 @@ $(document).on('click', '.js-bag', function(evt) {
 
 // input to change both letters
 $(document).on('input', '.js-bag-input', function(evt) {
+  if ($(this).val().match(/[^A-z]/)) { return $(this).val(state.letters) }
+
   setState({
     letters: $(this).val()
   })
@@ -106,20 +114,19 @@ $(document).on('click', '.js-bag-color-link', function(evt) {
 })
 
 // show custom bar customization step
-$(document).on('click', '.show-custom-bar', function(evt) {
-    setState({
-      step: "custom-bar"
-    })
 
-
+$(document).on('click', '.js-show-custom-bar', function(evt) {
+  setState({
+    step: "custom-bar"
   })
-  // show style selector step
-$(document).on('click', '.back-to-bag-styles', function(evt) {
+
+})
+
+// show style selector step
+$(document).on('click', '.js-back-to-bag-styles', function(evt) {
   setState({
     step: "style"
   })
-
-
 })
 
 // remove individual letter from bag
@@ -170,6 +177,8 @@ $(document).on('click', '.js-close-palette', function(evt) {
   })
 })
 
+$(window).on('resize', resize)
+
 function setState(newState) {
   lastState = Object.assign({}, state)
   state = Object.assign({}, state, newState)
@@ -190,10 +199,20 @@ function updateCustomInfo() {
   $("#custombar-custom-info").val(productDescription);
 }
 
+
+
+function resize() {
+  $(".js-tab-cnr").height($(".js-tab-back:not(.js-tab-back-all)").width())
+  $(".js-tab-back-all").css({ fontSize: ($(".js-tab-cnr").height() * 0.75) + "px" })
+  $(".js-swatch").height(($(".js-palette").height() / 3) + "px")
+  $(".palette").css({
+    height: "calc(" + ($("#customBarSectionMain").height() - $(".js-tab-cnr ").height() - $(".js-bag-color-thumbs-cnr").height() - $(".js-bag-custom").height() - $("js-letter-label").height()) + "px - 40%)"
+  })
+  $(".js-letters").height($(".js-bag-custom").height * state.letterAspectHeight + "px")
+}
+
+
 function render() {
-
-
-
   if (state.step == "style") {
     // show style selector step
     $("#styleViewSection").css({ display: "block" })
@@ -204,8 +223,6 @@ function render() {
   }
 
   if (state.step == "custom-bar") {
-
-
     // reset
     $('.js-letters').find('.js-letter').remove()
     $('.js-tab-cnr').find('.js-tab:not([data-index=-1])').parents('.js-tab-back').remove()
@@ -216,12 +233,15 @@ function render() {
     $('.js-swatch').removeClass('active')
     $('.js-loading').hide()
 
-    // show custom-bar step 
+    // show custom-bar step
     $("#styleViewSection").css({ display: "none" })
     $("#customBarSectionMain").css({ display: "block" })
-    $(".show-custom-bar").css({ display: "none" })
-    $(".back-to-bag-styles").css({ display: "flex" })
-    $(".check-my-custom-out").css({ display: "flex" })
+    if (state.navActive == true) {
+      $(".show-custom-bar").css({ display: "none" })
+      $(".back-to-bag-styles").css({ display: "flex" })
+      $(".check-my-custom-out").css({ display: "flex" })
+
+    }
 
 
     // render bag color
@@ -276,6 +296,8 @@ function render() {
   updateCustomInfo()
 }
 
+
+
 function autoselect() {
   $(this).select()
 }
@@ -294,7 +316,7 @@ function Tab(props) {
 
   return $(`
     <div class="tab-back js-tab-back">
-         <img src="${src}" alt="${alt}" class="tab js-tab" data-index="${props.index}"/> 
+         <img src="${src}" alt="${alt}" class="tab js-tab" data-index="${props.index}"/>
     </div>
   `)
 }
