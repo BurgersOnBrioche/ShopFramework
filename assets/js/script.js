@@ -151,6 +151,11 @@ $(document).on('click', '.js-letter', function(evt) {
   }
 })
 
+
+$(document).on('click', '.js-tab-all', function(evt) {
+  alert("")
+})
+
 $(document).on('click', '.js-tab', function(evt) {
   if ($(this).data('index') > -1) {
     setState({
@@ -243,7 +248,6 @@ function render() {
       $(".show-custom-bar").css({ display: "none" })
       $(".back-to-bag-styles").css({ display: "flex" })
       $(".check-my-custom-out").css({ display: "flex" })
-
     }
 
 
