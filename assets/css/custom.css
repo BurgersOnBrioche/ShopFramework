@@ -177,6 +177,7 @@ input[type="text"].letters-input {
   top: 1px;
   height: 100%;
   margin: 0 1px;
+  padding: 5px 0;
   background: black;
   border-bottom: transparent;
   -webkit-border-top-right-radius: 10%;
