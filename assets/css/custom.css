@@ -132,6 +132,7 @@ body {
 
 .letters img {
   height: 100%;
+  width: auto;
 }
 
 .letter {
@@ -292,17 +293,19 @@ input[type="text"].letters-input {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .swatch {
   text-align: center;
-  max-height: 75%;
+  max-height: 60%;
+  width: auto;
 }
 
 .swatch img {
   border-radius: 50%;
   border: 2px solid white;
-  height: 100%;
+  width: 100%;
   cursor: pointer;
 }
 
