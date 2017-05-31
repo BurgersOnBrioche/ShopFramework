@@ -1,6 +1,6 @@
 var isSale = true
 var tutorial = true
-letterSpacings = {}
+var letterSpacings = {}
 
 $(document).ready(function() {
 
@@ -242,14 +242,7 @@ function resize() {
 }
 
 function imgLoadedResize(sender) {
-  console.log(sender.children())
-  switch (sender) {
-    case 1:
-      $(".js-bag-color-thumb").width()
-      break;
-    default:
-      break;
-  }
+  $(".js-bag-color-thumb").width()
 }
 $(window).on('resize', resize)
 var zoom = window.devicePixelRatio
