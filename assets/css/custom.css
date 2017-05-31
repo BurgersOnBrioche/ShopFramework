@@ -431,10 +431,12 @@ input[type="text"].letters-input {
   justify-content: center;
   cursor: pointer;
   height: 100%;
+  width: auto;
 }
 
 .bag-color-thumb img {
   height: 90%;
+  width: auto;
 }
 
 
