@@ -133,20 +133,6 @@ body {
   height: 100%;
 }
 
-
-/*
-@media only screen and (min-width: 769px) {
-  .bag-custom {
-    width: calc(40vh * 1.46);
-    height: 40vh;
-  }
-  .letters {
-    width: 100%;
-    text-align: center;
-  }
-}
-*/
-
 input[type="text"].letters-input {
   border: 1px solid black;
   display: inline-block;
@@ -197,8 +183,8 @@ input[type="text"].letters-input {
   width: 20%;
   color: white;
   font-family: AvenirLT-Heavy;
-  margin: 0 !important;
-  padding: 0!important;
+  margin: 0;
+  padding: 0;
 }
 
 .tab-back-all span {
@@ -567,4 +553,10 @@ input[type="text"].letters-input {
     -webkit-transform: scale(1.0);
     transform: scale(1.0);
   }
+}
+
+/* IE styles https://stackoverflow.com/questions/27703455/loading-css-stylesheet-only-for-ie11 */
+
+@media screen and (min-width:0\0) {
+  .bag-color { text-align: center; }
 }
