@@ -77,7 +77,6 @@ body {
   display: none;
   position: relative;
   width: 100%;
-  height: 100%
 }
 
 #styleViewSection {
@@ -432,10 +431,13 @@ input[type="text"].letters-input {
   justify-content: center;
   cursor: pointer;
   height: 100%;
+  width: auto;
+  margin: 0 1%;
 }
 
 .bag-color-thumb img {
   height: 90%;
+  width: auto;
 }
 
 
