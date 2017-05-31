@@ -96,6 +96,10 @@ body {
   #customBarSectionMain {
     display: flex;
   }
+
+  #content {
+    padding-bottom: 2em;
+  }
 }
 
 .desktop-only {
@@ -156,12 +160,13 @@ input[type="text"].letters-input {
 
 .tab-cnr {
   display: flex;
-  z-index: 1200;
+  z-index: 1;
   justify-content: center;
   align-items: center;
   flex-direction: row;
   width: 100%;
   border-bottom: 1px solid black;
+  margin-top: 2em;
 }
 
 .tab-back {
@@ -173,6 +178,7 @@ input[type="text"].letters-input {
   position: relative;
   top: 1px;
   height: 100%;
+  margin: 0 1px;
   background: black;
   border-bottom: transparent;
   -webkit-border-top-right-radius: 10%;
@@ -190,7 +196,6 @@ input[type="text"].letters-input {
 .tab-back-all {
   color: white;
   font-family: AvenirLT-Heavy;
-  margin: 0;
   padding: 0;
 }
 

@@ -100,7 +100,7 @@ $(document).on('click', '.js-input', autoselect)
 $(document).on('click', '.js-swatch-link', function(evt) {
   var materials = state.materials.concat([])
   var color = $(this).data('color')
-  if (state.editingBag) {
+  if (state.editingBag || state.activeLetter == -1 ) {
     materials = materials.map(function(m) { return color })
   } else {
     materials[state.activeLetter] = $(this).data('color')
@@ -233,7 +233,7 @@ function resize() {
 
 $(window).on('resize', resize)
 
-//resize onload dependencies 
+//resize onload dependencies
 
 
 
@@ -296,7 +296,6 @@ function render() {
 
     // render tabs
     $('.js-tab-all').html('ALL')
-
 
     // select input if we're showing a new input
     if (state.editing !== lastState.editing || (state.activeLetter !== lastState.activeLetter && state.activeLetter === state.letters.length)) {
