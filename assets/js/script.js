@@ -197,10 +197,10 @@ function setState(newState) {
 function updateCustomInfo() {
   var productDescription = state.bag.style + "-" + state.bag.color
   if (state.letters.length > 0) {
-    productDescription += ` / ${state.letters[0].toUpperCase()}-${state.materials[0]}`
+    productDescription += [' / ', state.letters[0].toUpperCase(), '-', state.materials[0]].join('')
   }
   if (state.letters.length > 1) {
-    productDescription += ` / ${state.letters[1].toUpperCase()}-${state.materials[1]}`
+    productDescription += [' / ', state.letters[1].toUpperCase(), '-', state.materials[1]].join('')
   }
   $("#custombar-custom-info").val(productDescription);
 }
@@ -257,7 +257,8 @@ function render() {
       var tab = Tab({ letter: l, material: state.materials[i], index: i })
       $('.js-loading').show()
       $('.js-letters').append(letter)
-      $(`.js-tab[data-index=${i-1}]`).parents('.js-tab-back').after(tab)
+      const tabSelector = ['.js-tab[data-index=',i-1,']'].join('')
+      $(tabSelector).parents('.js-tab-back').after(tab)
       letter[0].onload = function() {
         $('.js-loading').hide()
         if (state.activeLetter === i) {
@@ -272,7 +273,7 @@ function render() {
         $(this).html('All')
       } else {
         var ind = $(this).data('index')
-        var src = `${window.baseUrl || ''}assets/img/letters/` + state.letters[ind].toUpperCase() + `-` + state.materials[ind] + `.png`;
+        var src = [window.baseUrl || '', 'assets/img/letters/', state.letters[ind].toUpperCase(), '-', state.materials[ind], '.png'].join('')
         $(this).css({ background: "url(" + (window.baseUrl || '') + src + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
       }
     })
@@ -283,12 +284,14 @@ function render() {
     }
 
     // render active tab
-
-    $(`.js-tab[data-index=${state.activeLetter}]`).addClass('active')
-    $(`.js-tab[data-index=${state.activeLetter}]`).parents('.js-tab-back').addClass('active')
+    const activeTabSelector = ['.js-tab[data-index=',state.activeLetter,']'].join('')
+    $(activeTabSelector).addClass('active').parents('.js-tab-back').addClass('active')
 
     // render active swatch
-    $(`.js-swatch[data-color=${state.materials[state.activeLetter]}]`).addClass('active')
+    if( state.activeLetter > -1 ) {
+      const activeSwatchSelector = ['.js-swatch[data-color=',state.materials[state.activeLetter],']'].join('')
+      $(activeSwatchSelector).addClass('active')
+    }
 
     // set value of inputs
     $('.js-bag-input').val(state.letters)
@@ -305,32 +308,20 @@ function autoselect() {
 }
 
 function Letter(props) {
-  var alt = `${props.letter} in ${props.material}`
-  var src = `${window.baseUrl || ''}assets/img/letters/${props.letter.toUpperCase()}-${props.material}.png`;
-  return $(`
-    <img src="${src}" alt="${alt}" class="js-letter" data-index="${props.index}"/>
-  `)
+  var alt = [props.letter,' in ',props.material].join('')
+  var src = [window.baseUrl || '','assets/img/letters/',props.letter.toUpperCase(),'-',props.material,'.png'].join('')
+  var html = ['<img src="',src,'" alt="',alt,'" class="js-letter" data-index="',props.index,'"/>'].join('')
+  return $(html)
 }
 
 function Tab(props) {
-  var alt = `${props.letter} in ${props.material}`
-  var src = `${window.baseUrl || ''}assets/img/letters/${props.letter.toUpperCase()}-${props.material}.png`;
+  var alt = [props.letter,' in ', props.material].join('')
+  var src = [window.baseUrl || '','assets/img/letters/',props.letter.toUpperCase(),'-',props.material,'.png'].join('')
+  var html = [
+    '<div class="tab-back js-tab-back">',
+      '<img src="',src,'" alt="',alt,'" class="tab js-tab" data-index="',props.index,'"/>',
+    '</div>',
+  ].join('')
 
-  return $(`
-    <div class="tab-back js-tab-back">
-         <img src="${src}" alt="${alt}" class="tab js-tab" data-index="${props.index}"/>
-    </div>
-  `)
-}
-var imageCache = {}
-
-function loadImage(src, cb) {
-  if (!imageCache[src]) {
-    imageCache[src] = new Image
-    imageCache[src].src = src
-  }
-  imageCache[src].onload = function() {
-    imageCache[src].loaded = true
-    cb()
-  }
+  return $(html)
 }
