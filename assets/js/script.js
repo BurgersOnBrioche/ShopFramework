@@ -228,7 +228,7 @@ function resize() {
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
-  $(".bag-color-thumb").width($(".bag-color-thumb img").width())
+    //$(".bag-color-thumb").width($(".bag-color-thumb img").width())
 }
 
 $(window).on('resize', resize)
