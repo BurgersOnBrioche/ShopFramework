@@ -295,7 +295,7 @@ input[type="text"].letters-input {
 .swatch {
   height: 90%;
   text-align: center;
-  padding: 0 3px;
+  padding: 0 1%;
 }
 
 .swatch img {
