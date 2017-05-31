@@ -145,11 +145,6 @@ body {
   cursor: pointer;
 }
 
-.fa.fa-arrow-right,
-.fa.fa-arrow-left {
-  font-size: 200%;
-}
-
 .fa.fa-arrow-right {
   margin-right: 2%;
 }
