@@ -84,23 +84,11 @@ $(document).on('input', '.js-bag-input', function(evt) {
 $(document).on('focus', '.js-bag-input', autoselect)
 $(document).on('click', '.js-bag-input', autoselect)
 
-// input to change a single letter
-$(document).on('input', '.js-input', function(evt) {
-  var letters = state.letters.split('')
-  letters.splice(state.activeLetter, 1, $(this).val())
-
-  setState({
-    letters: letters.join(''),
-  })
-})
-$(document).on('focus', '.js-input', autoselect)
-$(document).on('click', '.js-input', autoselect)
-
 // select material swatch for individual letter
 $(document).on('click', '.js-swatch-link', function(evt) {
   var materials = state.materials.concat([])
   var color = $(this).data('color')
-  if (state.editingBag) {
+  if (state.editingBag || state.activeLetter == -1 ) {
     materials = materials.map(function(m) { return color })
   } else {
     materials[state.activeLetter] = $(this).data('color')
@@ -143,16 +131,6 @@ $(document).on('click', '.js-back-to-bag-styles', function(evt) {
   })
 })
 
-// remove individual letter from bag
-$(document).on('click', '.js-remove-letter', function(evt) {
-  var letters = state.letters.split('')
-  letters.splice(state.activeLetter, 1)
-  setState({
-    letters: letters.join(''),
-    editing: false,
-  })
-})
-
 // edit individual letter
 $(document).on('click', '.js-letter', function(evt) {
   evt.stopPropagation()
@@ -165,8 +143,9 @@ $(document).on('click', '.js-letter', function(evt) {
   }
 })
 
+//
 $(document).on('click', '.js-tab-back', function(evt) {
-  let tab = $(this).children('.js-tab')
+  var tab = $(this).children('.js-tab')
   if (tab.data('index') > -1) {
     setState({
       editing: true,
@@ -180,8 +159,6 @@ $(document).on('click', '.js-tab-back', function(evt) {
       activeLetter: tab.data('index'),
     })
   }
-
-
 })
 
 // stop editing
@@ -191,9 +168,6 @@ $(document).on('click', '.js-close-palette', function(evt) {
     editingBag: false
   })
 })
-
-
-
 
 function setState(newState) {
   lastState = $.extend({}, state)
@@ -218,7 +192,7 @@ function updateCustomInfo() {
 //resize handler
 function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
-  let newTabHeight = ($(".js-palette").height() * 0.5)
+  var newTabHeight = ($(".js-palette").height() * 0.5)
   $(".js-tab-cnr").height(newTabHeight)
 
   $(".js-swatch").height($("#customBarSectionMain").width() / (($(".js-swatch").length - 1) / 1.5))
@@ -228,15 +202,9 @@ function resize() {
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
-    //$(".bag-color-thumb").width($(".bag-color-thumb img").width())
 }
 
 $(window).on('resize', resize)
-
-//resize onload dependencies 
-
-
-
 
 function render() {
 
@@ -285,8 +253,7 @@ function render() {
       $(tabSelector).parents('.js-tab-back').after(tab)
 
       letter[0].onload = function() {
-
-        $(this).css({ marginLeft: $(this).width() * letterSpacings[l.toUpperCase()]["left"] + "px", marginRight: $(this).width() * letterSpacings[l.toUpperCase()]["right"] + "px" })
+        letter.css({ marginLeft: letter.width() * letterSpacings[l.toUpperCase()]["left"] + "px", marginRight: letter.width() * letterSpacings[l.toUpperCase()]["right"] + "px" })
         $('.js-loading').hide()
         if (state.activeLetter === i) {
           $('.js-preview').append(letter.clone())
@@ -296,7 +263,6 @@ function render() {
 
     // render tabs
     $('.js-tab-all').html('ALL')
-
 
     // select input if we're showing a new input
     if (state.editing !== lastState.editing || (state.activeLetter !== lastState.activeLetter && state.activeLetter === state.letters.length)) {
@@ -324,8 +290,6 @@ function render() {
   updateCustomInfo()
   resize()
 }
-
-
 
 function autoselect() {
   $(this).select()

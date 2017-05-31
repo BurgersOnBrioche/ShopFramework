@@ -70,7 +70,6 @@ body {
   justify-content: center;
   flex-direction: row;
   margin-top: 1%;
-  overflow: scroll;
 }
 
 #customBarSectionMain {
@@ -95,6 +94,10 @@ body {
 @media only screen and (min-width: 769px) {
   #customBarSectionMain {
     display: flex;
+  }
+
+  #content {
+    padding-bottom: 2em;
   }
 }
 
@@ -132,7 +135,6 @@ body {
 
 .letters img {
   height: 100%;
-  width: auto;
 }
 
 .letter {
@@ -156,12 +158,13 @@ input[type="text"].letters-input {
 
 .tab-cnr {
   display: flex;
-  z-index: 1200;
+  z-index: 1;
   justify-content: center;
   align-items: center;
   flex-direction: row;
   width: 100%;
   border-bottom: 1px solid black;
+  margin-top: 2em;
 }
 
 .tab-back {
@@ -173,6 +176,8 @@ input[type="text"].letters-input {
   position: relative;
   top: 1px;
   height: 100%;
+  margin: 0 1px;
+  padding: 5px 0;
   background: black;
   border-bottom: transparent;
   -webkit-border-top-right-radius: 10%;
@@ -190,7 +195,6 @@ input[type="text"].letters-input {
 .tab-back-all {
   color: white;
   font-family: AvenirLT-Heavy;
-  margin: 0;
   padding: 0;
 }
 
@@ -213,7 +217,6 @@ input[type="text"].letters-input {
 
 .tab {
   height: 70%;
-  width: auto;
 }
 
 .tab-all {
@@ -268,14 +271,6 @@ input[type="text"].letters-input {
   height: 100%;
 }
 
-.close-palette {
-  position: absolute;
-  right: 1em;
-  top: 1em;
-  font-size: 20px;
-  display: none;
-}
-
 .letter-label {
   height: 5%;
   margin: 0.5em 0;
@@ -299,7 +294,6 @@ input[type="text"].letters-input {
 .swatch {
   text-align: center;
   max-height: 60%;
-  width: auto;
 }
 
 .swatch img {
@@ -315,40 +309,6 @@ input[type="text"].letters-input {
 }
 
 @media only screen and (min-width: 769px) {}
-
-
-/* Letter Preview */
-
-.preview-cnr {
-  position: relative;
-  background: url(../img/graphpaper.gif) repeat;
-  border: 1px solid #afd7ff;
-  border-width: 1px 0;
-}
-
-.preview {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.preview img {
-  height: 90%;
-}
-
-.remove-letter {
-  color: white;
-  background-color: black;
-  padding: 5px 8px;
-  position: absolute;
-  top: -11px;
-  right: -8px;
-  font-weight: bold;
-  border-radius: 50%;
-  line-height: 15px;
-}
-
 
 /* bag style */
 
@@ -434,13 +394,11 @@ input[type="text"].letters-input {
   justify-content: center;
   cursor: pointer;
   height: 100%;
-  width: auto;
   margin: 0 1%;
 }
 
 .bag-color-thumb img {
   height: 90%;
-  width: auto;
 }
 
 

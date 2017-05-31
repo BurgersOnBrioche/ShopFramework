@@ -3,17 +3,21 @@
 This is the source for the javascript that is embedded into the shopframework.com shopify site.
 
 
+## Requirements
+
+1. Node 6+
+
 ## Setup
 
-    $ npm install -g gh-pages http-server
+    $ npm install
 
 ## Running Locally
 
-    $ http-server -p 8000 --cors
+    $ npm start
 
 ## Deploy
 
-    $ gh-pages -d .
+    $ npm run deploy
 
 ## Shopify integration
 
