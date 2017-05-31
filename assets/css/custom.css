@@ -26,7 +26,10 @@ a {
   cursor: pointer;
 }
 
-.bag-color-thumb img { max-width: none; }
+.bag-color-thumb img {
+  max-width: none;
+}
+
 
 /*
 
@@ -142,6 +145,24 @@ body {
   cursor: pointer;
 }
 
+.fa.fa-arrow-right {
+  margin-right: 2%;
+}
+
+.fa.fa-arrow-left {
+  margin-left: 2%;
+}
+
+.left-arrow-animating {
+  -webkit-animation: left-arrow-pulse 2s infinite ease-in-out both;
+  animation: left-arrow-pulse 2s infinite ease-in-out both;
+}
+
+.right-arrow-animating {
+  -webkit-animation: right-arrow-pulse 2s infinite ease-in-out both;
+  animation: right-arrow-pulse 2s infinite ease-in-out both;
+}
+
 input[type="text"].letters-input {
   border: 1px solid black;
   display: inline-block;
@@ -152,6 +173,7 @@ input[type="text"].letters-input {
   font-size: 100%;
   height: 100%;
   padding: .5em 0;
+  margin: 0!important;
 }
 
 
@@ -165,7 +187,7 @@ input[type="text"].letters-input {
   flex-direction: row;
   width: 100%;
   border-bottom: 1px solid black;
-  margin-top: 2em;
+  height: 10%;
 }
 
 .tab-back {
@@ -177,7 +199,6 @@ input[type="text"].letters-input {
   position: relative;
   top: 1px;
   height: 100%;
-  margin: 0 1px;
   padding: 5px 0;
   background: black;
   border-bottom: transparent;
@@ -231,52 +252,12 @@ input[type="text"].letters-input {
 
 /* Editing palette */
 
-.palette {
+.letter-label {
+  height: 5%;
+  margin: 1em 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  padding-top: 2em;
-  background-color: white;
-  z-index: 1;
-  transition: transform 200ms;
-  -webkit-transition: 200ms;
-  transform: 200ms;
-}
-
-.palette.closed {
-  transform: translateY(100%);
-  -webkit-transform: translateY(100%);
-}
-
-.bag-editor {
-  height: 100%;
-  width: 100%;
-}
-
-.left-cnr,
-.right-cnr {
-  height: 100%;
-}
-
-.right-cnr {
-  width: 100px;
-}
-
-.left-cnr {
-  flex: 1;
-  height: 100%;
-}
-
-.panels {
-  display: flex;
-  height: 100%;
-}
-
-.letter-label {
-  height: 5%;
-  margin: 0.5em 0;
-  display: block;
   text-align: center;
 }
 
@@ -286,23 +267,26 @@ input[type="text"].letters-input {
 /* Swatches */
 
 .swatches {
-  height: 100%;
+  height: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  border: 1px solid black;
+  border-width: 0 1px 1px 1px;
 }
 
 .swatch {
   text-align: center;
-  max-height: 60%;
+  height: 90%;
   width: auto;
+  padding: 0 1%;
 }
 
 .swatch img {
   border-radius: 50%;
   border: 2px solid white;
-  width: 100%;
+  height: 100%;
   cursor: pointer;
 }
 
@@ -312,6 +296,7 @@ input[type="text"].letters-input {
 }
 
 @media only screen and (min-width: 769px) {}
+
 
 /* bag style */
 
@@ -513,10 +498,53 @@ input[type="text"].letters-input {
 }
 
 
+/* Custom Animations */
+
+@-webkit-keyframes right-arrow-pulse {
+  50% {
+    margin-right: 7.5%;
+  }
+  100% {
+    margin-right: 2%;
+  }
+}
+
+@keyframes right-arrow-pulse {
+  50% {
+    margin-right: 7.5%;
+  }
+  100% {
+    margin-right: 2%;
+  }
+}
+
+@-webkit-keyframes left-arrow-pulse {
+  50% {
+    margin-left: 7.5%;
+  }
+  100% {
+    margin-left: 2%;
+  }
+}
+
+@keyframes left-arrow-pulse {
+  50% {
+    margin-left: 7.5%;
+  }
+  100% {
+    margin-left: 2%;
+  }
+}
+
+
 /* IE styles https://stackoverflow.com/questions/27703455/loading-css-stylesheet-only-for-ie11 */
 
 @media screen and (min-width:0\0) {
   .bag-color {
     text-align: center;
+  }
+  input[type="text"].letters-input {
+    height: auto;
+    min-height: 100%;
   }
 }

@@ -1,6 +1,13 @@
 var isSale = true
-letterSpacings = {}
+var tutorial = true
+var letterSpacings = {}
+
 $(document).ready(function() {
+
+  // shows arrows for steps
+  if (tutorial) {
+    $(".fa.fa-arrow-right, .fa.fa-arrow-left").css({ display: "flex" })
+  }
   // hide contact us form
   if (!window.location.href.match(/localhost/)) {
     var interval = setInterval(function() {
@@ -21,7 +28,7 @@ $(document).ready(function() {
     return response.text()
   }).then(function(html) {
     html = html.replace(/assets\/img\//g, (window.baseUrl || '') + 'assets/img/')
-    $('#custombar').parent().css({ position: 'relative'})
+    $('#custombar').parent().css({ position: 'relative' })
     $('#custombar').before(html).remove()
   })
 })
@@ -38,7 +45,7 @@ var state = {
     height: 8.5,
     width: 12
   },
-  letters: 'AA',
+  letters: '',
   letterAspectHeight: 0.376,
   materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
   positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -46,7 +53,13 @@ var state = {
   editing: false,
   editingBag: true,
   step: "custom-bar",
-  navActive: false
+  navActive: false,
+  arrow: {
+    step1: false,
+    step2: false,
+    step3: false,
+    step4: false
+  }
 }
 
 var lastState = $.extend({}, state);
@@ -68,9 +81,14 @@ $(document).on('click', '.js-bag', function(evt) {
 // input to change both letters
 $(document).on('input', '.js-bag-input', function(evt) {
   if ($(this).val().match(/[^A-z]/)) { return $(this).val(state.letters) }
-
-  var newState = { letters: $(this).val() }
-
+  var newState = {
+    letters: $(this).val(),
+    arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 }
+  }
+  console.log(newState.arrow)
+  if (state.arrow.step2 == false) {
+    newState.arrow.step2 = true
+  }
   // reset active letter pointer if letters are deleted
   if ($(this).val().length < state.letters.length) {
     const letterIndexes = $(this).val().length - 1;
@@ -86,15 +104,19 @@ $(document).on('click', '.js-bag-input', autoselect)
 $(document).on('click', '.js-swatch-link', function(evt) {
   var materials = state.materials.concat([])
   var color = $(this).data('color')
-  if (state.editingBag || state.activeLetter == -1 ) {
+  if (state.editingBag || state.activeLetter == -1) {
     materials = materials.map(function(m) { return color })
   } else {
     materials[state.activeLetter] = $(this).data('color')
   }
-
-  setState({
-    materials: materials
-  })
+  var newState = {
+    materials: materials,
+    arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 }
+  }
+  if (state.arrow.step4 == false) {
+    newState.arrow.step4 = true
+  }
+  setState(newState)
 })
 
 
@@ -108,9 +130,15 @@ $(document).on('click', '.js-bag-style-link', function(evt) {
 
 // select bag color
 $(document).on('click', '.js-bag-color-link', function(evt) {
-  setState({
-    bag: { color: $(this).data('color'), style: state.bag.style }
-  })
+  var newState = {
+    bag: { color: $(this).data('color'), style: state.bag.style },
+    arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 }
+  }
+  if (state.arrow.step1 == false) {
+    newState.arrow.step1 = true
+
+  }
+  setState(newState)
 })
 
 // show custom bar customization step
@@ -141,30 +169,32 @@ $(document).on('click', '.js-letter', function(evt) {
   }
 })
 
-//
+// select letter tab
 $(document).on('click', '.js-tab-back', function(evt) {
   var tab = $(this).children('.js-tab')
+  var newState = {}
   if (tab.data('index') > -1) {
-    setState({
+    newState = {
       editing: true,
       editingBag: false,
       activeLetter: tab.data('index'),
-    })
+      arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 },
+
+    }
   } else {
-    setState({
+    newState = {
       editing: false,
       editingBag: true,
       activeLetter: tab.data('index'),
-    })
-  }
-})
+      arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 },
 
-// stop editing
-$(document).on('click', '.js-close-palette', function(evt) {
-  setState({
-    editing: false,
-    editingBag: false
-  })
+
+    }
+  }
+  if (state.arrow.step3 == false) {
+    newState.arrow.step3 = true
+  }
+  setState(newState)
 })
 
 function setState(newState) {
@@ -187,24 +217,44 @@ function updateCustomInfo() {
   $("#custombar-custom-info").val(productDescription);
 }
 
+function setImageLoaded(sender) {
+  sender.setAttribute('data-loaded', true)
+  resize()
+}
 //resize handler
 function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
-  var newTabHeight = ($(".js-palette").height() * 0.5)
-  $(".js-tab-cnr").height(newTabHeight)
+  $("#customBarSectionMain").width($("#customBarSectionMain").parent().width() + "px")
 
-  $(".js-swatch").height($("#customBarSectionMain").width() / (($(".js-swatch").length - 1) / 1.5))
-
-  $(".js-tab-back:not(.js-tab-back-all)").width(newTabHeight)
-  $(".js-tab-back-all").width(newTabHeight * 2)
+  $(".js-swatch").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
+  $(".js-tab-back:not(.js-tab-back-all)").width($(".js-tab-cnr").height())
+  $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
+
+  $(".fa.fa-arrow-right,.fa.fa-arrow-left").css({ fontSize: $(".js-letter-label").height() + "px" })
+  $(".js-bag-color-link").each(function() {
+    if ($(this).attr('data-loaded')) {
+      $(this).parents('.js-bag-color-thumb').width($(this).width())
+    }
+  })
 }
 
+function imgLoadedResize(sender) {
+  $(".js-bag-color-thumb").width()
+}
 $(window).on('resize', resize)
+var zoom = window.devicePixelRatio
+setInterval(function() {
+  if (window.devicePixelRatio != zoom) {
+    resize();
+    zoom = window.devicePixelRatio;
+  }
+}, 300)
 
 function render() {
+
 
   if (state.step == "style") {
     // show style selector step
@@ -235,13 +285,16 @@ function render() {
       $(".check-my-custom-out").css({ display: "flex" })
     }
 
+    //sets step arrows
+    if (state.arrow.step1) $(".js-bag-color>.fa.fa-arrow-right, .js-bag-color>.fa.fa-arrow-left").css({ display: "none" })
+    if (state.arrow.step2) $(".js-letter-label>.fa.fa-arrow-right, .js-letter-label>.fa.fa-arrow-left").css({ display: "none" })
+    if (state.arrow.step3) $(".js-tab-cnr>.fa.fa-arrow-right, .js-tab-cnr>.fa.fa-arrow-left").css({ display: "none" })
+    if (state.arrow.step4) $(".js-swatches>.fa.fa-arrow-right, .js-swatches>.fa.fa-arrow-left").css({ display: "none" })
 
     // render bag color
     $('.js-bag-custom').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/" + state.bag.style + "-" + state.bag.color + ".png)" })
 
-
     // render letters in bag and preview and adds tabs
-
     state.letters.split('').forEach(function(l, i) {
       var letter = Letter({ letter: l, material: state.materials[i], index: i })
       var tab = Tab({ letter: l, material: state.materials[i], index: i })
