@@ -38,7 +38,7 @@ var state = {
   letterAspectHeight: 0.26,
   materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
   positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  activeLetter: 0,
+  activeLetter: -1,
   editing: false,
   editingBag: false,
   step: "custom-bar",
@@ -63,9 +63,15 @@ $(document).on('click', '.js-bag', function(evt) {
 $(document).on('input', '.js-bag-input', function(evt) {
   if ($(this).val().match(/[^A-z]/)) { return $(this).val(state.letters) }
 
-  setState({
-    letters: $(this).val()
-  })
+  var newState = { letters: $(this).val() }
+
+  // reset active letter pointer if letters are deleted
+  if( $(this).val().length < state.letters.length ) {
+    const letterIndexes = $(this).val().length - 1;
+    newState.activeLetter = Math.min(letterIndexes, state.activeLetter);
+  }
+
+  setState(newState)
 })
 $(document).on('focus', '.js-bag-input', autoselect)
 $(document).on('click', '.js-bag-input', autoselect)
@@ -200,14 +206,12 @@ function updateCustomInfo() {
 }
 
 function resize() {
-
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
   $(".js-tab-cnr").height($(".js-tab-back:not(.js-tab-back-all)").width())
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-cnr").height() * 0.75) + "px" })
   $(".js-swatch").height(($(".js-palette").height() / 3) + "px")
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
-
 }
 
 
