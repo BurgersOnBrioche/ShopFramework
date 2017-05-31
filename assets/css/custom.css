@@ -169,7 +169,6 @@ input[type="text"].letters-input {
   position: relative;
   top: 1px;
   height: 100%;
-  width: 10%;
   background: black;
   border-bottom: transparent;
   -webkit-border-top-right-radius: 10%;
@@ -185,7 +184,6 @@ input[type="text"].letters-input {
 }
 
 .tab-back-all {
-  width: 20%;
   color: white;
   font-family: AvenirLT-Heavy;
   margin: 0;
@@ -297,7 +295,7 @@ input[type="text"].letters-input {
 .swatch {
   height: 90%;
   text-align: center;
-  padding: 0 3px;
+  padding: 0 1%;
 }
 
 .swatch img {

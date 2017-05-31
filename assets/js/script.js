@@ -218,15 +218,19 @@ function updateCustomInfo() {
 //resize handler
 function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
-  $(".js-tab-cnr").height(($(".js-palette").height() * 0.5) + "px")
-  $(".js-swatch").height(($(".js-palette").height() * 0.5) + "px")
-  $(".js-tab-back").width($(".js-tab-cnr").height())
-  $(".js-tab-back-all").css({ fontSize: ($(".js-tab-cnr").height() * 0.75) + "px" })
+  let newTabHeight = ($(".js-palette").height() * 0.5)
+  $(".js-tab-cnr").height(newTabHeight)
+
+  $(".js-swatch").height($("#customBarSectionMain").width() / (($(".js-swatch").length - 1) / 1.5))
+  $(".js-tab-back:not(.js-tab-back-all)").width(newTabHeight)
+  $(".js-tab-back-all").width(newTabHeight * 2)
+  $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
 }
 $(window).on('resize', resize)
 
+//resize onload dependencies 
 
 
 
@@ -288,15 +292,8 @@ function render() {
     })
 
     // render tabs
-    $('.js-tab').each(function() {
-      if ($(this).data('index') == -1) {
-        $(this).html('All')
-      } else {
-        var ind = $(this).data('index')
-        var src = [window.baseUrl || '', 'assets/img/letters/', state.letters[ind].toUpperCase(), '-', state.materials[ind], '.png'].join('')
-        $(this).css({ background: "url(" + (window.baseUrl || '') + src + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
-      }
-    })
+    $('.js-tab-all').html('ALL')
+
 
     // select input if we're showing a new input
     if (state.editing !== lastState.editing || (state.activeLetter !== lastState.activeLetter && state.activeLetter === state.letters.length)) {
@@ -322,6 +319,7 @@ function render() {
   }
   // update shopify hidden input
   updateCustomInfo()
+  resize()
 }
 
 
