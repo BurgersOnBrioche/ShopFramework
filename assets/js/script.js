@@ -10,6 +10,7 @@ $(document).ready(function() {
       clearInterval(interval)
     }, 200)
   }
+
   // fix odd safari bug where the delegated click is not being recognized, but only for the bag
   setTimeout(function() {
     $('.js-click').on('click', function() {})
@@ -23,6 +24,7 @@ $(document).ready(function() {
     $('#custombar').parent().css({ position: 'relative', overflow: 'hidden' })
     $('#custombar').before(html).remove()
     render()
+    resize()
   })
 })
 
@@ -34,15 +36,17 @@ var state = {
     width: 12
   },
   letters: 'AA',
+  letterAspectHeight: 0.26,
   materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
   positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  activeLetter: 0,
+  activeLetter: -1,
   editing: false,
   editingBag: false,
-  step: isSale ? 'custom-bar' : "style"
+  step: "custom-bar",
+  navActive: false
 }
 
-var lastState = Object.assign({}, state);
+var lastState = $.extend({}, state);
 
 //
 // EVENT HANDLING
@@ -58,11 +62,17 @@ $(document).on('click', '.js-bag', function(evt) {
 
 // input to change both letters
 $(document).on('input', '.js-bag-input', function(evt) {
-  if( $(this).val().match(/[^A-z]/) ) { return $(this).val(state.letters) }
+  if ($(this).val().match(/[^A-z]/)) { return $(this).val(state.letters) }
 
-  setState({
-    letters: $(this).val()
-  })
+  var newState = { letters: $(this).val() }
+
+  // reset active letter pointer if letters are deleted
+  if( $(this).val().length < state.letters.length ) {
+    const letterIndexes = $(this).val().length - 1;
+    newState.activeLetter = Math.min(letterIndexes, state.activeLetter);
+  }
+
+  setState(newState)
 })
 $(document).on('focus', '.js-bag-input', autoselect)
 $(document).on('click', '.js-bag-input', autoselect)
@@ -111,10 +121,12 @@ $(document).on('click', '.js-bag-color-link', function(evt) {
 })
 
 // show custom bar customization step
+
 $(document).on('click', '.js-show-custom-bar', function(evt) {
   setState({
     step: "custom-bar"
   })
+
 })
 
 // show style selector step
@@ -172,9 +184,11 @@ $(document).on('click', '.js-close-palette', function(evt) {
   })
 })
 
+$(window).on('resize', resize)
+
 function setState(newState) {
-  lastState = Object.assign({}, state)
-  state = Object.assign({}, state, newState)
+  lastState = $.extend({}, state)
+  state = $.extend({}, state, newState)
   if (window.location.href.match(/localhost/)) {
     console.log('set', newState, 'state is now', state)
   }
@@ -184,18 +198,25 @@ function setState(newState) {
 function updateCustomInfo() {
   var productDescription = state.bag.style + "-" + state.bag.color
   if (state.letters.length > 0) {
-    productDescription += ` / ${state.letters[0].toUpperCase()}-${state.materials[0]}`
+    productDescription += [' / ', state.letters[0].toUpperCase(), '-', state.materials[0]].join('')
   }
   if (state.letters.length > 1) {
-    productDescription += ` / ${state.letters[1].toUpperCase()}-${state.materials[1]}`
+    productDescription += [' / ', state.letters[1].toUpperCase(), '-', state.materials[1]].join('')
   }
   $("#custombar-custom-info").val(productDescription);
 }
 
+function resize() {
+  $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
+  $(".js-tab-cnr").height($(".js-tab-back:not(.js-tab-back-all)").width())
+  $(".js-tab-back-all").css({ fontSize: ($(".js-tab-cnr").height() * 0.75) + "px" })
+  $(".js-swatch").height(($(".js-palette").height() / 3) + "px")
+  $(".js-letter-label").height($("js-bag-input").height())
+  $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
+}
+
+
 function render() {
-
-  if( isSale ) { $('#custombarNav').hide() }
-
   if (state.step == "style") {
     // show style selector step
     $("#styleViewSection").css({ display: "block" })
@@ -206,8 +227,6 @@ function render() {
   }
 
   if (state.step == "custom-bar") {
-
-
     // reset
     $('.js-letters').find('.js-letter').remove()
     $('.js-tab-cnr').find('.js-tab:not([data-index=-1])').parents('.js-tab-back').remove()
@@ -221,9 +240,11 @@ function render() {
     // show custom-bar step
     $("#styleViewSection").css({ display: "none" })
     $("#customBarSectionMain").css({ display: "block" })
-    $(".show-custom-bar").css({ display: "none" })
-    $(".back-to-bag-styles").css({ display: "flex" })
-    $(".check-my-custom-out").css({ display: "flex" })
+    if (state.navActive == true) {
+      $(".show-custom-bar").css({ display: "none" })
+      $(".back-to-bag-styles").css({ display: "flex" })
+      $(".check-my-custom-out").css({ display: "flex" })
+    }
 
 
     // render bag color
@@ -237,7 +258,8 @@ function render() {
       var tab = Tab({ letter: l, material: state.materials[i], index: i })
       $('.js-loading').show()
       $('.js-letters').append(letter)
-      $(`.js-tab[data-index=${i-1}]`).parents('.js-tab-back').after(tab)
+      const tabSelector = ['.js-tab[data-index=',i-1,']'].join('')
+      $(tabSelector).parents('.js-tab-back').after(tab)
       letter[0].onload = function() {
         $('.js-loading').hide()
         if (state.activeLetter === i) {
@@ -252,7 +274,7 @@ function render() {
         $(this).html('All')
       } else {
         var ind = $(this).data('index')
-        var src = `${window.baseUrl || ''}assets/img/letters/` + state.letters[ind].toUpperCase() + `-` + state.materials[ind] + `.png`;
+        var src = [window.baseUrl || '', 'assets/img/letters/', state.letters[ind].toUpperCase(), '-', state.materials[ind], '.png'].join('')
         $(this).css({ background: "url(" + (window.baseUrl || '') + src + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
       }
     })
@@ -263,12 +285,14 @@ function render() {
     }
 
     // render active tab
-
-    $(`.js-tab[data-index=${state.activeLetter}]`).addClass('active')
-    $(`.js-tab[data-index=${state.activeLetter}]`).parents('.js-tab-back').addClass('active')
+    const activeTabSelector = ['.js-tab[data-index=',state.activeLetter,']'].join('')
+    $(activeTabSelector).addClass('active').parents('.js-tab-back').addClass('active')
 
     // render active swatch
-    $(`.js-swatch[data-color=${state.materials[state.activeLetter]}]`).addClass('active')
+    if( state.activeLetter > -1 ) {
+      const activeSwatchSelector = ['.js-swatch[data-color=',state.materials[state.activeLetter],']'].join('')
+      $(activeSwatchSelector).addClass('active')
+    }
 
     // set value of inputs
     $('.js-bag-input').val(state.letters)
@@ -278,37 +302,27 @@ function render() {
   updateCustomInfo()
 }
 
+
+
 function autoselect() {
   $(this).select()
 }
 
 function Letter(props) {
-  var alt = `${props.letter} in ${props.material}`
-  var src = `${window.baseUrl || ''}assets/img/letters/${props.letter.toUpperCase()}-${props.material}.png`;
-  return $(`
-    <img src="${src}" alt="${alt}" class="js-letter" data-index="${props.index}"/>
-  `)
+  var alt = [props.letter,' in ',props.material].join('')
+  var src = [window.baseUrl || '','assets/img/letters/',props.letter.toUpperCase(),'-',props.material,'.png'].join('')
+  var html = ['<img src="',src,'" alt="',alt,'" class="js-letter" data-index="',props.index,'"/>'].join('')
+  return $(html)
 }
 
 function Tab(props) {
-  var alt = `${props.letter} in ${props.material}`
-  var src = `${window.baseUrl || ''}assets/img/letters/${props.letter.toUpperCase()}-${props.material}.png`;
+  var alt = [props.letter,' in ', props.material].join('')
+  var src = [window.baseUrl || '','assets/img/letters/',props.letter.toUpperCase(),'-',props.material,'.png'].join('')
+  var html = [
+    '<div class="tab-back js-tab-back">',
+      '<img src="',src,'" alt="',alt,'" class="tab js-tab" data-index="',props.index,'"/>',
+    '</div>',
+  ].join('')
 
-  return $(`
-    <div class="tab-back js-tab-back">
-         <img src="${src}" alt="${alt}" class="tab js-tab" data-index="${props.index}"/>
-    </div>
-  `)
-}
-var imageCache = {}
-
-function loadImage(src, cb) {
-  if (!imageCache[src]) {
-    imageCache[src] = new Image
-    imageCache[src].src = src
-  }
-  imageCache[src].onload = function() {
-    imageCache[src].loaded = true
-    cb()
-  }
+  return $(html)
 }

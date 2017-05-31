@@ -33,7 +33,7 @@
   </div>
 </section>
 <section id="customBarSectionMain">
-  <div class="bag-color-thumbs-cnr">
+  <div class="bag-color-thumbs-cnr js-bag-color-thumbs-cnr">
     <div class="bag-color">
       <div class="bag-color-thumb">
         <img src="assets/img/bags/danny-black.png" class="js-bag-color-link" data-color="black" />
@@ -51,12 +51,14 @@
       <div class="bounce3"></div>
     </div>
   </div>
-  <label class="letter-label">
-        <input class="js-bag-input letters-input" type="text" maxLength="2" placeholder="A-Z"/>
+
+  <label class="letter-label js-letter-label">
+        <input class="js-bag-input letters-input" type="text" maxLength="12"  placeholder="A-Z"/>
+
   </label>
   <div class="tab-cnr js-tab-cnr">
     <div class="tab-back js-tab-back js-tab-back-all tab-back-all">
-      <div class="tab tab-all js-tab" data-index="-1">All</div>
+      <div class="tab tab-all js-tab js-click" data-index="-1">All</div>
     </div>
   </div>
   <div class="palette js-palette">
@@ -82,11 +84,11 @@
             <div class="swatch js-swatch" data-color="gold-metallic">
               <img src="assets/img/material-swatches/swatch-gold-metallic.png" alt="gold-metallic" class="js-swatch-link" data-color="gold-metallic" />
             </div>
+
           </div>
         </div>
       </div>
     </div>
-
     <div class="letter-editor js-letter-editor" style="display:none">
       <div class="panels">
         <div class="swatches left-cnr">

@@ -63,7 +63,6 @@ html,
 body {
   height: 100%;
   font-family: AvenirLT-Heavy;
-  overflow: scroll;
 }
 
 #customBarHeaderMain {
@@ -76,7 +75,6 @@ body {
 #customBarSectionMain {
   display: none;
   position: relative;
-  height: 85%;
   width: 100%
 }
 
@@ -115,9 +113,9 @@ body {
 .bag-custom {
   background: url('../img/bags/danny-black.png') no-repeat center;
   background-size: contain;
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
-  height: 40vw;
+  height: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,17 +131,6 @@ body {
 
 .letters img {
   height: 100%;
-}
-
-@media only screen and (min-width: 769px) {
-  .bag-custom {
-    width: calc(40vh * 1.46);
-    height: 40vh;
-  }
-  .letters {
-    width: 100%;
-    text-align: center;
-  }
 }
 
 input[type="text"].letters-input {
@@ -165,7 +152,7 @@ input[type="text"].letters-input {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  height: 7.5%;
+  width: 100%;
   border-bottom: 1px solid black;
 }
 
@@ -195,8 +182,14 @@ input[type="text"].letters-input {
 .tab-back-all {
   width: 20%;
   color: white;
-  font-size: 2.1em;
   font-family: AvenirLT-Heavy;
+  margin: 0;
+  padding: 0;
+}
+
+.tab-back-all span {
+  position: relative;
+  top: -20px;
 }
 
 .tab-back-all.active {
@@ -217,6 +210,9 @@ input[type="text"].letters-input {
 }
 
 .tab-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
 }
 
@@ -224,7 +220,11 @@ input[type="text"].letters-input {
 /* Editing palette */
 
 .palette {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  height: 20%;
   background-color: white;
   z-index: 1;
   transition: transform 200ms;
@@ -235,6 +235,11 @@ input[type="text"].letters-input {
 .palette.closed {
   transform: translateY(100%);
   -webkit-transform: translateY(100%);
+}
+
+.bag-editor {
+  height: 100%;
+  width: 100%;
 }
 
 .left-cnr,
@@ -248,11 +253,12 @@ input[type="text"].letters-input {
 
 .left-cnr {
   flex: 1;
+  height: 100%;
 }
 
 .panels {
   display: flex;
-  height: 100px;
+  height: 100%;
 }
 
 .close-palette {
@@ -264,24 +270,13 @@ input[type="text"].letters-input {
 }
 
 .letter-label {
+  height: 5%;
   margin: 0.5em 0;
   display: block;
   text-align: center;
 }
 
-@media only screen and (min-width: 769px) {
-  .palette {
-    width: auto;
-    position: static;
-  }
-  .palette .fa-angle-down:before {
-    content: "\f105";
-  }
-  .palette.closed {
-    transform: translateX(100%);
-    -webkit-transform: translateX(100%);
-  }
-}
+@media only screen and (min-width: 769px) {}
 
 
 /* Swatches */
@@ -292,12 +287,10 @@ input[type="text"].letters-input {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  padding: 0 10%;
 }
 
 .swatch {
   height: 90%;
-  padding: 3%;
   text-align: center;
 }
 
@@ -313,18 +306,7 @@ input[type="text"].letters-input {
   border: 2px solid #333 !important;
 }
 
-@media only screen and (min-width: 769px) {
-  .swatches {
-    height: 100%;
-  }
-  .swatch {
-    height: 50%;
-  }
-  .swatch img {
-    width: 36px;
-    height: 36px;
-  }
-}
+@media only screen and (min-width: 769px) {}
 
 
 /* Letter Preview */
@@ -446,17 +428,17 @@ input[type="text"].letters-input {
 
 /* Bag Color */
 
+.bag-color-thumbs-cnr {
+  display: block;
+  height: 20%;
+}
+
 .bag-color {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
   height: 100%;
-}
-
-.bag-color-thumbs-cnr {
-  display: block;
-  Height: 20%;
 }
 
 .bag-color-thumb {
@@ -491,7 +473,7 @@ input[type="text"].letters-input {
 }
 
 .show-custom-bar {
-  display: flex;
+  display: none;
   background: black;
   color: white;
   width: 100%;
@@ -571,4 +553,10 @@ input[type="text"].letters-input {
     -webkit-transform: scale(1.0);
     transform: scale(1.0);
   }
+}
+
+/* IE styles https://stackoverflow.com/questions/27703455/loading-css-stylesheet-only-for-ie11 */
+
+@media screen and (min-width:0\0) {
+  .bag-color { text-align: center; }
 }
