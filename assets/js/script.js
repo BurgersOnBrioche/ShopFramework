@@ -21,7 +21,7 @@ $(document).ready(function() {
     return response.text()
   }).then(function(html) {
     html = html.replace(/assets\/img\//g, (window.baseUrl || '') + 'assets/img/')
-    $('#custombar').parent().css({ position: 'relative', overflow: 'hidden' })
+    $('#custombar').parent().css({ position: 'relative'})
     $('#custombar').before(html).remove()
     render()
     resize()
