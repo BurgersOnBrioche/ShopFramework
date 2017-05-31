@@ -196,6 +196,8 @@ function resize() {
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
+  console.log($("js-bag-input").height())
+  $(".fa.fa-arrow-right").css({ fontSize: $("js-bag-input").height() + "px" })
   $(".js-bag-color-link").each(function() {
     if ($(this).attr('data-loaded')) {
       $(this).parents('.js-bag-color-thumb').width($(this).width())
@@ -216,7 +218,7 @@ function imgLoadedResize(sender) {
 $(window).on('resize', resize)
 var zoom = window.devicePixelRatio
 setInterval(function() {
-  if( window.devicePixelRatio != zoom ) {
+  if (window.devicePixelRatio != zoom) {
     resize();
     zoom = window.devicePixelRatio;
   }
