@@ -147,7 +147,7 @@ body {
 
 .fa.fa-arrow-right,
 .fa.fa-arrow-left {
-  font-size: 2em;
+  font-size: 100%;
 }
 
 .fa.fa-arrow-right {
@@ -178,6 +178,7 @@ input[type="text"].letters-input {
   font-size: 100%;
   height: 100%;
   padding: .5em 0;
+  margin: 0!important;
 }
 
 
