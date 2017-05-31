@@ -92,6 +92,9 @@ body {
 }
 
 @media only screen and (min-width: 769px) {
+  .section-title h1 {
+    text-align: left;
+  }
   #content {
     padding-bottom: 2em;
   }
