@@ -71,6 +71,7 @@ body {
   justify-content: center;
   flex-direction: row;
   margin-top: 1%;
+  overflow: scroll;
 }
 
 #customBarSectionMain {
@@ -135,6 +136,7 @@ body {
 
 .letters img {
   height: 100%;
+  width: auto;
 }
 
 .letter {
@@ -217,6 +219,7 @@ input[type="text"].letters-input {
 
 .tab {
   height: 70%;
+  width: auto;
 }
 
 .tab-all {
@@ -294,6 +297,7 @@ input[type="text"].letters-input {
 .swatch {
   text-align: center;
   max-height: 60%;
+  width: auto;
 }
 
 .swatch img {
@@ -394,11 +398,13 @@ input[type="text"].letters-input {
   justify-content: center;
   cursor: pointer;
   height: 100%;
+  width: auto;
   margin: 0 1%;
 }
 
 .bag-color-thumb img {
   height: 90%;
+  width: auto;
 }
 
 
