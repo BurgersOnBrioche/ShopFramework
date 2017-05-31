@@ -70,6 +70,7 @@ body {
   justify-content: center;
   flex-direction: row;
   margin-top: 1%;
+  overflow: scroll;
 }
 
 #customBarSectionMain {
@@ -370,7 +371,7 @@ input[type="text"].letters-input {
 }
 
 .bag-style-cnr {
-  height: 40vw;
+  height: 40%;
   width: 100%;
   display: flex;
   margin: auto;
@@ -408,33 +409,12 @@ input[type="text"].letters-input {
 }
 
 
-/*
-.customize-me-cnr {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 20%;
-}
-
-.customize-me-cnr span {
-  display: flex;
-  background: black;
-  color: white;
-  font-size: 2em;
-  height: 50%;
-  justify-content: center;
-  align-items: center;
-  padding: 5%;
-}
-*/
-
-
 /* Bag Color */
 
 .bag-color-thumbs-cnr {
   display: block;
-  height: 20%;
+  height: 15%;
+  width: 100%;
 }
 
 .bag-color {
@@ -443,11 +423,14 @@ input[type="text"].letters-input {
   align-items: center;
   flex-direction: row;
   height: 100%;
+  width: 100%;
 }
 
 .bag-color-thumb {
+  display: flex;
+  justify-content: center;
   cursor: pointer;
-  height: 50%;
+  height: 100%;
 }
 
 .bag-color-thumb img {
