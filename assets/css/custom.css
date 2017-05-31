@@ -95,6 +95,10 @@ body {
   #customBarSectionMain {
     display: flex;
   }
+
+  #content {
+    padding-bottom: 2em;
+  }
 }
 
 .desktop-only {
