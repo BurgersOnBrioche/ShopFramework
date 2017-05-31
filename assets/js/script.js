@@ -131,6 +131,7 @@ $(document).on('click', '.js-show-custom-bar', function(evt) {
   setState({
     step: "custom-bar"
   })
+
 })
 
 // show style selector step
@@ -162,19 +163,19 @@ $(document).on('click', '.js-letter', function(evt) {
   }
 })
 
-$(document).on('click', '.js-tab', function(evt) {
-
-  if ($(this).data('index') > -1) {
+$(document).on('click', '.js-tab-back', function(evt) {
+  let tab = $(this).children('.js-tab')
+  if (tab.data('index') > -1) {
     setState({
       editing: true,
       editingBag: false,
-      activeLetter: $(this).data('index'),
+      activeLetter: tab.data('index'),
     })
   } else {
     setState({
       editing: false,
       editingBag: true,
-      activeLetter: $(this).data('index'),
+      activeLetter: tab.data('index'),
     })
   }
 
@@ -215,7 +216,7 @@ function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
   $(".js-tab-cnr").height($(".js-tab-back:not(.js-tab-back-all)").width())
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-cnr").height() * 0.75) + "px" })
-  $(".js-swatch").height(($(".js-palette").height() / 3) + "px")
+  $(".js-swatch").height(($(".js-palette").height() / 2) + "px")
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
 }
@@ -252,6 +253,7 @@ function render() {
       $(".check-my-custom-out").css({ display: "flex" })
     }
 
+
     // render bag color
     $('.js-bag-custom').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/" + state.bag.style + "-" + state.bag.color + ".png)" })
 
@@ -265,7 +267,9 @@ function render() {
       $('.js-letters').append(letter)
       const tabSelector = ['.js-tab[data-index=', i - 1, ']'].join('')
       $(tabSelector).parents('.js-tab-back').after(tab)
+
       letter[0].onload = function() {
+
         $(this).css({ marginLeft: $(this).width() * letterSpacings[l.toUpperCase()]["left"] + "px", marginRight: $(this).width() * letterSpacings[l.toUpperCase()]["right"] + "px" })
         $('.js-loading').hide()
         if (state.activeLetter === i) {
@@ -297,6 +301,9 @@ function render() {
     // render active swatch
     if (state.activeLetter > -1) {
       const activeSwatchSelector = ['.js-swatch[data-color=', state.materials[state.activeLetter], ']'].join('')
+      $(activeSwatchSelector).addClass('active')
+    } else {
+      const activeSwatchSelector = ['.js-swatch[data-color=', state.materials[state.activeLetter + 1], ']'].join('')
       $(activeSwatchSelector).addClass('active')
     }
 
