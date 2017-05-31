@@ -554,3 +554,9 @@ input[type="text"].letters-input {
     transform: scale(1.0);
   }
 }
+
+/* IE styles https://stackoverflow.com/questions/27703455/loading-css-stylesheet-only-for-ie11 */
+
+@media screen and (min-width:0\0) {
+  .bag-color { text-align: center; }
+}

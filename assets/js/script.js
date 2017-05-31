@@ -10,6 +10,7 @@ $(document).ready(function() {
       clearInterval(interval)
     }, 200)
   }
+
   // fix odd safari bug where the delegated click is not being recognized, but only for the bag
   setTimeout(function() {
     $('.js-click').on('click', function() {})
@@ -45,7 +46,7 @@ var state = {
   navActive: false
 }
 
-var lastState = Object.assign({}, state);
+var lastState = $.extend({}, state);
 
 //
 // EVENT HANDLING
@@ -186,8 +187,8 @@ $(document).on('click', '.js-close-palette', function(evt) {
 $(window).on('resize', resize)
 
 function setState(newState) {
-  lastState = Object.assign({}, state)
-  state = Object.assign({}, state, newState)
+  lastState = $.extend({}, state)
+  state = $.extend({}, state, newState)
   if (window.location.href.match(/localhost/)) {
     console.log('set', newState, 'state is now', state)
   }
