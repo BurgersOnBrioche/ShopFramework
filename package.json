@@ -1,0 +1,25 @@
+{
+  "name": "shopframework",
+  "version": "1.0.0",
+  "description": "Custombar Embed Frontend Code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server -p 8000 --cors",
+    "deploy": "gh-pages -d ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BurgersOnBrioche/ShopFramework.git"
+  },
+  "author": "David Lichy & Neil Sarkar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BurgersOnBrioche/ShopFramework/issues"
+  },
+  "homepage": "https://github.com/BurgersOnBrioche/ShopFramework#readme",
+  "devDependencies": {
+    "gh-pages": "^1.0.0",
+    "http-server": "^0.10.0"
+  }
+}

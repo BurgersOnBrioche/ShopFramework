@@ -75,7 +75,7 @@ body {
 #customBarSectionMain {
   display: none;
   position: relative;
-  width: 100%
+  width: 100%;
 }
 
 #styleViewSection {
@@ -137,13 +137,19 @@ body {
   height: 100%;
 }
 
+.letter {
+  cursor: pointer;
+}
+
 input[type="text"].letters-input {
   border: 1px solid black;
   display: inline-block;
   text-align: center;
   text-transform: uppercase;
   text-indent: 0;
-  width: 2.5em;
+  width: 3em;
+  font-size: 100%;
+  height: 100%;
   padding: .5em 0;
 }
 
@@ -162,6 +168,7 @@ input[type="text"].letters-input {
 }
 
 .tab-back {
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -169,8 +176,8 @@ input[type="text"].letters-input {
   position: relative;
   top: 1px;
   height: 100%;
-  width: 10%;
   margin: 0 1px;
+  padding: 5px 0;
   background: black;
   border-bottom: transparent;
   -webkit-border-top-right-radius: 10%;
@@ -186,7 +193,6 @@ input[type="text"].letters-input {
 }
 
 .tab-back-all {
-  width: 20%;
   color: white;
   font-family: AvenirLT-Heavy;
   padding: 0;
@@ -211,7 +217,6 @@ input[type="text"].letters-input {
 
 .tab {
   height: 70%;
-  width: auto;
 }
 
 .tab-all {
@@ -266,14 +271,6 @@ input[type="text"].letters-input {
   height: 100%;
 }
 
-.close-palette {
-  position: absolute;
-  right: 1em;
-  top: 1em;
-  font-size: 20px;
-  display: none;
-}
-
 .letter-label {
   height: 5%;
   margin: 0.5em 0;
@@ -289,20 +286,20 @@ input[type="text"].letters-input {
 .swatches {
   height: 100%;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .swatch {
-  height: 90%;
   text-align: center;
+  max-height: 60%;
 }
 
 .swatch img {
   border-radius: 50%;
   border: 2px solid white;
-  height: 100%;
+  width: 100%;
   cursor: pointer;
 }
 
@@ -312,40 +309,6 @@ input[type="text"].letters-input {
 }
 
 @media only screen and (min-width: 769px) {}
-
-
-/* Letter Preview */
-
-.preview-cnr {
-  position: relative;
-  background: url(../img/graphpaper.gif) repeat;
-  border: 1px solid #afd7ff;
-  border-width: 1px 0;
-}
-
-.preview {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.preview img {
-  height: 90%;
-}
-
-.remove-letter {
-  color: white;
-  background-color: black;
-  padding: 5px 8px;
-  position: absolute;
-  top: -11px;
-  right: -8px;
-  font-weight: bold;
-  border-radius: 50%;
-  line-height: 15px;
-}
-
 
 /* bag style */
 
@@ -371,7 +334,7 @@ input[type="text"].letters-input {
 }
 
 .bag-style-cnr {
-  height: 40vw;
+  height: 40%;
   width: 100%;
   display: flex;
   margin: auto;
@@ -409,33 +372,12 @@ input[type="text"].letters-input {
 }
 
 
-/*
-.customize-me-cnr {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 20%;
-}
-
-.customize-me-cnr span {
-  display: flex;
-  background: black;
-  color: white;
-  font-size: 2em;
-  height: 50%;
-  justify-content: center;
-  align-items: center;
-  padding: 5%;
-}
-*/
-
-
 /* Bag Color */
 
 .bag-color-thumbs-cnr {
   display: block;
-  height: 20%;
+  height: 15%;
+  width: 100%;
 }
 
 .bag-color {
@@ -444,10 +386,15 @@ input[type="text"].letters-input {
   align-items: center;
   flex-direction: row;
   height: 100%;
+  width: 100%;
 }
 
 .bag-color-thumb {
-  height: 50%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  height: 100%;
+  margin: 0 1%;
 }
 
 .bag-color-thumb img {
@@ -560,8 +507,11 @@ input[type="text"].letters-input {
   }
 }
 
+
 /* IE styles https://stackoverflow.com/questions/27703455/loading-css-stylesheet-only-for-ie11 */
 
 @media screen and (min-width:0\0) {
-  .bag-color { text-align: center; }
+  .bag-color {
+    text-align: center;
+  }
 }

@@ -36,10 +36,10 @@
   <div class="bag-color-thumbs-cnr js-bag-color-thumbs-cnr">
     <div class="bag-color">
       <div class="bag-color-thumb">
-        <img src="assets/img/bags/danny-black.png" class="js-bag-color-link" data-color="black" />
+        <img src="assets/img/bags/danny-black.png" class="js-bag-color-link" data-color="black" onload="resize()" />
       </div>
       <div class="bag-color-thumb">
-        <img src="assets/img/bags/danny-white.png" class="js-bag-color-link" data-color="white" />
+        <img src="assets/img/bags/danny-white.png" class="js-bag-color-link" data-color="white" onload="resize()" />
       </div>
     </div>
   </div>
@@ -53,12 +53,12 @@
   </div>
 
   <label class="letter-label js-letter-label">
-        <input class="js-bag-input letters-input" type="text" maxLength="12"  placeholder="A-Z"/>
+        <input class="js-bag-input letters-input" type="text" maxLength="2"  placeholder="A-Z"/>
 
   </label>
   <div class="tab-cnr js-tab-cnr">
     <div class="tab-back js-tab-back js-tab-back-all tab-back-all">
-      <div class="tab tab-all js-tab js-click" data-index="-1">All</div>
+      <div class="tab tab-all js-tab js-tab-all js-click" data-index="-1">ALL</div>
     </div>
   </div>
   <div class="palette js-palette">
@@ -111,15 +111,8 @@
             <img src="assets/img/material-swatches/swatch-gold-metallic.png" alt="gold-metallic" class="js-swatch-link" data-color="gold-metallic" />
           </div>
         </div>
-        <div class="preview-cnr right-cnr">
-          <div class="js-preview preview"></div>
-          <a class="remove-letter js-remove-letter">&times;</a>
-        </div>
       </div>
     </div>
-    <a class="close-palette js-close-palette">
-      <i class="fa fa-angle-down"></i>
-    </a>
   </div>
 </section>
 <section id="custombarNav">

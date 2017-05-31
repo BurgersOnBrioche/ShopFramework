@@ -1,5 +1,5 @@
 var isSale = true
-
+letterSpacings = {}
 $(document).ready(function() {
   // hide contact us form
   if (!window.location.href.match(/localhost/)) {
@@ -28,6 +28,11 @@ $(document).ready(function() {
   })
 })
 
+fetch((window.baseUrl || '') + '/assets/js/letter-spacing.json').then(function(response) {
+  response.json().then(function(json) {
+    letterSpacings = json
+  })
+})
 var state = {
   bag: {
     color: 'black',
@@ -36,12 +41,12 @@ var state = {
     width: 12
   },
   letters: 'AA',
-  letterAspectHeight: 0.26,
+  letterAspectHeight: 0.376,
   materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
   positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   activeLetter: -1,
   editing: false,
-  editingBag: false,
+  editingBag: true,
   step: "custom-bar",
   navActive: false
 }
@@ -58,7 +63,9 @@ $(document).on('click', '.js-bag', function(evt) {
     editing: true,
     editingBag: true,
   })
+
 })
+
 
 // input to change both letters
 $(document).on('input', '.js-bag-input', function(evt) {
@@ -67,7 +74,7 @@ $(document).on('input', '.js-bag-input', function(evt) {
   var newState = { letters: $(this).val() }
 
   // reset active letter pointer if letters are deleted
-  if( $(this).val().length < state.letters.length ) {
+  if ($(this).val().length < state.letters.length) {
     const letterIndexes = $(this).val().length - 1;
     newState.activeLetter = Math.min(letterIndexes, state.activeLetter);
   }
@@ -76,18 +83,6 @@ $(document).on('input', '.js-bag-input', function(evt) {
 })
 $(document).on('focus', '.js-bag-input', autoselect)
 $(document).on('click', '.js-bag-input', autoselect)
-
-// input to change a single letter
-$(document).on('input', '.js-input', function(evt) {
-  var letters = state.letters.split('')
-  letters.splice(state.activeLetter, 1, $(this).val())
-
-  setState({
-    letters: letters.join(''),
-  })
-})
-$(document).on('focus', '.js-input', autoselect)
-$(document).on('click', '.js-input', autoselect)
 
 // select material swatch for individual letter
 $(document).on('click', '.js-swatch-link', function(evt) {
@@ -136,16 +131,6 @@ $(document).on('click', '.js-back-to-bag-styles', function(evt) {
   })
 })
 
-// remove individual letter from bag
-$(document).on('click', '.js-remove-letter', function(evt) {
-  var letters = state.letters.split('')
-  letters.splice(state.activeLetter, 1)
-  setState({
-    letters: letters.join(''),
-    editing: false,
-  })
-})
-
 // edit individual letter
 $(document).on('click', '.js-letter', function(evt) {
   evt.stopPropagation()
@@ -158,22 +143,22 @@ $(document).on('click', '.js-letter', function(evt) {
   }
 })
 
-$(document).on('click', '.js-tab', function(evt) {
-  if ($(this).data('index') > -1) {
+//
+$(document).on('click', '.js-tab-back', function(evt) {
+  var tab = $(this).children('.js-tab')
+  if (tab.data('index') > -1) {
     setState({
       editing: true,
       editingBag: false,
-      activeLetter: $(this).data('index'),
+      activeLetter: tab.data('index'),
     })
   } else {
     setState({
       editing: false,
       editingBag: true,
-      activeLetter: $(this).data('index'),
+      activeLetter: tab.data('index'),
     })
   }
-
-
 })
 
 // stop editing
@@ -183,8 +168,6 @@ $(document).on('click', '.js-close-palette', function(evt) {
     editingBag: false
   })
 })
-
-$(window).on('resize', resize)
 
 function setState(newState) {
   lastState = $.extend({}, state)
@@ -206,17 +189,25 @@ function updateCustomInfo() {
   $("#custombar-custom-info").val(productDescription);
 }
 
+//resize handler
 function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
-  $(".js-tab-cnr").height($(".js-tab-back:not(.js-tab-back-all)").width())
-  $(".js-tab-back-all").css({ fontSize: ($(".js-tab-cnr").height() * 0.75) + "px" })
-  $(".js-swatch").height(($(".js-palette").height() / 3) + "px")
+  var newTabHeight = ($(".js-palette").height() * 0.5)
+  $(".js-tab-cnr").height(newTabHeight)
+
+  $(".js-swatch").height($("#customBarSectionMain").width() / (($(".js-swatch").length - 1) / 1.5))
+
+  $(".js-tab-back:not(.js-tab-back-all)").width(newTabHeight)
+  $(".js-tab-back-all").width(newTabHeight * 2)
+  $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
 }
 
+$(window).on('resize', resize)
 
 function render() {
+
   if (state.step == "style") {
     // show style selector step
     $("#styleViewSection").css({ display: "block" })
@@ -258,9 +249,11 @@ function render() {
       var tab = Tab({ letter: l, material: state.materials[i], index: i })
       $('.js-loading').show()
       $('.js-letters').append(letter)
-      const tabSelector = ['.js-tab[data-index=',i-1,']'].join('')
+      const tabSelector = ['.js-tab[data-index=', i - 1, ']'].join('')
       $(tabSelector).parents('.js-tab-back').after(tab)
+
       letter[0].onload = function() {
+        letter.css({ marginLeft: letter.width() * letterSpacings[l.toUpperCase()]["left"] + "px", marginRight: letter.width() * letterSpacings[l.toUpperCase()]["right"] + "px" })
         $('.js-loading').hide()
         if (state.activeLetter === i) {
           $('.js-preview').append(letter.clone())
@@ -269,7 +262,7 @@ function render() {
     })
 
     // render tabs
-    $('.js-tab[data-index=-1]').html('All')
+    $('.js-tab-all').html('ALL')
 
     // select input if we're showing a new input
     if (state.editing !== lastState.editing || (state.activeLetter !== lastState.activeLetter && state.activeLetter === state.letters.length)) {
@@ -277,12 +270,15 @@ function render() {
     }
 
     // render active tab
-    const activeTabSelector = ['.js-tab[data-index=',state.activeLetter,']'].join('')
+    const activeTabSelector = ['.js-tab[data-index=', state.activeLetter, ']'].join('')
     $(activeTabSelector).addClass('active').parents('.js-tab-back').addClass('active')
 
     // render active swatch
-    if( state.activeLetter > -1 ) {
-      const activeSwatchSelector = ['.js-swatch[data-color=',state.materials[state.activeLetter],']'].join('')
+    if (state.activeLetter > -1) {
+      const activeSwatchSelector = ['.js-swatch[data-color=', state.materials[state.activeLetter], ']'].join('')
+      $(activeSwatchSelector).addClass('active')
+    } else {
+      const activeSwatchSelector = ['.js-swatch[data-color=', state.materials[state.activeLetter + 1], ']'].join('')
       $(activeSwatchSelector).addClass('active')
     }
 
@@ -292,27 +288,26 @@ function render() {
   }
   // update shopify hidden input
   updateCustomInfo()
+  resize()
 }
-
-
 
 function autoselect() {
   $(this).select()
 }
 
 function Letter(props) {
-  var alt = [props.letter,' in ',props.material].join('')
-  var src = [window.baseUrl || '','assets/img/letters/',props.letter.toUpperCase(),'-',props.material,'.png'].join('')
-  var html = ['<img src="',src,'" alt="',alt,'" class="js-letter" data-index="',props.index,'"/>'].join('')
+  var alt = [props.letter, ' in ', props.material].join('')
+  var src = [window.baseUrl || '', 'assets/img/letters/', props.letter.toUpperCase(), '-', props.material, '.png'].join('')
+  var html = ['<img src="', src, '" alt="', alt, '" class="letter js-letter" data-index="', props.index, '"/>'].join('')
   return $(html)
 }
 
 function Tab(props) {
-  var alt = [props.letter,' in ', props.material].join('')
-  var src = [window.baseUrl || '','assets/img/letters/',props.letter.toUpperCase(),'-',props.material,'.png'].join('')
+  var alt = [props.letter, ' in ', props.material].join('')
+  var src = [window.baseUrl || '', 'assets/img/letters/', props.letter.toUpperCase(), '-', props.material, '.png'].join('')
   var html = [
     '<div class="tab-back js-tab-back">',
-      '<img src="',src,'" alt="',alt,'" class="tab js-tab" data-index="',props.index,'"/>',
+    '<img src="', src, '" alt="', alt, '" class="tab js-tab" data-index="', props.index, '"/>',
     '</div>',
   ].join('')
 
