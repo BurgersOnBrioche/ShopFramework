@@ -218,15 +218,18 @@ function updateCustomInfo() {
 //resize handler
 function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
-  $(".js-tab-cnr").height(($(".js-palette").height() * 0.5) + "px")
-  $(".js-swatch").height(($(".js-palette").height() * 0.5) + "px")
-  $(".js-tab-back").width($(".js-tab-cnr").height())
-  $(".js-tab-back-all").css({ fontSize: ($(".js-tab-cnr").height() * 0.75) + "px" })
+  let newTabHeight = ($(".js-palette").height() * 0.5)
+  $(".js-tab-cnr").height(newTabHeight)
+  $(".js-swatch").height(newTabHeight)
+  $(".js-tab-back:not(.js-tab-back-all)").width(newTabHeight)
+  $(".js-tab-back-all").width(newTabHeight * 2)
+  $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
 }
 $(window).on('resize', resize)
 
+//resize onload dependencies 
 
 
 
