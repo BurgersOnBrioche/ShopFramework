@@ -289,7 +289,6 @@ input[type="text"].letters-input {
 .swatches {
   height: 100%;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
@@ -297,7 +296,7 @@ input[type="text"].letters-input {
 .swatch {
   text-align: center;
   padding: 0 1%;
-  max-height: 85%;
+  max-height: 75%;
 }
 
 .swatch img {
