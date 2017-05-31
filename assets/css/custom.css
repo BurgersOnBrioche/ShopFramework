@@ -145,11 +145,6 @@ body {
   cursor: pointer;
 }
 
-.fa.fa-arrow-right,
-.fa.fa-arrow-left {
-  font-size: 2em;
-}
-
 .fa.fa-arrow-right {
   margin-right: 2%;
 }
@@ -178,6 +173,7 @@ input[type="text"].letters-input {
   font-size: 100%;
   height: 100%;
   padding: .5em 0;
+  margin: 0!important;
 }
 
 
