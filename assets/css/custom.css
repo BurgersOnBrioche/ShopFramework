@@ -284,6 +284,10 @@ input[type="text"].letters-input {
 }
 
 .swatch img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
   border-radius: 50%;
   border: 2px solid white;
   height: 100%;
