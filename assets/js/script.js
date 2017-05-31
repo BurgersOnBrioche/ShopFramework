@@ -21,7 +21,7 @@ $(document).ready(function() {
     return response.text()
   }).then(function(html) {
     html = html.replace(/assets\/img\//g, (window.baseUrl || '') + 'assets/img/')
-    $('#custombar').parent().css({ position: 'relative'})
+    $('#custombar').parent().css({ position: 'relative' })
     $('#custombar').before(html).remove()
   })
 })
@@ -86,7 +86,7 @@ $(document).on('click', '.js-bag-input', autoselect)
 $(document).on('click', '.js-swatch-link', function(evt) {
   var materials = state.materials.concat([])
   var color = $(this).data('color')
-  if (state.editingBag || state.activeLetter == -1 ) {
+  if (state.editingBag || state.activeLetter == -1) {
     materials = materials.map(function(m) { return color })
   } else {
     materials[state.activeLetter] = $(this).data('color')
@@ -187,21 +187,36 @@ function updateCustomInfo() {
   $("#custombar-custom-info").val(productDescription);
 }
 
+function setImageLoaded(sender) {
+  sender.setAttribute('data-loaded', true)
+  resize()
+}
 //resize handler
 function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
-  var newTabHeight = ($(".js-palette").height() * 0.5)
-  $(".js-tab-cnr").height(newTabHeight)
-
-  $(".js-swatch").height($("#customBarSectionMain").width() / (($(".js-swatch").length - 1) / 1.5))
-
-  $(".js-tab-back:not(.js-tab-back-all)").width(newTabHeight)
-  $(".js-tab-back-all").width(newTabHeight * 2)
+  $(".js-swatch").css({ maxHeight: ($("#customBarSectionMain").width() / (($(".js-swatch").length - 1) / 1.5)) + "px" })
+  $(".js-tab-back:not(.js-tab-back-all)").width($(".js-tab-cnr").height())
+  $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
+  $(".js-bag-color-link").each(function() {
+    if ($(this).attr('data-loaded')) {
+      $(this).parents('.js-bag-color-thumb').width($(this).width())
+    }
+  })
 }
 
+function imgLoadedResize(sender) {
+  console.log(sender.children())
+  switch (sender) {
+    case 1:
+      $(".js-bag-color-thumb").width()
+      break;
+    default:
+      break;
+  }
+}
 $(window).on('resize', resize)
 
 function render() {

@@ -35,11 +35,11 @@
 <section id="customBarSectionMain">
   <div class="bag-color-thumbs-cnr js-bag-color-thumbs-cnr">
     <div class="bag-color">
-      <div class="bag-color-thumb">
-        <img src="assets/img/bags/danny-black.png" class="js-bag-color-link" data-color="black" onload="resize()" />
+      <div class="bag-color-thumb js-bag-color-thumb">
+        <img src="assets/img/bags/danny-black.png" class="js-bag-color-link" data-color="black" data-loaded="false" onload="setImageLoaded(this);" />
       </div>
-      <div class="bag-color-thumb">
-        <img src="assets/img/bags/danny-white.png" class="js-bag-color-link" data-color="white" onload="resize()" />
+      <div class="bag-color-thumb js-bag-color-thumb">
+        <img src="assets/img/bags/danny-white.png" class="js-bag-color-link" data-color="white" data-loaded="false" onload="setImageLoaded(this);" />
       </div>
     </div>
   </div>
@@ -122,8 +122,8 @@
 </section>
 <script>
   window.render()
-  // There are some race conditions with the DOM height sizing that make this setTimeout necessary.
-  // To reproduce: cmd+r in chrome incognito window on embedded shopify site
+    // There are some race conditions with the DOM height sizing that make this setTimeout necessary.
+    // To reproduce: cmd+r in chrome incognito window on embedded shopify site
   setTimeout(function() {
     window.resize()
   }, 1000)
