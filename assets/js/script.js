@@ -224,7 +224,7 @@ function setImageLoaded(sender) {
 //resize handler
 function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
-  $("#customBarSectionMain").width($("#customBarSectionMain").parent().width() + "px")
+    //$("#customBarSectionMain").width($("#customBarSectionMain").parent().width() + "px")
 
   $(".js-swatch").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
   $(".js-tab-back:not(.js-tab-back-all)").width($(".js-tab-cnr").height())
