@@ -41,12 +41,12 @@ var state = {
     width: 12
   },
   letters: 'AA',
-  letterAspectHeight: 0.26,
+  letterAspectHeight: 0.376,
   materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
   positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   activeLetter: -1,
   editing: false,
-  editingBag: false,
+  editingBag: true,
   step: "custom-bar",
   navActive: false
 }
@@ -131,7 +131,6 @@ $(document).on('click', '.js-show-custom-bar', function(evt) {
   setState({
     step: "custom-bar"
   })
-
 })
 
 // show style selector step
@@ -253,7 +252,6 @@ function render() {
       $(".check-my-custom-out").css({ display: "flex" })
     }
 
-
     // render bag color
     $('.js-bag-custom').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/" + state.bag.style + "-" + state.bag.color + ".png)" })
 
@@ -267,9 +265,7 @@ function render() {
       $('.js-letters').append(letter)
       const tabSelector = ['.js-tab[data-index=', i - 1, ']'].join('')
       $(tabSelector).parents('.js-tab-back').after(tab)
-
       letter[0].onload = function() {
-
         $(this).css({ marginLeft: $(this).width() * letterSpacings[l.toUpperCase()]["left"] + "px", marginRight: $(this).width() * letterSpacings[l.toUpperCase()]["right"] + "px" })
         $('.js-loading').hide()
         if (state.activeLetter === i) {
