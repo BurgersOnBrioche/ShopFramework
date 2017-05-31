@@ -443,6 +443,7 @@ input[type="text"].letters-input {
 }
 
 .bag-color-thumb {
+  cursor: pointer;
   height: 50%;
 }
 

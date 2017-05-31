@@ -216,7 +216,7 @@ function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
   $(".js-tab-cnr").height($(".js-tab-back:not(.js-tab-back-all)").width())
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-cnr").height() * 0.75) + "px" })
-  $(".js-swatch").height(($(".js-palette").height() / 2) + "px")
+  $(".js-swatch").height(($(".js-palette").height() * 0.9) + "px")
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
 }
