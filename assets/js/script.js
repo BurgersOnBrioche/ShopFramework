@@ -38,7 +38,7 @@ var state = {
     height: 8.5,
     width: 12
   },
-  letters: 'AA',
+  letters: '',
   letterAspectHeight: 0.376,
   materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
   positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -46,7 +46,8 @@ var state = {
   editing: false,
   editingBag: true,
   step: "custom-bar",
-  navActive: false
+  navActive: false,
+  arrowStep: 1
 }
 
 var lastState = $.extend({}, state);
@@ -70,7 +71,9 @@ $(document).on('input', '.js-bag-input', function(evt) {
   if ($(this).val().match(/[^A-z]/)) { return $(this).val(state.letters) }
 
   var newState = { letters: $(this).val() }
-
+  if (state.arrowStep == 2 && newState.letters.length == 2) {
+    newState.arrowStep = 3
+  }
   // reset active letter pointer if letters are deleted
   if ($(this).val().length < state.letters.length) {
     const letterIndexes = $(this).val().length - 1;
@@ -80,11 +83,7 @@ $(document).on('input', '.js-bag-input', function(evt) {
   setState(newState)
 })
 $(document).on('focus', '.js-bag-input', autoselect)
-$(document).on('click', '.js-bag-input', function() {
-  $(".fa.fa-arrow-right").removeClass("right-arrow-animating")
-  $(".fa.fa-arrow-left").removeClass("left-arrow-animating")
-  autoselect()
-})
+$(document).on('click', '.js-bag-input', autoselect)
 
 // select material swatch for individual letter
 $(document).on('click', '.js-swatch-link', function(evt) {
@@ -95,10 +94,11 @@ $(document).on('click', '.js-swatch-link', function(evt) {
   } else {
     materials[state.activeLetter] = $(this).data('color')
   }
-
-  setState({
-    materials: materials
-  })
+  var newState = { materials: materials }
+  if (state.arrowStep == 4) {
+    newState.arrowStep = 0
+  }
+  setState(newState)
 })
 
 
@@ -112,9 +112,13 @@ $(document).on('click', '.js-bag-style-link', function(evt) {
 
 // select bag color
 $(document).on('click', '.js-bag-color-link', function(evt) {
-  setState({
+  var newState = {
     bag: { color: $(this).data('color'), style: state.bag.style }
-  })
+  }
+  if (state.arrowStep == 1) {
+    newState.arrowStep = 2
+  }
+  setState(newState)
 })
 
 // show custom bar customization step
@@ -148,19 +152,24 @@ $(document).on('click', '.js-letter', function(evt) {
 // select letter tab
 $(document).on('click', '.js-tab-back', function(evt) {
   var tab = $(this).children('.js-tab')
+  var newState = {}
   if (tab.data('index') > -1) {
-    setState({
+    newState = {
       editing: true,
       editingBag: false,
       activeLetter: tab.data('index'),
-    })
+    }
   } else {
-    setState({
+    newState = {
       editing: false,
       editingBag: true,
       activeLetter: tab.data('index'),
-    })
+    }
   }
+  if (state.arrowStep == 3) {
+    newState.arrowStep = 4
+  }
+  setState(newState)
 })
 
 function setState(newState) {
@@ -226,6 +235,7 @@ setInterval(function() {
 
 function render() {
 
+
   if (state.step == "style") {
     // show style selector step
     $("#styleViewSection").css({ display: "block" })
@@ -245,8 +255,8 @@ function render() {
     $('.js-tab-back').removeClass('active')
     $('.js-swatch').removeClass('active')
     $('.js-loading').hide()
-
-    // show custom-bar step
+    $(".fa.fa-arrow-right, .fa.fa-arrow-left").css({ display: "none" })
+      // show custom-bar step
     $("#styleViewSection").css({ display: "none" })
     $("#customBarSectionMain").css({ display: "block" })
     if (state.navActive == true) {
@@ -255,7 +265,24 @@ function render() {
       $(".check-my-custom-out").css({ display: "flex" })
     }
 
+    //sets step arrows
+    switch (state.arrowStep) {
+      case 1:
+        $(".js-bag-color>.fa.fa-arrow-right, .js-bag-color>.fa.fa-arrow-left").css({ display: "flex" })
+        break;
+      case 2:
+        $(".js-letter-label>.fa.fa-arrow-right, .js-letter-label>.fa.fa-arrow-left").css({ display: "flex" })
+        break;
+      case 3:
+        $(".js-tab-cnr>.fa.fa-arrow-right, .js-tab-cnr>.fa.fa-arrow-left").css({ display: "flex" })
+        break;
+      case 4:
+        $(".js-swatches>.fa.fa-arrow-right, .js-swatches>.fa.fa-arrow-left").css({ display: "flex" })
+        break;
 
+      default:
+        break;
+    }
     // render bag color
     $('.js-bag-custom').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/" + state.bag.style + "-" + state.bag.color + ".png)" })
 
