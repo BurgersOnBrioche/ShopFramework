@@ -122,5 +122,9 @@
 </section>
 <script>
   window.render()
-  window.resize()
+  // There are some race conditions with the DOM height sizing that make this setTimeout necessary.
+  // To reproduce: cmd+r in chrome incognito window on embedded shopify site
+  setTimeout(function() {
+    window.resize()
+  }, 1000)
 </script>
