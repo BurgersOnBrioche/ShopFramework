@@ -220,7 +220,7 @@ function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
   let newTabHeight = ($(".js-palette").height() * 0.5)
   $(".js-tab-cnr").height(newTabHeight)
-  $(".js-swatch").height(newTabHeight)
+  $(".js-swatch").height(newTabHeight * 0.9)
   $(".js-tab-back:not(.js-tab-back-all)").width(newTabHeight)
   $(".js-tab-back-all").width(newTabHeight * 2)
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
