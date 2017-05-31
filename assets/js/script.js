@@ -84,18 +84,6 @@ $(document).on('input', '.js-bag-input', function(evt) {
 $(document).on('focus', '.js-bag-input', autoselect)
 $(document).on('click', '.js-bag-input', autoselect)
 
-// input to change a single letter
-$(document).on('input', '.js-input', function(evt) {
-  var letters = state.letters.split('')
-  letters.splice(state.activeLetter, 1, $(this).val())
-
-  setState({
-    letters: letters.join(''),
-  })
-})
-$(document).on('focus', '.js-input', autoselect)
-$(document).on('click', '.js-input', autoselect)
-
 // select material swatch for individual letter
 $(document).on('click', '.js-swatch-link', function(evt) {
   var materials = state.materials.concat([])
@@ -143,16 +131,6 @@ $(document).on('click', '.js-back-to-bag-styles', function(evt) {
   })
 })
 
-// remove individual letter from bag
-$(document).on('click', '.js-remove-letter', function(evt) {
-  var letters = state.letters.split('')
-  letters.splice(state.activeLetter, 1)
-  setState({
-    letters: letters.join(''),
-    editing: false,
-  })
-})
-
 // edit individual letter
 $(document).on('click', '.js-letter', function(evt) {
   evt.stopPropagation()
@@ -165,6 +143,7 @@ $(document).on('click', '.js-letter', function(evt) {
   }
 })
 
+//
 $(document).on('click', '.js-tab-back', function(evt) {
   var tab = $(this).children('.js-tab')
   if (tab.data('index') > -1) {
@@ -180,8 +159,6 @@ $(document).on('click', '.js-tab-back', function(evt) {
       activeLetter: tab.data('index'),
     })
   }
-
-
 })
 
 // stop editing
@@ -191,9 +168,6 @@ $(document).on('click', '.js-close-palette', function(evt) {
     editingBag: false
   })
 })
-
-
-
 
 function setState(newState) {
   lastState = $.extend({}, state)
@@ -228,15 +202,9 @@ function resize() {
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
-    //$(".bag-color-thumb").width($(".bag-color-thumb img").width())
 }
 
 $(window).on('resize', resize)
-
-//resize onload dependencies
-
-
-
 
 function render() {
 
@@ -322,8 +290,6 @@ function render() {
   updateCustomInfo()
   resize()
 }
-
-
 
 function autoselect() {
   $(this).select()
