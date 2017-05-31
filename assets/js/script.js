@@ -291,15 +291,8 @@ function render() {
     })
 
     // render tabs
-    $('.js-tab').each(function() {
-      if ($(this).data('index') == -1) {
-        $(this).html('All')
-      } else {
-        var ind = $(this).data('index')
-        var src = [window.baseUrl || '', 'assets/img/letters/', state.letters[ind].toUpperCase(), '-', state.materials[ind], '.png'].join('')
-        $(this).css({ background: "url(" + (window.baseUrl || '') + src + ") no-repeat", backgroundSize: "contain", backgroundPosition: "center" })
-      }
-    })
+    $('.js-tab-all').html('ALL')
+
 
     // select input if we're showing a new input
     if (state.editing !== lastState.editing || (state.activeLetter !== lastState.activeLetter && state.activeLetter === state.letters.length)) {
