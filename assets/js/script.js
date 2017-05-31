@@ -23,8 +23,6 @@ $(document).ready(function() {
     html = html.replace(/assets\/img\//g, (window.baseUrl || '') + 'assets/img/')
     $('#custombar').parent().css({ position: 'relative'})
     $('#custombar').before(html).remove()
-    render()
-    resize()
   })
 })
 
