@@ -166,7 +166,7 @@ $(document).on('click', '.js-letter', function(evt) {
 })
 
 $(document).on('click', '.js-tab-back', function(evt) {
-  let tab = $(this).children('.js-tab')
+  var tab = $(this).children('.js-tab')
   if (tab.data('index') > -1) {
     setState({
       editing: true,
@@ -218,7 +218,7 @@ function updateCustomInfo() {
 //resize handler
 function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
-  let newTabHeight = ($(".js-palette").height() * 0.5)
+  var newTabHeight = ($(".js-palette").height() * 0.5)
   $(".js-tab-cnr").height(newTabHeight)
 
   $(".js-swatch").height($("#customBarSectionMain").width() / (($(".js-swatch").length - 1) / 1.5))
@@ -285,8 +285,7 @@ function render() {
       $(tabSelector).parents('.js-tab-back').after(tab)
 
       letter[0].onload = function() {
-
-        $(this).css({ marginLeft: $(this).width() * letterSpacings[l.toUpperCase()]["left"] + "px", marginRight: $(this).width() * letterSpacings[l.toUpperCase()]["right"] + "px" })
+        letter.css({ marginLeft: letter.width() * letterSpacings[l.toUpperCase()]["left"] + "px", marginRight: letter.width() * letterSpacings[l.toUpperCase()]["right"] + "px" })
         $('.js-loading').hide()
         if (state.activeLetter === i) {
           $('.js-preview').append(letter.clone())
