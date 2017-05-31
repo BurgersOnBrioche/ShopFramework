@@ -93,7 +93,7 @@ $(document).on('click', '.js-input', autoselect)
 $(document).on('click', '.js-swatch-link', function(evt) {
   var materials = state.materials.concat([])
   var color = $(this).data('color')
-  if (state.editingBag) {
+  if (state.editingBag || state.activeLetter == -1 ) {
     materials = materials.map(function(m) { return color })
   } else {
     materials[state.activeLetter] = $(this).data('color')
