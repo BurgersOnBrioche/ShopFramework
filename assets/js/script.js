@@ -145,7 +145,7 @@ $(document).on('click', '.js-letter', function(evt) {
   }
 })
 
-//
+// select letter tab
 $(document).on('click', '.js-tab-back', function(evt) {
   var tab = $(this).children('.js-tab')
   if (tab.data('index') > -1) {
@@ -161,14 +161,6 @@ $(document).on('click', '.js-tab-back', function(evt) {
       activeLetter: tab.data('index'),
     })
   }
-})
-
-// stop editing
-$(document).on('click', '.js-close-palette', function(evt) {
-  setState({
-    editing: false,
-    editingBag: false
-  })
 })
 
 function setState(newState) {
@@ -222,6 +214,13 @@ function imgLoadedResize(sender) {
   }
 }
 $(window).on('resize', resize)
+var zoom = window.devicePixelRatio
+setInterval(function() {
+  if( window.devicePixelRatio != zoom ) {
+    resize();
+    zoom = window.devicePixelRatio;
+  }
+}, 300)
 
 function render() {
 
