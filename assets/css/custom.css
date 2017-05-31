@@ -157,6 +157,7 @@ input[type="text"].letters-input {
 }
 
 .tab-back {
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -555,8 +556,11 @@ input[type="text"].letters-input {
   }
 }
 
+
 /* IE styles https://stackoverflow.com/questions/27703455/loading-css-stylesheet-only-for-ie11 */
 
 @media screen and (min-width:0\0) {
-  .bag-color { text-align: center; }
+  .bag-color {
+    text-align: center;
+  }
 }
