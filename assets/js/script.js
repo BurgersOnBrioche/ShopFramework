@@ -325,6 +325,7 @@ function render() {
   }
   // update shopify hidden input
   updateCustomInfo()
+  resize()
 }
 
 
