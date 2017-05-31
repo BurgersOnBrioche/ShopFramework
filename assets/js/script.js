@@ -1,7 +1,13 @@
 var isSale = true
+var tutorial = true
 letterSpacings = {}
 
 $(document).ready(function() {
+
+  // shows arrows for steps
+  if (tutorial) {
+    $(".fa.fa-arrow-right, .fa.fa-arrow-left").css({ display: "flex" })
+  }
   // hide contact us form
   if (!window.location.href.match(/localhost/)) {
     var interval = setInterval(function() {
@@ -48,7 +54,12 @@ var state = {
   editingBag: true,
   step: "custom-bar",
   navActive: false,
-  arrowStep: 1
+  arrow: {
+    step1: false,
+    step2: false,
+    step3: false,
+    step4: false
+  }
 }
 
 var lastState = $.extend({}, state);
@@ -70,10 +81,13 @@ $(document).on('click', '.js-bag', function(evt) {
 // input to change both letters
 $(document).on('input', '.js-bag-input', function(evt) {
   if ($(this).val().match(/[^A-z]/)) { return $(this).val(state.letters) }
-
-  var newState = { letters: $(this).val() }
-  if (state.arrowStep == 2 && newState.letters.length == 2) {
-    newState.arrowStep = 3
+  var newState = {
+    letters: $(this).val(),
+    arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 }
+  }
+  console.log(newState.arrow)
+  if (state.arrow.step2 == false) {
+    newState.arrow.step2 = true
   }
   // reset active letter pointer if letters are deleted
   if ($(this).val().length < state.letters.length) {
@@ -95,9 +109,12 @@ $(document).on('click', '.js-swatch-link', function(evt) {
   } else {
     materials[state.activeLetter] = $(this).data('color')
   }
-  var newState = { materials: materials }
-  if (state.arrowStep == 4) {
-    newState.arrowStep = 0
+  var newState = {
+    materials: materials,
+    arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 }
+  }
+  if (state.arrow.step4 == false) {
+    newState.arrow.step4 = true
   }
   setState(newState)
 })
@@ -114,10 +131,12 @@ $(document).on('click', '.js-bag-style-link', function(evt) {
 // select bag color
 $(document).on('click', '.js-bag-color-link', function(evt) {
   var newState = {
-    bag: { color: $(this).data('color'), style: state.bag.style }
+    bag: { color: $(this).data('color'), style: state.bag.style },
+    arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 }
   }
-  if (state.arrowStep == 1) {
-    newState.arrowStep = 2
+  if (state.arrow.step1 == false) {
+    newState.arrow.step1 = true
+
   }
   setState(newState)
 })
@@ -159,16 +178,21 @@ $(document).on('click', '.js-tab-back', function(evt) {
       editing: true,
       editingBag: false,
       activeLetter: tab.data('index'),
+      arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 },
+
     }
   } else {
     newState = {
       editing: false,
       editingBag: true,
       activeLetter: tab.data('index'),
+      arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 },
+
+
     }
   }
-  if (state.arrowStep == 3) {
-    newState.arrowStep = 4
+  if (state.arrow.step3 == false) {
+    newState.arrow.step3 = true
   }
   setState(newState)
 })
@@ -258,8 +282,8 @@ function render() {
     $('.js-tab-back').removeClass('active')
     $('.js-swatch').removeClass('active')
     $('.js-loading').hide()
-    $(".fa.fa-arrow-right, .fa.fa-arrow-left").css({ display: "none" })
-      // show custom-bar step
+
+    // show custom-bar step
     $("#styleViewSection").css({ display: "none" })
     $("#customBarSectionMain").css({ display: "block" })
     if (state.navActive == true) {
@@ -269,29 +293,15 @@ function render() {
     }
 
     //sets step arrows
-    switch (state.arrowStep) {
-      case 1:
-        $(".js-bag-color>.fa.fa-arrow-right, .js-bag-color>.fa.fa-arrow-left").css({ display: "flex" })
-        break;
-      case 2:
-        $(".js-letter-label>.fa.fa-arrow-right, .js-letter-label>.fa.fa-arrow-left").css({ display: "flex" })
-        break;
-      case 3:
-        $(".js-tab-cnr>.fa.fa-arrow-right, .js-tab-cnr>.fa.fa-arrow-left").css({ display: "flex" })
-        break;
-      case 4:
-        $(".js-swatches>.fa.fa-arrow-right, .js-swatches>.fa.fa-arrow-left").css({ display: "flex" })
-        break;
+    if (state.arrow.step1) $(".js-bag-color>.fa.fa-arrow-right, .js-bag-color>.fa.fa-arrow-left").css({ display: "none" })
+    if (state.arrow.step2) $(".js-letter-label>.fa.fa-arrow-right, .js-letter-label>.fa.fa-arrow-left").css({ display: "none" })
+    if (state.arrow.step3) $(".js-tab-cnr>.fa.fa-arrow-right, .js-tab-cnr>.fa.fa-arrow-left").css({ display: "none" })
+    if (state.arrow.step4) $(".js-swatches>.fa.fa-arrow-right, .js-swatches>.fa.fa-arrow-left").css({ display: "none" })
 
-      default:
-        break;
-    }
     // render bag color
     $('.js-bag-custom').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/" + state.bag.style + "-" + state.bag.color + ".png)" })
 
-
     // render letters in bag and preview and adds tabs
-
     state.letters.split('').forEach(function(l, i) {
       var letter = Letter({ letter: l, material: state.materials[i], index: i })
       var tab = Tab({ letter: l, material: state.materials[i], index: i })
