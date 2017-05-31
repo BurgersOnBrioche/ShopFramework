@@ -143,7 +143,9 @@ input[type="text"].letters-input {
   text-align: center;
   text-transform: uppercase;
   text-indent: 0;
-  width: 2.5em;
+  width: 3em;
+  font-size: 2em;
+  height: 1em;
   padding: .5em 0;
 }
 
@@ -273,7 +275,7 @@ input[type="text"].letters-input {
 }
 
 .letter-label {
-  height: 5%;
+  height: 3.5em;
   margin: 0.5em 0;
   display: block;
   text-align: center;
@@ -293,9 +295,9 @@ input[type="text"].letters-input {
 }
 
 .swatch {
-  height: 90%;
   text-align: center;
   padding: 0 1%;
+  max-height: 85%;
 }
 
 .swatch img {
