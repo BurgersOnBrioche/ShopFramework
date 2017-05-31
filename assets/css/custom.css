@@ -133,6 +133,10 @@ body {
   height: 100%;
 }
 
+.letter {
+  cursor: pointer;
+}
+
 input[type="text"].letters-input {
   border: 1px solid black;
   display: inline-block;
@@ -293,6 +297,7 @@ input[type="text"].letters-input {
 .swatch {
   height: 90%;
   text-align: center;
+  padding: 0 3px;
 }
 
 .swatch img {
@@ -443,6 +448,7 @@ input[type="text"].letters-input {
 }
 
 .bag-color-thumb {
+  cursor: pointer;
   height: 50%;
 }
 
