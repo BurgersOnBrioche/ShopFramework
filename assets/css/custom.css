@@ -79,7 +79,7 @@ body {
 #customBarSectionMain {
   display: none;
   height: 65vh;
-  width: auto;
+  width: 100%;
 }
 
 #styleViewSection {
@@ -284,10 +284,6 @@ input[type="text"].letters-input {
 }
 
 .swatch img {
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
   border-radius: 50%;
   border: 2px solid white;
   height: 100%;
@@ -550,5 +546,11 @@ input[type="text"].letters-input {
   input[type="text"].letters-input {
     height: auto;
     min-height: 100%;
+  }
+  .swatches {
+    display: table-row;
+  }
+  .swatch {
+    display: table-cell;
   }
 }
