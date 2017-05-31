@@ -26,7 +26,7 @@ a {
   cursor: pointer;
 }
 
-.bag-color-thumb img { max-width: 0; }
+.bag-color-thumb img { max-width: none; }
 
 /*
 
