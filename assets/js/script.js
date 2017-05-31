@@ -63,7 +63,9 @@ $(document).on('click', '.js-bag', function(evt) {
     editing: true,
     editingBag: true,
   })
+
 })
+
 
 // input to change both letters
 $(document).on('input', '.js-bag-input', function(evt) {
@@ -190,7 +192,8 @@ $(document).on('click', '.js-close-palette', function(evt) {
   })
 })
 
-$(window).on('resize', resize)
+
+
 
 function setState(newState) {
   lastState = $.extend({}, state)
@@ -212,14 +215,20 @@ function updateCustomInfo() {
   $("#custombar-custom-info").val(productDescription);
 }
 
+//resize handler
 function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
-  $(".js-tab-cnr").height($(".js-tab-back:not(.js-tab-back-all)").width())
+  $(".js-tab-cnr").height(($(".js-palette").height() * 0.5) + "px")
+  $(".js-swatch").height(($(".js-palette").height() * 0.5) + "px")
+  $(".js-tab-back").width($(".js-tab-cnr").height())
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-cnr").height() * 0.75) + "px" })
-  $(".js-swatch").height(($(".js-palette").height() * 0.9) + "px")
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
 }
+$(window).on('resize', resize)
+
+
+
 
 
 function render() {
@@ -324,7 +333,7 @@ function autoselect() {
 function Letter(props) {
   var alt = [props.letter, ' in ', props.material].join('')
   var src = [window.baseUrl || '', 'assets/img/letters/', props.letter.toUpperCase(), '-', props.material, '.png'].join('')
-  var html = ['<img src="', src, '" alt="', alt, '" class="js-letter" data-index="', props.index, '"/>'].join('')
+  var html = ['<img src="', src, '" alt="', alt, '" class="letter js-letter" data-index="', props.index, '"/>'].join('')
   return $(html)
 }
 
