@@ -80,7 +80,11 @@ $(document).on('input', '.js-bag-input', function(evt) {
   setState(newState)
 })
 $(document).on('focus', '.js-bag-input', autoselect)
-$(document).on('click', '.js-bag-input', autoselect)
+$(document).on('click', '.js-bag-input', function() {
+  $(".fa.fa-arrow-right").removeClass("right-arrow-animating")
+  $(".fa.fa-arrow-left").removeClass("left-arrow-animating")
+  autoselect()
+})
 
 // select material swatch for individual letter
 $(document).on('click', '.js-swatch-link', function(evt) {
@@ -194,7 +198,7 @@ function setImageLoaded(sender) {
 //resize handler
 function resize() {
   $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
-  $(".js-swatch").css({ maxHeight: ($("#customBarSectionMain").width() / (($(".js-swatch").length - 1) / 1.5)) + "px" })
+  $(".js-swatch").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
   $(".js-tab-back:not(.js-tab-back-all)").width($(".js-tab-cnr").height())
   $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
