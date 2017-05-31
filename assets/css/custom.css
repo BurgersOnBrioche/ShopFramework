@@ -524,4 +524,8 @@ input[type="text"].letters-input {
   .bag-color {
     text-align: center;
   }
+  input[type="text"].letters-input {
+    height: auto;
+    min-height: 100%;
+  }
 }
