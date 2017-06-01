@@ -260,9 +260,6 @@ function resize() {
   $(".fa.fa-arrow-right,.fa.fa-arrow-left").css({ fontSize: $(".js-letter-label").height() + "px" })
 
 
-  $(".js-bag-color-thumb>img").each(function() {
-    $(this).width($(this).height() * (state.bag.img.width / state.bag.img.height))
-  })
   $(".js-tab-back:not(.js-tab-back-all)").each(function() {
     $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
   })
