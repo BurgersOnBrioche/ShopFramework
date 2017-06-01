@@ -66,8 +66,8 @@ a {
 html,
 body {
   height: 100%;
-  font-family: AvenirLT-Heavy;
 }
+
 
 #customBarHeaderMain {
   display: flex;
@@ -80,6 +80,7 @@ body {
   display: none;
   height: 65vh;
   width: 100%;
+  font-family: AvenirLT-Heavy;
 }
 
 #styleViewSection {
