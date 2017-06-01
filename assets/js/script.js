@@ -245,9 +245,6 @@ function setImageLoaded(sender) {
 //resize handler
 function resize() {
 
-  if ($(this).parent().height() * (state.bag.img.width / state.bag.img.height) == "undefined") {
-    console.log("helllo")
-  }
 
   if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.2) {
     $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
