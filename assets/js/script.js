@@ -410,9 +410,7 @@ function render() {
 
 
     // render swatch background 
-    $(".js-swatch").each(function() {
-      $(this).css({ background: [window.baseUrl || '', "assets/img/material-swatches/swatch-", $(this).data("color"), ".png no-repeat"].join(''), backgroundSize: "cover" })
-    })
+
 
 
     // render active swatch
