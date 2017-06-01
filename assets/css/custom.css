@@ -78,7 +78,7 @@ body {
 
 #customBarSectionMain {
   display: none;
-  position: relative;
+  height: 65vh;
   width: 100%;
 }
 
@@ -154,13 +154,13 @@ body {
 }
 
 .left-arrow-animating {
-  -webkit-animation: left-arrow-pulse 2s infinite ease-in-out both;
-  animation: left-arrow-pulse 2s infinite ease-in-out both;
+  -webkit-animation: left-arrow-pulse 1s infinite ease-in-out both;
+  animation: left-arrow-pulse 1s infinite ease-in-out both;
 }
 
 .right-arrow-animating {
-  -webkit-animation: right-arrow-pulse 2s infinite ease-in-out both;
-  animation: right-arrow-pulse 2s infinite ease-in-out both;
+  -webkit-animation: right-arrow-pulse 1s infinite ease-in-out both;
+  animation: right-arrow-pulse 1s infinite ease-in-out both;
 }
 
 input[type="text"].letters-input {
@@ -253,7 +253,7 @@ input[type="text"].letters-input {
 /* Editing palette */
 
 .letter-label {
-  height: 5%;
+  height: 7.5%;
   margin: 1em 0;
   display: flex;
   justify-content: center;
@@ -502,7 +502,7 @@ input[type="text"].letters-input {
 
 @-webkit-keyframes right-arrow-pulse {
   50% {
-    margin-right: 7.5%;
+    margin-right: 5%;
   }
   100% {
     margin-right: 2%;
@@ -511,7 +511,7 @@ input[type="text"].letters-input {
 
 @keyframes right-arrow-pulse {
   50% {
-    margin-right: 7.5%;
+    margin-right: 5%;
   }
   100% {
     margin-right: 2%;
@@ -520,7 +520,7 @@ input[type="text"].letters-input {
 
 @-webkit-keyframes left-arrow-pulse {
   50% {
-    margin-left: 7.5%;
+    margin-left: 5%;
   }
   100% {
     margin-left: 2%;
@@ -529,7 +529,7 @@ input[type="text"].letters-input {
 
 @keyframes left-arrow-pulse {
   50% {
-    margin-left: 7.5%;
+    margin-left: 5%;
   }
   100% {
     margin-left: 2%;
@@ -546,5 +546,15 @@ input[type="text"].letters-input {
   input[type="text"].letters-input {
     height: auto;
     min-height: 100%;
+  }
+  .swatches {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+  .swatch {
+    display: table-cell;
+    height: 50px;
+    vertical-align: middle;
   }
 }

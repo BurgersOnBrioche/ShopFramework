@@ -45,7 +45,7 @@ var state = {
     height: 8.5,
     width: 12
   },
-  letters: '',
+  letters: 'AZ',
   letterAspectHeight: 0.376,
   materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
   positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -57,8 +57,8 @@ var state = {
   arrow: {
     step1: false,
     step2: false,
-    step3: false,
-    step4: false
+    step3: true,
+    step4: true
   }
 }
 
@@ -223,8 +223,6 @@ function setImageLoaded(sender) {
 }
 //resize handler
 function resize() {
-  $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
-  $("#customBarSectionMain").width($("#customBarSectionMain").parent().width() + "px")
 
   $(".js-swatch").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
   $(".js-tab-back:not(.js-tab-back-all)").width($(".js-tab-cnr").height())
