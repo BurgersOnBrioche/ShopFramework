@@ -559,13 +559,21 @@ input[type="text"].letters-input {
     min-height: 100%;
   }
   .swatches {
-    display: table;
-    table-layout: fixed;
+    display: block;
     width: 100%;
+    text-align: center;
+    white-space: nowrap;
   }
   .swatch {
-    display: table-cell;
-    height: 50px;
+    position: relative;
+    top: 10%;
+    text-align: center;
+    display: inline-block;
+    height: 90%;
     vertical-align: middle;
   }
+}
+
+#testLink {
+  background: url('../img/material-swatches/swatch-hotpink.png') no-repeat center;
 }

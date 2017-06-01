@@ -245,9 +245,13 @@ function setImageLoaded(sender) {
 //resize handler
 function resize() {
 
-  console.log()
+  if ($(this).parent().height() * (state.bag.img.width / state.bag.img.height) == "undefined") {
+    console.log("helllo")
+  }
+
   if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.2) {
     $(".js-swatch").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
+
   } else {
     $(".js-swatch").css({ maxHeight: ["calc(", $(".js-swatches").height(), "px - 30%)"].join('') })
   }
@@ -258,8 +262,16 @@ function resize() {
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px").children("js-letter").width(25)
   $(".fa.fa-arrow-right,.fa.fa-arrow-left").css({ fontSize: $(".js-letter-label").height() + "px" })
+  $(".js-bag-color-thumb").each(function() {
+    console.log($(this).parent().height() * (state.bag.img.width / state.bag.img.height))
+    $(this).width($(this).height() * (state.bag.img.width / state.bag.img.height))
+  })
 
+  $(".js-bag-color-thumb>img").each(function() {
+    console.log($(this).parent().height() * (state.bag.img.width / state.bag.img.height))
 
+    $(this).width($(this).parent().height() * (state.bag.img.width / state.bag.img.height))
+  })
   $(".js-tab-back:not(.js-tab-back-all)").each(function() {
     $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
   })
