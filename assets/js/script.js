@@ -242,14 +242,16 @@ function setImageLoaded(sender) {
 }
 //resize handler
 function resize() {
-
   $(".js-swatch").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
   $(".js-tab-back:not(.js-tab-back-all)").width($(".js-tab-cnr").height())
   $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
-  $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px")
+  $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px").children("js-letter").width(25)
   $(".fa.fa-arrow-right,.fa.fa-arrow-left").css({ fontSize: $(".js-letter-label").height() + "px" })
+  $(".js-letter").each(function() {
+    $(this).width($(this).height * (letterSpacings[state.letters[$(this).data("index")]]))
+  })
   $(".js-bag-color-link").each(function() {
     if ($(this).attr('data-loaded')) {
       $(this).parents('.js-bag-color-thumb').width($(this).width())
@@ -257,8 +259,10 @@ function resize() {
   })
 }
 
+
 function imgLoadedResize(sender) {
   $(".js-bag-color-thumb").width()
+
 }
 $(window).on('resize', resize)
 var zoom = window.devicePixelRatio
