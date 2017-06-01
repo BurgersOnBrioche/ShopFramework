@@ -566,6 +566,7 @@ input[type="text"].letters-input {
   }
   .swatch {
     position: relative;
+    top: 5%;
     text-align: center;
     display: inline-block;
     vertical-align: middle;
