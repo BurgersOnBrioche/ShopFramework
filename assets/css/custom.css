@@ -78,7 +78,7 @@ body {
 
 #customBarSectionMain {
   display: none;
-  height: 65vh;
+  position: relative;
   width: 100%;
 }
 
@@ -104,13 +104,20 @@ body {
   }
 }
 
-.desktop-only {
+.only-mobile {
+  display: block !important;
+}
+
+.only-desktop {
   display: none !important;
 }
 
 @media only screen and (min-width: 769px) {
-  .desktop-only {
-    display: flex !important;
+  .only-desktop {
+    display: block !important;
+  }
+  .only-mobile {
+    display: none !important;
   }
 }
 
@@ -118,7 +125,7 @@ body {
 /* Displayed Bag */
 
 .bag-custom {
-  background: url('../img/bags/danny-black.png') no-repeat center;
+  background: url('../img/bags/dani-black.png') no-repeat center;
   background-size: contain;
   width: 100%;
   margin: 0 auto;
@@ -332,7 +339,7 @@ input[type="text"].letters-input {
 }
 
 .bag-style-main {
-  background: url('../img/bags/danny-black.png') no-repeat center;
+  background: url('../img/bags/dani-black.png') no-repeat center;
   background-size: contain;
   width: 70%;
   height: 100%;
@@ -546,15 +553,5 @@ input[type="text"].letters-input {
   input[type="text"].letters-input {
     height: auto;
     min-height: 100%;
-  }
-  .swatches {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-  }
-  .swatch {
-    display: table-cell;
-    height: 50px;
-    vertical-align: middle;
   }
 }

@@ -41,7 +41,7 @@ fetch((window.baseUrl || '') + '/assets/js/letter-spacing.json').then(function(r
 var state = {
   bag: {
     color: 'black',
-    style: 'danny',
+    style: 'dani',
     height: 8.5,
     width: 12
   },
@@ -207,14 +207,28 @@ function setState(newState) {
 }
 
 function updateCustomInfo() {
-  var productDescription = state.bag.style + "-" + state.bag.color
+  var productDescription = capitalize(state.bag.style) + " - " + capitalize(state.bag.color) + " Base"
   if (state.letters.length > 0) {
-    productDescription += [' / ', state.letters[0].toUpperCase(), '-', state.materials[0]].join('')
+    productDescription += [' / ', state.letters[0].toUpperCase(), ' - ', materialName(state.materials[0])].join('')
   }
   if (state.letters.length > 1) {
-    productDescription += [' / ', state.letters[1].toUpperCase(), '-', state.materials[1]].join('')
+    productDescription += [' / ', state.letters[1].toUpperCase(), ' - ', materialName(state.materials[1])].join('')
   }
   $("#custombar-custom-info").val(productDescription);
+}
+
+function capitalize(string) {
+  return string[0].toUpperCase() + string.substring(1)
+}
+
+function materialName(material) {
+  switch(material) {
+    case 'hotpink': return 'Hot Pink';
+    case 'lightturquoise': return 'Light Turquoise';
+    case 'silver-metallic': return 'Silver Metallic';
+    case 'gold-metallic': return "Gold Metallic";
+    default: return capitalize(material)
+  }
 }
 
 function setImageLoaded(sender) {
@@ -223,6 +237,8 @@ function setImageLoaded(sender) {
 }
 //resize handler
 function resize() {
+  $("#customBarSectionMain").height($("#customBarSectionMain").parent().height() + "px")
+  $("#customBarSectionMain").width($("#customBarSectionMain").parent().width() + "px")
 
   $(".js-swatch").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
   $(".js-tab-back:not(.js-tab-back-all)").width($(".js-tab-cnr").height())
