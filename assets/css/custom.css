@@ -566,10 +566,14 @@ input[type="text"].letters-input {
   }
   .swatch {
     position: relative;
-    top: 10%;
     text-align: center;
     display: inline-block;
-    height: 90%;
+    vertical-align: middle;
+  }
+  .swatch img {
+    position: relative;
+    text-align: center;
+    display: inline-block;
     vertical-align: middle;
   }
 }

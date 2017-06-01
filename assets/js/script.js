@@ -250,11 +250,12 @@ function resize() {
   }
 
   if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.2) {
-    $(".js-swatch").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
+    $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
 
   } else {
-    $(".js-swatch").css({ maxHeight: ["calc(", $(".js-swatches").height(), "px - 30%)"].join('') })
+    $(".js-swatch>img").css({ maxHeight: ["calc(", $(".js-swatches").height(), "px - 30%)"].join('') })
   }
+
 
   $(".js-tab-back:not(.js-tab-back-all)").width($(".js-tab-cnr").height())
   $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
