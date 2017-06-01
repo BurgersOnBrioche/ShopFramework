@@ -137,16 +137,18 @@ body {
 }
 
 .letters {
-  display: flex;
+  display: table;
   align-items: center;
   justify-content: center;
   height: 30%;
-  width: auto;
+  width: 100%;
+  text-align: center;
 }
+
+.letter-image-cnr {}
 
 .letters img {
   height: 100%;
-  width: auto;
 }
 
 .letter {
@@ -286,7 +288,7 @@ input[type="text"].letters-input {
 
 .swatch {
   text-align: center;
-  height: 90%;
+  height: 80%;
   width: auto;
   padding: 0 1%;
 }
