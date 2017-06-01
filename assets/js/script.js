@@ -41,7 +41,11 @@ var state = {
     color: 'black',
     style: 'dani',
     height: 8.5,
-    width: 12
+    width: 12,
+    img: {
+      height: 1475,
+      width: 1801
+    }
   },
   letters: 'AZ',
   letterAspectHeight: 0.376,
@@ -121,7 +125,16 @@ $(document).on('click', '.js-swatch-link', function(evt) {
 // select bag style
 $(document).on('click', '.js-bag-style-link', function(evt) {
   setState({
-    bag: { color: state.bag.color, style: $(this).data('style') }
+    bag: {
+      color: state.bag.color,
+      style: $(this).data('style'),
+      height: state.bag.height,
+      width: state.bag.width,
+      img: {
+        height: state.bag.img.height,
+        width: state.bag.img.width
+      }
+    }
   })
 
 })
@@ -129,7 +142,16 @@ $(document).on('click', '.js-bag-style-link', function(evt) {
 // select bag color
 $(document).on('click', '.js-bag-color-link', function(evt) {
   var newState = {
-    bag: { color: $(this).data('color'), style: state.bag.style },
+    bag: {
+      color: $(this).data('color'),
+      style: state.bag.style,
+      height: state.bag.height,
+      width: state.bag.width,
+      img: {
+        height: state.bag.img.height,
+        width: state.bag.img.width
+      }
+    },
     arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 }
   }
   if (state.arrow.step1 == false) {
@@ -239,21 +261,40 @@ function setImageLoaded(sender) {
   resize()
 }
 //resize handler
-function resize() {
+var resizeInterval
 
-  $(".js-swatch").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
+function resize() {
+  clearInterval(resizeInterval)
+  resizeInterval = setInterval(function() {
+    render()
+    clearInterval(resizeInterval)
+    console.log("rennn")
+  }, 750)
+
+  if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.3) {
+    $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
+
+  } else {
+    $(".js-swatch>img").css({ maxHeight: ["calc(", $(".js-swatches").height(), "px - 30%)"].join('') })
+  }
+
+
   $(".js-tab-back:not(.js-tab-back-all)").width($(".js-tab-cnr").height())
   $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px").children("js-letter").width(25)
   $(".fa.fa-arrow-right,.fa.fa-arrow-left").css({ fontSize: $(".js-letter-label").height() + "px" })
-
-  $(".js-tab-back:not(.js-tab-back-all)").each(function() {
-
-    $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
+  $(".js-bag-color-thumb").each(function() {
+    $(this).width($(this).height() * (state.bag.img.width / state.bag.img.height))
   })
 
+  $(".js-bag-color-thumb>img").each(function() {
+    $(this).width($(this).parent().height() * (state.bag.img.width / state.bag.img.height))
+  })
+  $(".js-tab-back:not(.js-tab-back-all)").each(function() {
+    $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
+  })
   $("img.js-letter").each(function() {
     $(this).width($(this).height() * (letterSpacings[state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letters[$(this).data("index")]]["img"].height))
   })

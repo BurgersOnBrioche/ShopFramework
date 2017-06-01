@@ -395,13 +395,11 @@ input[type="text"].letters-input {
   justify-content: center;
   cursor: pointer;
   height: 100%;
-  width: auto;
-  margin: 0 1%;
+  margin: 0 3px;
 }
 
 .bag-color-thumb img {
   height: 90%;
-  width: auto;
 }
 
 
@@ -561,13 +559,26 @@ input[type="text"].letters-input {
     min-height: 100%;
   }
   .swatches {
-    display: table;
-    table-layout: fixed;
+    display: block;
     width: 100%;
+    text-align: center;
+    white-space: nowrap;
   }
   .swatch {
-    display: table-cell;
-    height: 50px;
+    position: relative;
+    top: 5%;
+    text-align: center;
+    display: inline-block;
     vertical-align: middle;
   }
+  .swatch img {
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+#testLink {
+  background: url('../img/material-swatches/swatch-hotpink.png') no-repeat center;
 }
