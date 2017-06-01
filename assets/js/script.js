@@ -250,6 +250,13 @@ function resize() {
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px").children("js-letter").width(25)
   $(".fa.fa-arrow-right,.fa.fa-arrow-left").css({ fontSize: $(".js-letter-label").height() + "px" })
 
+  $(".js-tab-back:not(.js-tab-back-all)").each(function() {
+    $(this).children("js-tab").width($(this).height() * (letterSpacings[state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letters[$(this).data("index")]]["img"].height))
+  })
+
+  $("img.js-letter").each(function() {
+    $(this).width($(this).height() * (letterSpacings[state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letters[$(this).data("index")]]["img"].height))
+  })
   $("img.js-letter").each(function() {
     $(this).width($(this).height() * (letterSpacings[state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letters[$(this).data("index")]]["img"].height))
   })
