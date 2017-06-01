@@ -395,13 +395,11 @@ input[type="text"].letters-input {
   justify-content: center;
   cursor: pointer;
   height: 100%;
-  width: auto;
-  margin: 0 1%;
+  margin: 0 3px;
 }
 
 .bag-color-thumb img {
   height: 90%;
-  width: auto;
 }
 
 

@@ -31,7 +31,6 @@ $(document).ready(function() {
     $('#custombar').before(html).remove()
   })
 })
-
 fetch((window.baseUrl || '') + '/assets/js/letter-spacing.json').then(function(response) {
   response.json().then(function(json) {
     letterSpacings = json
@@ -42,7 +41,11 @@ var state = {
     color: 'black',
     style: 'dani',
     height: 8.5,
-    width: 12
+    width: 12,
+    img: {
+      height: 1475,
+      width: 1801
+    }
   },
   letters: 'AZ',
   letterAspectHeight: 0.376,
@@ -242,7 +245,13 @@ function setImageLoaded(sender) {
 //resize handler
 function resize() {
 
-  $(".js-swatch").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
+  console.log()
+  if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.2) {
+    $(".js-swatch").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
+  } else {
+    $(".js-swatch").css({ maxHeight: ["calc(", $(".js-swatches").height(), "px - 30%)"].join('') })
+  }
+
   $(".js-tab-back:not(.js-tab-back-all)").width($(".js-tab-cnr").height())
   $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
@@ -250,11 +259,13 @@ function resize() {
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px").children("js-letter").width(25)
   $(".fa.fa-arrow-right,.fa.fa-arrow-left").css({ fontSize: $(".js-letter-label").height() + "px" })
 
-  $(".js-tab-back:not(.js-tab-back-all)").each(function() {
 
+  $(".js-bag-color-thumb>img").each(function() {
+    $(this).width($(this).height() * (state.bag.img.width / state.bag.img.height))
+  })
+  $(".js-tab-back:not(.js-tab-back-all)").each(function() {
     $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
   })
-
   $("img.js-letter").each(function() {
     $(this).width($(this).height() * (letterSpacings[state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letters[$(this).data("index")]]["img"].height))
   })
