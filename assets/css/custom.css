@@ -78,7 +78,7 @@ body {
 
 #customBarSectionMain {
   display: none;
-  position: relative;
+  height: 65vh;
   width: 100%;
 }
 
@@ -104,20 +104,13 @@ body {
   }
 }
 
-.only-mobile {
-  display: block !important;
-}
-
-.only-desktop {
+.desktop-only {
   display: none !important;
 }
 
 @media only screen and (min-width: 769px) {
-  .only-desktop {
-    display: block !important;
-  }
-  .only-mobile {
-    display: none !important;
+  .desktop-only {
+    display: flex !important;
   }
 }
 
@@ -125,7 +118,7 @@ body {
 /* Displayed Bag */
 
 .bag-custom {
-  background: url('../img/bags/dani-black.png') no-repeat center;
+  background: url('../img/bags/danny-black.png') no-repeat center;
   background-size: contain;
   width: 100%;
   margin: 0 auto;
@@ -260,7 +253,7 @@ input[type="text"].letters-input {
 /* Editing palette */
 
 .letter-label {
-  height: 5%;
+  height: 7.5%;
   margin: 1em 0;
   display: flex;
   justify-content: center;
@@ -339,7 +332,7 @@ input[type="text"].letters-input {
 }
 
 .bag-style-main {
-  background: url('../img/bags/dani-black.png') no-repeat center;
+  background: url('../img/bags/danny-black.png') no-repeat center;
   background-size: contain;
   width: 70%;
   height: 100%;
@@ -553,5 +546,15 @@ input[type="text"].letters-input {
   input[type="text"].letters-input {
     height: auto;
     min-height: 100%;
+  }
+  .swatches {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+  .swatch {
+    display: table-cell;
+    height: 50px;
+    vertical-align: middle;
   }
 }
