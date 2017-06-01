@@ -408,6 +408,13 @@ function render() {
     const activeTabSelector = ['.js-tab[data-index=', state.activeLetter, ']'].join('')
     $(activeTabSelector).addClass('active').parents('.js-tab-back').addClass('active')
 
+
+    // render swatch background 
+    $(".js-swatch").each(function() {
+      $(this).css({ background: [window.baseUrl || '', "assets/img/material-swatches/swatch-", $(this).data("color"), ".png no-repeat"].join(''), backgroundSize: "cover" })
+    })
+
+
     // render active swatch
     if (state.activeLetter > -1) {
       const activeSwatchSelector = ['.js-swatch[data-color=', state.materials[state.activeLetter], ']'].join('')
