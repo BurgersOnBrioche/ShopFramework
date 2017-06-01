@@ -68,7 +68,6 @@ body {
   height: 100%;
 }
 
-
 #customBarHeaderMain {
   display: flex;
   justify-content: center;
@@ -146,11 +145,11 @@ body {
 
 .letters img {
   height: 100%;
-  width: auto;
 }
 
 .letter {
   cursor: pointer;
+  width: auto;
 }
 
 .fa.fa-arrow-right {
@@ -294,7 +293,7 @@ input[type="text"].letters-input {
 .swatch img {
   border-radius: 50%;
   border: 2px solid white;
-  height: 100%;
+  height: 110%;
   cursor: pointer;
 }
 
