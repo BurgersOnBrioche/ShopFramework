@@ -154,13 +154,13 @@ body {
 }
 
 .left-arrow-animating {
-  -webkit-animation: left-arrow-pulse 2s infinite ease-in-out both;
-  animation: left-arrow-pulse 2s infinite ease-in-out both;
+  -webkit-animation: left-arrow-pulse 1s infinite ease-in-out both;
+  animation: left-arrow-pulse 1s infinite ease-in-out both;
 }
 
 .right-arrow-animating {
-  -webkit-animation: right-arrow-pulse 2s infinite ease-in-out both;
-  animation: right-arrow-pulse 2s infinite ease-in-out both;
+  -webkit-animation: right-arrow-pulse 1s infinite ease-in-out both;
+  animation: right-arrow-pulse 1s infinite ease-in-out both;
 }
 
 input[type="text"].letters-input {
