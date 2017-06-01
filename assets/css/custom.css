@@ -141,15 +141,16 @@ body {
   align-items: center;
   justify-content: center;
   height: 30%;
+  width: auto;
 }
 
 .letters img {
   height: 100%;
+  width: auto;
 }
 
 .letter {
   cursor: pointer;
-  width: auto;
 }
 
 .fa.fa-arrow-right {
