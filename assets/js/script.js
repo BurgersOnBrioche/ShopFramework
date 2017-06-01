@@ -251,7 +251,8 @@ function resize() {
   $(".fa.fa-arrow-right,.fa.fa-arrow-left").css({ fontSize: $(".js-letter-label").height() + "px" })
 
   $(".js-tab-back:not(.js-tab-back-all)").each(function() {
-    $(this).children("js-tab").width($(this).height() * (letterSpacings[state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letters[$(this).data("index")]]["img"].height))
+
+    $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
   })
 
   $("img.js-letter").each(function() {
