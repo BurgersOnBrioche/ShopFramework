@@ -548,9 +548,13 @@ input[type="text"].letters-input {
     min-height: 100%;
   }
   .swatches {
-    display: table-row;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
   }
   .swatch {
     display: table-cell;
+    height: 50px;
+    vertical-align: middle;
   }
 }
