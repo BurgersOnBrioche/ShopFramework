@@ -125,7 +125,16 @@ $(document).on('click', '.js-swatch-link', function(evt) {
 // select bag style
 $(document).on('click', '.js-bag-style-link', function(evt) {
   setState({
-    bag: { color: state.bag.color, style: $(this).data('style') }
+    bag: {
+      color: state.bag.color,
+      style: $(this).data('style'),
+      height: state.bag.height,
+      width: state.bag.width,
+      img: {
+        height: state.bag.img.height,
+        width: state.bag.img.width
+      }
+    }
   })
 
 })
@@ -133,7 +142,16 @@ $(document).on('click', '.js-bag-style-link', function(evt) {
 // select bag color
 $(document).on('click', '.js-bag-color-link', function(evt) {
   var newState = {
-    bag: { color: $(this).data('color'), style: state.bag.style },
+    bag: {
+      color: $(this).data('color'),
+      style: state.bag.style,
+      height: state.bag.height,
+      width: state.bag.width,
+      img: {
+        height: state.bag.img.height,
+        width: state.bag.img.width
+      }
+    },
     arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 }
   }
   if (state.arrow.step1 == false) {
@@ -250,9 +268,10 @@ function resize() {
   resizeInterval = setInterval(function() {
     render()
     clearInterval(resizeInterval)
-  }, 1000)
+    console.log("rennn")
+  }, 750)
 
-  if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.2) {
+  if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.3) {
     $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
 
   } else {
@@ -271,8 +290,6 @@ function resize() {
   })
 
   $(".js-bag-color-thumb>img").each(function() {
-    console.log($(this).parent().height() * (state.bag.img.width / state.bag.img.height))
-
     $(this).width($(this).parent().height() * (state.bag.img.width / state.bag.img.height))
   })
   $(".js-tab-back:not(.js-tab-back-all)").each(function() {
@@ -384,9 +401,6 @@ function render() {
       const activeSwatchSelector = ['.js-swatch[data-color=', state.materials[state.activeLetter + 1], ']'].join('')
       $(activeSwatchSelector).addClass('active')
     }
-
-    //render swatch background
-
 
     // set value of inputs
     $('.js-bag-input').val(state.letters)
