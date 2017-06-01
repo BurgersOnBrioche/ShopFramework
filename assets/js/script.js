@@ -249,6 +249,7 @@ function resize() {
   clearInterval(resizeInterval)
   resizeInterval = setInterval(function() {
     render()
+    clearInterval(resizeInterval)
   }, 3000)
 
   if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.2) {
