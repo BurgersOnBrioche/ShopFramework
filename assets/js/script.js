@@ -268,7 +268,6 @@ function resize() {
   resizeInterval = setInterval(function() {
     render()
     clearInterval(resizeInterval)
-    console.log("rennn")
   }, 750)
 
   if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.3) {
@@ -283,7 +282,7 @@ function resize() {
   $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
-  $(".js-bag-input").css({ fontSize: $(".js-letter-label").height() + "px" })
+  $(".js-bag-input").css({ fontSize: $(".j.js-bag-input").height() + "px" })
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px").children("js-letter").width(25)
   $(".fa.fa-arrow-right,.fa.fa-arrow-left").css({ fontSize: $(".js-letter-label").height() + "px" })
   $(".js-bag-color-thumb").each(function() {

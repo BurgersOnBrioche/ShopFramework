@@ -80,7 +80,6 @@ body {
   height: 65vh;
   width: 100%;
   min-width: 291px;
-  font-family: AvenirLT-Heavy;
 }
 
 #styleViewSection {
@@ -177,6 +176,7 @@ body {
 }
 
 input[type="text"].letters-input {
+  font-family: AvenirLT-Heavy;
   border: 1px solid black;
   display: inline-block;
   text-align: center;
