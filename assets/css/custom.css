@@ -118,7 +118,7 @@ body {
 /* Displayed Bag */
 
 .bag-custom {
-  background: url('../img/bags/danny-black.png') no-repeat center;
+  background: url('../img/bags/dani-black.png') no-repeat center;
   background-size: contain;
   width: 100%;
   margin: 0 auto;
@@ -332,7 +332,7 @@ input[type="text"].letters-input {
 }
 
 .bag-style-main {
-  background: url('../img/bags/danny-black.png') no-repeat center;
+  background: url('../img/bags/dani-black.png') no-repeat center;
   background-size: contain;
   width: 70%;
   height: 100%;
