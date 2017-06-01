@@ -261,7 +261,6 @@ function resize() {
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px").children("js-letter").width(25)
   $(".fa.fa-arrow-right,.fa.fa-arrow-left").css({ fontSize: $(".js-letter-label").height() + "px" })
   $(".js-bag-color-thumb").each(function() {
-    console.log($(this).parent().height() * (state.bag.img.width / state.bag.img.height))
     $(this).width($(this).height() * (state.bag.img.width / state.bag.img.height))
   })
 
