@@ -243,8 +243,13 @@ function setImageLoaded(sender) {
   resize()
 }
 //resize handler
-function resize() {
+var resizeInterval
 
+function resize() {
+  clearInterval(resizeInterval)
+  resizeInterval = setInterval(function() {
+    render()
+  }, 3000)
 
   if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.2) {
     $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
