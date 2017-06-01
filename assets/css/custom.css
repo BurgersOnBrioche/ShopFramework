@@ -104,19 +104,19 @@ body {
   }
 }
 
-.mobile-only {
+.only-mobile {
   display: block !important;
 }
 
-.desktop-only {
+.only-desktop {
   display: none !important;
 }
 
 @media only screen and (min-width: 769px) {
-  .desktop-only {
+  .only-desktop {
     display: block !important;
   }
-  .mobile-only {
+  .only-mobile {
     display: none !important;
   }
 }
