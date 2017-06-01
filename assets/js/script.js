@@ -1,8 +1,17 @@
 var isSale = true
 var tutorial = true
 var letterSpacings = {}
-
+var isIE = false
 $(document).ready(function() {
+
+  //check if browser is IE
+  var ua = window.navigator.userAgent;
+  var trident = ua.indexOf("Trident/")
+  var msie = ua.indexOf("MSIE ")
+  if (msie > 0 || trident > 0) {
+    isIE = true
+  }
+
   // shows arrows for steps
   if (tutorial) {
     $(".fa.fa-arrow-right, .fa.fa-arrow-left").css({ display: "flex" })
@@ -264,11 +273,8 @@ function setImageLoaded(sender) {
 var resizeInterval
 
 function resize() {
-  clearInterval(resizeInterval)
-  resizeInterval = setInterval(function() {
-    render()
-    clearInterval(resizeInterval)
-  }, 750)
+
+
 
   if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.3) {
     $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
@@ -306,6 +312,15 @@ function resize() {
       $(this).parents('.js-bag-color-thumb').width($(this).width())
     }
   })
+  if (isIE == true) {
+    clearInterval(resizeInterval)
+    resizeInterval = setInterval(function() {
+      render()
+      clearInterval(resizeInterval)
+
+    }, 750)
+
+  }
 }
 
 
