@@ -137,18 +137,16 @@ body {
 }
 
 .letters {
-  display: table;
+  display: flex;
   align-items: center;
   justify-content: center;
   height: 30%;
-  width: 100%;
-  text-align: center;
+  width: auto;
 }
-
-.letter-image-cnr {}
 
 .letters img {
   height: 100%;
+  width: auto;
 }
 
 .letter {
@@ -277,7 +275,7 @@ input[type="text"].letters-input {
 /* Swatches */
 
 .swatches {
-  height: 20%;
+  height: 25%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -288,7 +286,7 @@ input[type="text"].letters-input {
 
 .swatch {
   text-align: center;
-  height: 80%;
+  height: 90%;
   width: auto;
   padding: 0 1%;
 }
