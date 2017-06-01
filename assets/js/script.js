@@ -222,12 +222,17 @@ function capitalize(string) {
 }
 
 function materialName(material) {
-  switch(material) {
-    case 'hotpink': return 'Hot Pink';
-    case 'lightturquoise': return 'Light Turquoise';
-    case 'silver-metallic': return 'Silver Metallic';
-    case 'gold-metallic': return "Gold Metallic";
-    default: return capitalize(material)
+  switch (material) {
+    case 'hotpink':
+      return 'Hot Pink';
+    case 'lightturquoise':
+      return 'Light Turquoise';
+    case 'silver-metallic':
+      return 'Silver Metallic';
+    case 'gold-metallic':
+      return "Gold Metallic";
+    default:
+      return capitalize(material)
   }
 }
 

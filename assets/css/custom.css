@@ -554,7 +554,6 @@ input[type="text"].letters-input {
     height: auto;
     min-height: 100%;
   }
-<<<<<<< HEAD
   .swatches {
     display: table;
     table-layout: fixed;
@@ -566,6 +565,3 @@ input[type="text"].letters-input {
     vertical-align: middle;
   }
 }
-=======
-}
->>>>>>> 6370e881cc4a5ffe6da7ffad4db7da86ae6c8835
