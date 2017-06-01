@@ -250,7 +250,7 @@ function resize() {
   resizeInterval = setInterval(function() {
     render()
     clearInterval(resizeInterval)
-  }, 3000)
+  }, 1000)
 
   if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.2) {
     $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
@@ -384,6 +384,9 @@ function render() {
       const activeSwatchSelector = ['.js-swatch[data-color=', state.materials[state.activeLetter + 1], ']'].join('')
       $(activeSwatchSelector).addClass('active')
     }
+
+    //render swatch background
+
 
     // set value of inputs
     $('.js-bag-input').val(state.letters)
