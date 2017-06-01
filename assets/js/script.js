@@ -3,7 +3,6 @@ var tutorial = true
 var letterSpacings = {}
 
 $(document).ready(function() {
-
   // shows arrows for steps
   if (tutorial) {
     $(".fa.fa-arrow-right, .fa.fa-arrow-left").css({ display: "flex" })
@@ -32,7 +31,6 @@ $(document).ready(function() {
     $('#custombar').before(html).remove()
   })
 })
-
 fetch((window.baseUrl || '') + '/assets/js/letter-spacing.json').then(function(response) {
   response.json().then(function(json) {
     letterSpacings = json
@@ -82,10 +80,10 @@ $(document).on('click', '.js-bag', function(evt) {
 $(document).on('input', '.js-bag-input', function(evt) {
   if ($(this).val().match(/[^A-z]/)) { return $(this).val(state.letters) }
   var newState = {
-    letters: $(this).val(),
+    letters: $(this).val().toUpperCase(),
     arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 }
   }
-  console.log(newState.arrow)
+
   if (state.arrow.step2 == false) {
     newState.arrow.step2 = true
   }
@@ -242,6 +240,7 @@ function setImageLoaded(sender) {
 }
 //resize handler
 function resize() {
+
   $(".js-swatch").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
   $(".js-tab-back:not(.js-tab-back-all)").width($(".js-tab-cnr").height())
   $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
@@ -249,6 +248,18 @@ function resize() {
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px").children("js-letter").width(25)
   $(".fa.fa-arrow-right,.fa.fa-arrow-left").css({ fontSize: $(".js-letter-label").height() + "px" })
+
+  $(".js-tab-back:not(.js-tab-back-all)").each(function() {
+
+    $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
+  })
+
+  $("img.js-letter").each(function() {
+    $(this).width($(this).height() * (letterSpacings[state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letters[$(this).data("index")]]["img"].height))
+  })
+  $("img.js-letter").each(function() {
+    $(this).width($(this).height() * (letterSpacings[state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letters[$(this).data("index")]]["img"].height))
+  })
   $(".js-bag-color-link").each(function() {
     if ($(this).attr('data-loaded')) {
       $(this).parents('.js-bag-color-thumb').width($(this).width())

@@ -162,11 +162,15 @@ body {
 }
 
 .left-arrow-animating {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   -webkit-animation: left-arrow-pulse 1s infinite ease-in-out both;
   animation: left-arrow-pulse 1s infinite ease-in-out both;
 }
 
 .right-arrow-animating {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   -webkit-animation: right-arrow-pulse 1s infinite ease-in-out both;
   animation: right-arrow-pulse 1s infinite ease-in-out both;
 }
@@ -275,7 +279,7 @@ input[type="text"].letters-input {
 /* Swatches */
 
 .swatches {
-  height: 20%;
+  height: 25%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -286,6 +290,7 @@ input[type="text"].letters-input {
 
 .swatch {
   text-align: center;
+  border-radius: 50%;
   height: 90%;
   width: auto;
   padding: 0 1%;
