@@ -22,12 +22,41 @@
   </section>
   <!--customBarHeaderMain-->
   <div style="height: 90%; position: relative;">
-    <div id="custombar"></div>
+    <div id="custombarBeach"></div>
   </div>
   <input type="text" placeholder="debugging input for shopify connection" id="custombar-custom-info" style="width: 100%; position: fixed; bottom: 0; border: 0; background-color: transparent; " />
   <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.0/es6-promise.auto.min.js"></script>
+  <script>
+    var state = {
+      bag: {
+        color: 'burlap-base',
+        style: 'dani',
+        height: 8.5,
+        width: 12,
+        img: {
+          height: 1475,
+          width: 1801
+        }
+      },
+      letters: 'AZ',
+      letterAspectHeight: 0.376,
+      materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
+      positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      activeLetter: -1,
+      editing: false,
+      editingBag: true,
+      step: "custom-bar",
+      navActive: false,
+      arrow: {
+        step1: false,
+        step2: false,
+        step3: true,
+        step4: true
+      }
+    }
+  </script>
   <script src="assets/js/script.js"></script>
 </body>
 
