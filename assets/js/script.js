@@ -32,12 +32,20 @@ $(document).ready(function() {
   }, 1000)
 
   // get template html and embed it in the page
+
   fetch((window.baseUrl || '') + '/assets/html/custombar.html').then(function(response) {
     return response.text()
   }).then(function(html) {
     html = html.replace(/assets\/img\//g, (window.baseUrl || '') + 'assets/img/')
     $('#custombar').parent().css({ position: 'relative' })
     $('#custombar').before(html).remove()
+  })
+  fetch((window.baseUrl || '') + '/assets/html/custombar-beach.html').then(function(response) {
+    return response.text()
+  }).then(function(html) {
+    html = html.replace(/assets\/img\//g, (window.baseUrl || '') + 'assets/img/')
+    $('#custombarBeach').parent().css({ position: 'relative' })
+    $('#custombarBeach').before(html).remove()
   })
 })
 fetch((window.baseUrl || '') + '/assets/js/letter-spacing.json').then(function(response) {
@@ -338,8 +346,6 @@ setInterval(function() {
 }, 300)
 
 function render() {
-
-
   if (state.step == "style") {
     // show style selector step
     $("#styleViewSection").css({ display: "block" })
@@ -409,7 +415,7 @@ function render() {
     $(activeTabSelector).addClass('active').parents('.js-tab-back').addClass('active')
 
 
-    // render swatch background 
+    // TODO: render swatch background 
 
 
 
