@@ -124,8 +124,20 @@ body {
 
 /* Displayed Bag */
 
-.bag-custom {
+.bag-custom.dani {
   background: url('../img/bags/dani-black.png') no-repeat center;
+  background-size: contain;
+  width: 100%;
+  margin: 0 auto;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.bag-custom.dani-beach {
+  background: url('../img/bags/dani-burlap-base.png') no-repeat center;
   background-size: contain;
   width: 100%;
   margin: 0 auto;
@@ -225,18 +237,21 @@ input[type="text"].letters-input {
   border-top-left-radius: 10%;
 }
 
-.tab-back-all {
+.tab-back-all,
+.tab-back-tassel {
   color: white;
   font-family: AvenirLT-Heavy;
   padding: 0;
 }
 
-.tab-back-all span {
+.tab-back-all span,
+.tab-back-tassel span {
   position: relative;
   top: -20px;
 }
 
-.tab-back-all.active {
+.tab-back-all.active,
+.tab-back-tassel.active {
   color: black;
 }
 
@@ -255,7 +270,8 @@ input[type="text"].letters-input {
   width: auto;
 }
 
-.tab-all {
+.tab-all,
+.tab-tassel {
   display: flex;
   justify-content: center;
   align-items: center;

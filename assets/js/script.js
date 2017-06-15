@@ -53,33 +53,7 @@ fetch((window.baseUrl || '') + '/assets/js/letter-spacing.json').then(function(r
     letterSpacings = json
   })
 })
-var state = {
-  bag: {
-    color: 'black',
-    style: 'dani',
-    height: 8.5,
-    width: 12,
-    img: {
-      height: 1475,
-      width: 1801
-    }
-  },
-  letters: 'AZ',
-  letterAspectHeight: 0.376,
-  materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
-  positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  activeLetter: -1,
-  editing: false,
-  editingBag: true,
-  step: "custom-bar",
-  navActive: false,
-  arrow: {
-    step1: false,
-    step2: false,
-    step3: true,
-    step4: true
-  }
-}
+
 
 var lastState = $.extend({}, state);
 
@@ -292,9 +266,12 @@ function resize() {
   }
 
 
-  $(".js-tab-back:not(.js-tab-back-all)").width($(".js-tab-cnr").height())
+  $(".js-tab-back:not(.js-tab-back-all, .js-tab-back-tassel)").width($(".js-tab-cnr").height())
   $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
+  $(".js-tab-back-tassel").width($(".js-tab-cnr").height() * 3)
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
+  $(".js-tab-back-tassel").css({ fontSize: ($(".js-tab-back-tassel").height() * 0.75) + "px" })
+
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-bag-input").css({ fontSize: $(".j.js-bag-input").height() + "px" })
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px").children("js-letter").width(25)
@@ -306,7 +283,7 @@ function resize() {
   $(".js-bag-color-thumb>img").each(function() {
     $(this).width($(this).parent().height() * (state.bag.img.width / state.bag.img.height))
   })
-  $(".js-tab-back:not(.js-tab-back-all)").each(function() {
+  $(".js-tab-back:not(.js-tab-back-all,.js-tab-back-tassel)").each(function() {
     $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
   })
   $("img.js-letter").each(function() {
@@ -358,7 +335,7 @@ function render() {
   if (state.step == "custom-bar") {
     // reset
     $('.js-letters').find('.js-letter').remove()
-    $('.js-tab-cnr').find('.js-tab:not([data-index=-1])').parents('.js-tab-back').remove()
+    $('.js-tab-cnr').find('.js-tab:not([data-index=-1], [data-index=-2])').parents('.js-tab-back').remove()
     $('.js-tab').html('')
     $('.js-preview').html('')
     $('.js-tab').removeClass('active')
@@ -403,7 +380,9 @@ function render() {
     })
 
     // render tabs
+    $('.js-tab-tassel').html('TASSEL')
     $('.js-tab-all').html('ALL')
+
 
     // select input if we're showing a new input
     if (state.editing !== lastState.editing || (state.activeLetter !== lastState.activeLetter && state.activeLetter === state.letters.length)) {
@@ -423,7 +402,7 @@ function render() {
     if (state.activeLetter > -1) {
       const activeSwatchSelector = ['.js-swatch[data-color=', state.materials[state.activeLetter], ']'].join('')
       $(activeSwatchSelector).addClass('active')
-    } else {
+    } else if (state.activeLetter == -1) {
       const activeSwatchSelector = ['.js-swatch[data-color=', state.materials[state.activeLetter + 1], ']'].join('')
       $(activeSwatchSelector).addClass('active')
     }
