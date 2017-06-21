@@ -29,6 +29,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.0/es6-promise.auto.min.js"></script>
   <script>
+    var letterSpacings = {}
+    fetch((window.baseUrl || '') + '/assets/js/letter-spacing.json').then(function(response) {
+      response.json().then(function(json) {
+        letterSpacings = json
+        console.log(json)
+      })
+    })
     var state = {
       bag: {
         color: 'burlap-base-natural',

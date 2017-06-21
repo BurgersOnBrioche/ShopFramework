@@ -1,6 +1,6 @@
 var isSale = true
 var tutorial = true
-var letterSpacings = {}
+
 var isIE = false
 var swatchSets = {
   letters: {
@@ -56,13 +56,6 @@ $(document).ready(function() {
     $('#custombarBeach').before(html).remove()
   })
 })
-fetch((window.baseUrl || '') + '/assets/js/letter-spacing.json').then(function(response) {
-  response.json().then(function(json) {
-    letterSpacings = json
-    console.log(json)
-  })
-})
-
 
 var lastState = $.extend({}, state);
 
