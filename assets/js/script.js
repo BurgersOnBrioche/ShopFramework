@@ -292,8 +292,7 @@ var resizeInterval
 function resize() {
 
 
-
-  if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.3) {
+  if ($("#customBarSectionMain").width() < (($(".js-swatch").height() * $(".js-swatch").length) + 40)) {
     $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
 
   } else {
