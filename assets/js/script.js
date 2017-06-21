@@ -3,7 +3,10 @@ var tutorial = true
 var letterSpacings = {}
 var isIE = false
 var swatchSets = {
-  letters: ['black', 'white', 'hotpink', 'lightturquoise', 'silver-metallic', 'gold-metallic'],
+  letters: {
+    leather: ['black', 'white', 'hotpink', 'lightturquoise', 'silver-metallic', 'gold-metallic'],
+    stencil: ['brush-black', 'brush-white']
+  },
   tassels: ['rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red'],
   trims: ['rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red']
 }
@@ -200,16 +203,18 @@ $(document).on('click', '.js-tab-back', function(evt) {
       editing: true,
       editingBag: false,
       activeLetter: tab.data('index'),
-      activeSwatchSet: swatchSets.letters,
+      activeSwatchSet: swatchSets.letters[state.letterMaterial],
       arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 },
 
     }
   } else if (tab.data('index') == -1) {
+    var swatchSet = []
+
     newState = {
       editing: false,
       editingBag: true,
       activeLetter: tab.data('index'),
-      activeSwatchSet: swatchSets.letters,
+      activeSwatchSet: swatchSets.letters[state.letterMaterial],
       arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 },
     }
   } else if (tab.data('index') == -2) {
@@ -423,6 +428,7 @@ function render() {
 
     state.activeSwatchSet.forEach(function(s, i) {
       var swatch = Swatch({ material: s })
+
       $(".js-swatches").append(swatch)
     })
 
@@ -454,7 +460,17 @@ function render() {
     } else if (state.activeLetter == -1) {
       const activeSwatchSelector = ['.js-swatch[data-color=', state.materials[state.activeLetter + 1], ']'].join('')
       $(activeSwatchSelector).addClass('active')
+    } else if (state.activeLetter == -2) {
+      const activeSwatchSelector = ['.js-swatch[data-color=', state.tassel, ']'].join('')
+      $(activeSwatchSelector).addClass('active')
+      console.log($(activeSwatchSelector).length)
+    } else if (state.activeLetter == -3) {
+      const activeSwatchSelector = ['.js-swatch[data-color=', state.trim, ']'].join('')
+      $(activeSwatchSelector).addClass('active')
+      console.log($(activeSwatchSelector).length)
     }
+
+
 
     // set value of inputs
     $('.js-bag-input').val(state.letters)
@@ -492,7 +508,7 @@ function Swatch(props) {
   var alt = props.material
   var src = [window.baseUrl || '', 'assets/img/material-swatches/swatch-', props.material, '.png'].join('')
   var html = [
-    '<div class="swatch js-swatch data-color="', props.material, '">',
+    '<div class="swatch js-swatch" data-color="', props.material, '">',
     '<img src="', src, '" alt="', alt, '" class="js-swatch-link" data-color="', props.material, '">',
     '</div>'
   ].join('')
