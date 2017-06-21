@@ -292,13 +292,15 @@ var resizeInterval
 function resize() {
 
 
+  /*
+    if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.3) {
+      $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
 
-  if ($("#customBarSectionMain").width() / $("#customBarSectionMain").height() < 1.3) {
-    $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
+    } else {
+      }
+      */
+  $(".js-swatch>img").css({ maxHeight: ["calc(", $(".js-swatches").height(), "px - 30%)"].join('') })
 
-  } else {
-    $(".js-swatch>img").css({ maxHeight: ["calc(", $(".js-swatches").height(), "px - 30%)"].join('') })
-  }
 
 
   $(".js-tab-back:not(.js-tab-back-all, .js-tab-back-tassel, .js-tab-back-trim)").width($(".js-tab-cnr").height())
