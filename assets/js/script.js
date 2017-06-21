@@ -311,13 +311,13 @@ function resize() {
     $(this).width($(this).parent().height() * (state.bag.img.width / state.bag.img.height))
   })
   $(".js-tab-back:not(.js-tab-back-all,.js-tab-back-tassel, .js-tab-back-trim)").each(function() {
-    $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letterMaterial][state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letterMaterial][state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
+    $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings["brush"][state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings.brush[state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
   })
   $("img.js-letter").each(function() {
-    $(this).width($(this).height() * (letterSpacings[state.letterMaterial][state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letterMaterial][state.letters[$(this).data("index")]]["img"].height))
+    $(this).width($(this).height() * (letterSpacings.brush[state.letters[$(this).data("index")]]["img"].width / letterSpacings.brush[state.letters[$(this).data("index")]]["img"].height))
   })
   $("img.js-letter").each(function() {
-    $(this).width($(this).height() * (letterSpacings[state.letterMaterial][state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letterMaterial][state.letters[$(this).data("index")]]["img"].height))
+    $(this).width($(this).height() * (letterSpacings.brush[state.letters[$(this).data("index")]]["img"].width / letterSpacings.brush[state.letters[$(this).data("index")]]["img"].height))
   })
   $(".js-bag-color-link").each(function() {
     if ($(this).attr('data-loaded')) {
@@ -408,7 +408,7 @@ function render() {
       $(tabSelector).parents('.js-tab-back').after(tab)
 
       letter[0].onload = function() {
-        letter.css({ marginLeft: letter.width() * letterSpacings[state.letterMaterial][l.toUpperCase()]["left"] + "px", marginRight: letter.width() * letterSpacings[state.letterMaterial][l.toUpperCase()]["right"] + "px" })
+        letter.css({ marginLeft: letter.width() * letterSpacings.brush[l.toUpperCase()]["left"] + "px", marginRight: letter.width() * letterSpacings.brush[l.toUpperCase()]["right"] + "px" })
         $('.js-loading').hide()
         if (state.activeLetter === i) {
           $('.js-preview').append(letter.clone())
