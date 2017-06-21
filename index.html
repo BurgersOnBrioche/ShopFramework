@@ -31,22 +31,25 @@
   <script>
     var state = {
       bag: {
-        color: 'burlap-base',
+        color: 'burlap-base-natural',
         style: 'dani',
-        height: 8.5,
+        height: 9,
         width: 12,
         img: {
-          height: 1475,
-          width: 1801
+          height: 574,
+          width: 847
         }
       },
       letters: 'AZ',
-      letterAspectHeight: 0.376,
+      letterAspectHeight: 0.222,
       materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
+      tassel: 'rickrack-blue',
+      trim: 'rickrack-blue',
       positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      activeLetter: -1,
+      activeSwatchSet: ['rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red'],
+      activeLetter: -3,
       editing: false,
-      editingBag: true,
+      editingBag: false,
       step: "custom-bar",
       navActive: false,
       arrow: {
