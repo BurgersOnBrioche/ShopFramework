@@ -124,6 +124,28 @@ body {
 
 /* Displayed Bag */
 
+.bag-custom-trim {
+  background: url('../img/trims/dani-trim-rickrack-blue.png') no-repeat center;
+  background-size: contain;
+  width: 100%;
+  margin: 0 auto;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bag-custom-tassel {
+  background: url('../img/tassels/dani-tassel-rickrack-blue.png') no-repeat center;
+  background-size: contain;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .bag-custom.dani {
   background: url('../img/bags/dani-black.png') no-repeat center;
   background-size: contain;
@@ -137,7 +159,7 @@ body {
 }
 
 .bag-custom.dani-beach {
-  background: url('../img/bags/dani-burlap-base.png') no-repeat center;
+  background: url('../img/bags/dani-burlap-base-natural.png') no-repeat center;
   background-size: contain;
   width: 100%;
   margin: 0 auto;
@@ -149,6 +171,7 @@ body {
 }
 
 .letters {
+  margin-bottom: 2%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -238,20 +261,23 @@ input[type="text"].letters-input {
 }
 
 .tab-back-all,
-.tab-back-tassel {
+.tab-back-tassel,
+.tab-back-trim {
   color: white;
   font-family: AvenirLT-Heavy;
   padding: 0;
 }
 
 .tab-back-all span,
-.tab-back-tassel span {
+.tab-back-tassel span,
+.tab-back-trim span {
   position: relative;
   top: -20px;
 }
 
 .tab-back-all.active,
-.tab-back-tassel.active {
+.tab-back-tassel.active,
+.tab-back-trim.active {
   color: black;
 }
 
@@ -271,7 +297,8 @@ input[type="text"].letters-input {
 }
 
 .tab-all,
-.tab-tassel {
+.tab-tassel,
+.tab-trim {
   display: flex;
   justify-content: center;
   align-items: center;

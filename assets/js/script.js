@@ -2,6 +2,11 @@ var isSale = true
 var tutorial = true
 var letterSpacings = {}
 var isIE = false
+var swatchSets = {
+  letters: ['black', 'white', 'hotpink', 'lightturquoise', 'silver-metallic', 'gold-metallic'],
+  tassels: ['rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red'],
+  trims: ['rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red']
+}
 $(document).ready(function() {
 
   //check if browser is IE
@@ -99,9 +104,15 @@ $(document).on('click', '.js-swatch-link', function(evt) {
   var color = $(this).data('color')
   if (state.editingBag || state.activeLetter == -1) {
     materials = materials.map(function(m) { return color })
-  } else {
+  } else if (state.activeLetter > -1) {
     materials[state.activeLetter] = $(this).data('color')
+  } else if (state.activeLetter == -2) {
+    state.tassel = color
+  } else if (state.activeLetter == -3) {
+    state.trim = color
   }
+
+
   var newState = {
     materials: materials,
     arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 }
@@ -189,19 +200,38 @@ $(document).on('click', '.js-tab-back', function(evt) {
       editing: true,
       editingBag: false,
       activeLetter: tab.data('index'),
+      activeSwatchSet: swatchSets.letters,
       arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 },
 
     }
-  } else {
+  } else if (tab.data('index') == -1) {
     newState = {
       editing: false,
       editingBag: true,
       activeLetter: tab.data('index'),
+      activeSwatchSet: swatchSets.letters,
       arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 },
-
-
+    }
+  } else if (tab.data('index') == -2) {
+    newState = {
+      editing: false,
+      editingBag: false,
+      activeLetter: tab.data('index'),
+      activeSwatchSet: swatchSets.tassels,
+      arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 },
+    }
+  } else if (tab.data('index') == -3) {
+    newState = {
+      editing: false,
+      editingBag: false,
+      activeLetter: tab.data('index'),
+      activeSwatchSet: swatchSets.trims,
+      arrow: { step1: state.arrow.step1, step2: state.arrow.step2, step3: state.arrow.step3, step4: state.arrow.step4 },
     }
   }
+
+
+
   if (state.arrow.step3 == false) {
     newState.arrow.step3 = true
   }
@@ -266,12 +296,13 @@ function resize() {
   }
 
 
-  $(".js-tab-back:not(.js-tab-back-all, .js-tab-back-tassel)").width($(".js-tab-cnr").height())
+  $(".js-tab-back:not(.js-tab-back-all, .js-tab-back-tassel, .js-tab-back-trim)").width($(".js-tab-cnr").height())
   $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
   $(".js-tab-back-tassel").width($(".js-tab-cnr").height() * 3)
+  $(".js-tab-back-trim").width($(".js-tab-cnr").height() * 3)
   $(".js-tab-back-all").css({ fontSize: ($(".js-tab-back-all").height() * 0.75) + "px" })
   $(".js-tab-back-tassel").css({ fontSize: ($(".js-tab-back-tassel").height() * 0.75) + "px" })
-
+  $(".js-tab-back-trim").css({ fontSize: ($(".js-tab-back-trim").height() * 0.75) + "px" })
   $(".js-letter-label").height($("js-bag-input").height())
   $(".js-bag-input").css({ fontSize: $(".j.js-bag-input").height() + "px" })
   $(".js-letters").height(($(".js-bag-custom").height() * state.letterAspectHeight) + "px").children("js-letter").width(25)
@@ -283,7 +314,7 @@ function resize() {
   $(".js-bag-color-thumb>img").each(function() {
     $(this).width($(this).parent().height() * (state.bag.img.width / state.bag.img.height))
   })
-  $(".js-tab-back:not(.js-tab-back-all,.js-tab-back-tassel)").each(function() {
+  $(".js-tab-back:not(.js-tab-back-all,.js-tab-back-tassel, .js-tab-back-trim)").each(function() {
     $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
   })
   $("img.js-letter").each(function() {
@@ -297,6 +328,9 @@ function resize() {
       $(this).parents('.js-bag-color-thumb').width($(this).width())
     }
   })
+
+  $(".js-bag-custom-trim").width($(".js-bag-custom").width())
+  $(".js-bag-custom-trim").height($(".js-bag-custom").height())
   if (isIE == true) {
     clearInterval(resizeInterval)
     resizeInterval = setInterval(function() {
@@ -335,13 +369,14 @@ function render() {
   if (state.step == "custom-bar") {
     // reset
     $('.js-letters').find('.js-letter').remove()
-    $('.js-tab-cnr').find('.js-tab:not([data-index=-1], [data-index=-2])').parents('.js-tab-back').remove()
+    $('.js-tab-cnr').find('.js-tab:not([data-index=-1], [data-index=-2], [data-index=-3])').parents('.js-tab-back').remove()
     $('.js-tab').html('')
     $('.js-preview').html('')
     $('.js-tab').removeClass('active')
     $('.js-tab-back').removeClass('active')
     $('.js-swatch').removeClass('active')
     $('.js-loading').hide()
+    $('.js-swatches').html('')
 
     // show custom-bar step
     $("#styleViewSection").css({ display: "none" })
@@ -361,6 +396,12 @@ function render() {
     // render bag color
     $('.js-bag-custom').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/bags/" + state.bag.style + "-" + state.bag.color + ".png)" })
 
+    //render tassel
+    $('.js-bag-custom-trim').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/trims/" + state.bag.style + "-trim-" + state.trim + ".png)" })
+
+    //render trim
+    $('.js-bag-custom-tassel').css({ backgroundImage: "url(" + (window.baseUrl || '') + "assets/img/tassels/" + state.bag.style + "-tassel-" + state.tassel + ".png)" })
+
     // render letters in bag and preview and adds tabs
     state.letters.split('').forEach(function(l, i) {
       var letter = Letter({ letter: l, material: state.materials[i], index: i })
@@ -379,8 +420,16 @@ function render() {
       }
     })
 
+
+    state.activeSwatchSet.forEach(function(s, i) {
+      var swatch = Swatch({ material: s })
+      $(".js-swatches").append(swatch)
+    })
+
+
     // render tabs
     $('.js-tab-tassel').html('TASSEL')
+    $('.js-tab-trim').html('TRIM')
     $('.js-tab-all').html('ALL')
 
 
@@ -436,5 +485,16 @@ function Tab(props) {
     '</div>',
   ].join('')
 
+  return $(html)
+}
+
+function Swatch(props) {
+  var alt = props.material
+  var src = [window.baseUrl || '', 'assets/img/material-swatches/swatch-', props.material, '.png'].join('')
+  var html = [
+    '<div class="swatch js-swatch data-color="', props.material, '">',
+    '<img src="', src, '" alt="', alt, '" class="js-swatch-link" data-color="', props.material, '">',
+    '</div>'
+  ].join('')
   return $(html)
 }
