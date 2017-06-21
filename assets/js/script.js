@@ -59,6 +59,7 @@ $(document).ready(function() {
 fetch((window.baseUrl || '') + '/assets/js/letter-spacing.json').then(function(response) {
   response.json().then(function(json) {
     letterSpacings = json
+    console.log(json)
   })
 })
 
