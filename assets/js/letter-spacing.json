@@ -1,212 +1,426 @@
 {
-  "A": {
-    "left": 0,
-    "right": 0,
-    "img": {
-      "height": 251,
-      "width": 256
-    }
+  "leather": {
+    "A": {
+      "left": 0,
+      "right": 0,
+      "img": {
+        "height": 251,
+        "width": 256
+      }
 
-  },
-  "B": {
-    "left": 0.1478,
-    "right": 0.0884,
-    "img": {
-      "height": 251,
-      "width": 189
-    }
+    },
+    "B": {
+      "left": 0.1478,
+      "right": 0.0884,
+      "img": {
+        "height": 251,
+        "width": 189
+      }
 
-  },
-  "C": {
-    "left": 0.062,
-    "right": 0.0101,
-    "img": {
-      "height": 263,
-      "width": 227
+    },
+    "C": {
+      "left": 0.062,
+      "right": 0.0101,
+      "img": {
+        "height": 263,
+        "width": 227
+      }
+    },
+    "D": {
+      "left": 0.1218,
+      "right": 0.062,
+      "img": {
+        "height": 251,
+        "width": 228
+      }
+    },
+    "E": {
+      "left": 0.1602,
+      "right": 0.0919,
+      "img": {
+        "height": 251,
+        "width": 176
+      }
+    },
+    "F": {
+      "left": 0.169,
+      "right": 0.0868,
+      "img": {
+        "height": 251,
+        "width": 166
+      }
+    },
+    "G": {
+      "left": 0.0595,
+      "right": 0.1049,
+      "img": {
+        "height": 263,
+        "width": 237
+      }
+    },
+    "H": {
+      "left": 0.1336,
+      "right": 0.1336,
+      "img": {
+        "height": 251,
+        "width": 209
+      }
+    },
+    "I": {
+      "left": 0.5942,
+      "right": 0.5942,
+      "img": {
+        "height": 251,
+        "width": 54
+      }
+    },
+    "J": {
+      "left": 0.0086,
+      "right": 0.1746,
+      "img": {
+        "height": 257,
+        "width": 154
+      }
+    },
+    "K": {
+      "left": 0.1277,
+      "right": 0,
+      "img": {
+        "height": 251,
+        "width": 220
+      }
+    },
+    "L": {
+      "left": 0.1804,
+      "right": 0.032,
+      "img": {
+        "height": 251,
+        "width": 156
+      }
+    },
+    "M": {
+      "left": 0.1051,
+      "right": 0.1051,
+      "img": {
+        "height": 251,
+        "width": 269
+      }
+    },
+    "N": {
+      "left": 0.1231,
+      "right": 0.1231,
+      "img": {
+        "height": 251,
+        "width": 227
+      }
+    },
+    "O": {
+      "left": 0.0537,
+      "right": 0.0537,
+      "img": {
+        "height": 263,
+        "width": 266
+      }
+    },
+    "P": {
+      "left": 0.1548,
+      "right": 0.0651,
+      "img": {
+        "height": 251,
+        "width": 180
+      }
+    },
+    "Q": {
+      "left": 0.0543,
+      "right": 0.0174,
+      "img": {
+        "height": 257,
+        "width": 282
+      }
+    },
+    "R": {
+      "left": 0.142,
+      "right": 0.0338,
+      "img": {
+        "height": 251,
+        "width": 192
+      }
+    },
+    "S": {
+      "left": 0.0617,
+      "right": 0.1088,
+      "img": {
+        "height": 263,
+        "width": 178
+      }
+    },
+    "T": {
+      "left": 0.0116,
+      "right": 0.0155,
+      "img": {
+        "height": 251,
+        "width": 201
+      }
+    },
+    "U": {
+      "left": 0.1289,
+      "right": 0.1289,
+      "img": {
+        "height": 257,
+        "width": 204
+      }
+    },
+    "V": {
+      "left": 0,
+      "right": 0,
+      "img": {
+        "height": 251,
+        "width": 239
+      }
+    },
+    "W": {
+      "left": 0,
+      "right": 0,
+      "img": {
+        "height": 251,
+        "width": 343
+      }
+    },
+    "X": {
+      "left": 0,
+      "right": 0,
+      "img": {
+        "height": 251,
+        "width": 243
+      }
+    },
+    "Y": {
+      "left": 0,
+      "right": 0,
+      "img": {
+        "height": 251,
+        "width": 234
+      }
+    },
+    "Z": {
+      "left": 0.064,
+      "right": 0.064,
+      "img": {
+        "height": 251,
+        "width": 194
+      }
     }
   },
-  "D": {
-    "left": 0.1218,
-    "right": 0.062,
-    "img": {
-      "height": 251,
-      "width": 228
-    }
-  },
-  "E": {
-    "left": 0.1602,
-    "right": 0.0919,
-    "img": {
-      "height": 251,
-      "width": 176
-    }
-  },
-  "F": {
-    "left": 0.169,
-    "right": 0.0868,
-    "img": {
-      "height": 251,
-      "width": 166
-    }
-  },
-  "G": {
-    "left": 0.0595,
-    "right": 0.1049,
-    "img": {
-      "height": 263,
-      "width": 237
-    }
-  },
-  "H": {
-    "left": 0.1336,
-    "right": 0.1336,
-    "img": {
-      "height": 251,
-      "width": 209
-    }
-  },
-  "I": {
-    "left": 0.5942,
-    "right": 0.5942,
-    "img": {
-      "height": 251,
-      "width": 54
-    }
-  },
-  "J": {
-    "left": 0.0086,
-    "right": 0.1746,
-    "img": {
-      "height": 257,
-      "width": 154
-    }
-  },
-  "K": {
-    "left": 0.1277,
-    "right": 0,
-    "img": {
-      "height": 251,
-      "width": 220
-    }
-  },
-  "L": {
-    "left": 0.1804,
-    "right": 0.032,
-    "img": {
-      "height": 251,
-      "width": 156
-    }
-  },
-  "M": {
-    "left": 0.1051,
-    "right": 0.1051,
-    "img": {
-      "height": 251,
-      "width": 269
-    }
-  },
-  "N": {
-    "left": 0.1231,
-    "right": 0.1231,
-    "img": {
-      "height": 251,
-      "width": 227
-    }
-  },
-  "O": {
-    "left": 0.0537,
-    "right": 0.0537,
-    "img": {
-      "height": 263,
-      "width": 266
-    }
-  },
-  "P": {
-    "left": 0.1548,
-    "right": 0.0651,
-    "img": {
-      "height": 251,
-      "width": 180
-    }
-  },
-  "Q": {
-    "left": 0.0543,
-    "right": 0.0174,
-    "img": {
-      "height": 257,
-      "width": 282
-    }
-  },
-  "R": {
-    "left": 0.142,
-    "right": 0.0338,
-    "img": {
-      "height": 251,
-      "width": 192
-    }
-  },
-  "S": {
-    "left": 0.0617,
-    "right": 0.1088,
-    "img": {
-      "height": 263,
-      "width": 178
-    }
-  },
-  "T": {
-    "left": 0.0116,
-    "right": 0.0155,
-    "img": {
-      "height": 251,
-      "width": 201
-    }
-  },
-  "U": {
-    "left": 0.1289,
-    "right": 0.1289,
-    "img": {
-      "height": 257,
-      "width": 204
-    }
-  },
-  "V": {
-    "left": 0,
-    "right": 0,
-    "img": {
-      "height": 251,
-      "width": 239
-    }
-  },
-  "W": {
-    "left": 0,
-    "right": 0,
-    "img": {
-      "height": 251,
-      "width": 343
-    }
-  },
-  "X": {
-    "left": 0,
-    "right": 0,
-    "img": {
-      "height": 251,
-      "width": 243
-    }
-  },
-  "Y": {
-    "left": 0,
-    "right": 0,
-    "img": {
-      "height": 251,
-      "width": 234
-    }
-  },
-  "Z": {
-    "left": 0.064,
-    "right": 0.064,
-    "img": {
-      "height": 251,
-      "width": 194
+  "brush": {
+    "A": {
+      "left": 0.1322751323,
+      "right": 0.1511715797,
+      "img": {
+        "height": 584,
+        "width": 349
+      }
+
+    },
+    "B": {
+      "left": 0.1491297333,
+      "right": 0.127948093,
+      "img": {
+        "height": 586,
+        "width": 321
+      }
+
+    },
+    "C": {
+      "left": 0.1118935837,
+      "right": 0.0989827856,
+      "img": {
+        "height": 590,
+        "width": 329
+      }
+    },
+    "D": {
+      "left": 0.129984051,
+      "right": 0.1698564593,
+      "img": {
+        "height": 583,
+        "width": 332
+      }
+    },
+    "E": {
+      "left": 0.2058823529,
+      "right": 0.2058823529,
+      "img": {
+        "height": 583,
+        "width": 270
+      }
+    },
+    "F": {
+      "left": 0.215339233,
+      "right": 0.2104228122,
+      "img": {
+        "height": 583,
+        "width": 270
+      }
+    },
+    "G": {
+      "left": 0.1409618574,
+      "right": 0.1608623549,
+      "img": {
+        "height": 586,
+        "width": 309
+      }
+    },
+    "H": {
+      "left": 0.1424607495,
+      "right": 0.1641319237,
+      "img": {
+        "height": 584,
+        "width": 314
+      }
+    },
+    "I": {
+      "left": 0.5111111111,
+      "right": 0.4444444444,
+      "img": {
+        "height": 584,
+        "width": 120
+      }
+    },
+    "J": {
+      "left": 0.1564009662,
+      "right": 0.1793478261,
+      "img": {
+        "height": 586,
+        "width": 287
+      }
+    },
+    "K": {
+      "left": 0.1361502347,
+      "right": 0.1627543036,
+      "img": {
+        "height": 585,
+        "width": 338
+      }
+    },
+    "L": {
+      "left": 0.1899059025,
+      "right": 0.1958939264,
+      "img": {
+        "height": 584,
+        "width": 257
+      }
+    },
+    "M": {
+      "left": 0.1012084592,
+      "right": 0.1495468278,
+      "img": {
+        "height": 584,
+        "width": 437
+      }
+    },
+    "N": {
+      "left": 0.1440677966,
+      "right": 0.1949152542,
+      "img": {
+        "height": 585,
+        "width": 313
+      }
+    },
+    "O": {
+      "left": 0.1087378641,
+      "right": 0.1533980583,
+      "img": {
+        "height": 586,
+        "width": 331
+      }
+    },
+    "P": {
+      "left": 0.1515875726,
+      "right": 0.1512461591,
+      "img": {
+        "height": 584,
+        "width": 323
+      }
+    },
+    "Q": {
+      "left": 0.09701492537,
+      "right": 0.1417910448,
+      "img": {
+        "height": 585,
+        "width": 322
+      }
+    },
+    "R": {
+      "left": 0.1526524474,
+      "right": 0.1599671862,
+      "img": {
+        "height": 583,
+        "width": 322
+      }
+    },
+    "S": {
+      "left": 0.1129322268,
+      "right": 0.1291839557,
+      "img": {
+        "height": 585,
+        "width": 310
+      }
+    },
+    "T": {
+      "left": 0.105754704,
+      "right": 0.1475072105,
+      "img": {
+        "height": 584,
+        "width": 320
+      }
+    },
+    "U": {
+      "left": 0.1494057725,
+      "right": 0.2003395586,
+      "img": {
+        "height": 585,
+        "width": 306
+      }
+    },
+    "V": {
+      "left": 0.09803921569,
+      "right": 0.1334841629,
+      "img": {
+        "height": 583,
+        "width": 350
+      }
+    },
+    "W": {
+      "left": 0.0666494668,
+      "right": 0.08513931889,
+      "img": {
+        "height": 511,
+        "width": 584
+      }
+    },
+    "X": {
+      "left": 0.1029411765,
+      "right": 0.1231617647,
+      "img": {
+        "height": 583,
+        "width": 359
+      }
+    },
+    "Y": {
+      "left": 0.09576982158,
+      "right": 0.1077632045,
+      "img": {
+        "height": 583,
+        "width": 372
+      }
+    },
+    "Z": {
+      "left": 0.110240113,
+      "right": 0.1491525424,
+      "img": {
+        "height": 583,
+        "width": 312
+      }
     }
   }
 }
