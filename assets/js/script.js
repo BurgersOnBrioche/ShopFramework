@@ -95,6 +95,25 @@ $(document).on('input', '.js-bag-input', function(evt) {
 $(document).on('focus', '.js-bag-input', autoselect)
 $(document).on('click', '.js-bag-input', autoselect)
 
+$(document).on('click', '.js-letter-material', function(evt) {
+  var material = $(this).data('material')
+  var materials = []
+    //TODO: Change Letter names with leather
+  if (material == 'brush') {
+    materials = ['brush-white', 'brush-white', 'brush-white']
+  } else {
+    materials = ['white', 'white', 'white']
+  }
+  var newState = {
+    materials: materials,
+    letterMaterial: material,
+    activeSwatchSet: swatchSets.letters[material],
+
+
+  }
+  setState(newState)
+})
+
 // select material swatch for individual letter
 $(document).on('click', '.js-swatch-link', function(evt) {
   var materials = state.materials.concat([])
@@ -247,12 +266,15 @@ function setState(newState) {
 }
 
 function updateCustomInfo() {
-  var productDescription = capitalize(state.bag.style) + " - " + capitalize(state.bag.color) + " Base"
+  var productDescription = capitalize(state.bag.style) + " - " + capitalize(state.bag.color) + " Base" + '/ Tassel ' + state.tassel + ' / Trim ' + state.trim
   if (state.letters.length > 0) {
     productDescription += [' / ', state.letters[0].toUpperCase(), ' - ', materialName(state.materials[0])].join('')
   }
   if (state.letters.length > 1) {
     productDescription += [' / ', state.letters[1].toUpperCase(), ' - ', materialName(state.materials[1])].join('')
+  }
+  if (state.letters.length > 2) {
+    productDescription += [' / ', state.letters[2].toUpperCase(), ' - ', materialName(state.materials[2])].join('')
   }
   $("#custombar-custom-info").val(productDescription);
 }
@@ -284,9 +306,8 @@ function setImageLoaded(sender) {
 var resizeInterval
 
 function resize() {
-  if ($("#customBarSectionMain").width() < (($(".js-swatch").height() * $(".js-swatch").length) + 40)) {
-    $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
-
+  if ($("#customBarSectionMain").width() < (($(".js-swatch").height() * 8) + 20)) {
+    $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / 8) + "px" })
   } else {
     $(".js-swatch>img").css({ maxHeight: ["calc(", $(".js-swatches").height(), "px - 30%)"].join('') })
   }
@@ -311,13 +332,13 @@ function resize() {
     $(this).width($(this).parent().height() * (state.bag.img.width / state.bag.img.height))
   })
   $(".js-tab-back:not(.js-tab-back-all,.js-tab-back-tassel, .js-tab-back-trim)").each(function() {
-    $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings["brush"][state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings.brush[state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
+    $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letterMaterial][state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letterMaterial][state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
   })
   $("img.js-letter").each(function() {
-    $(this).width($(this).height() * (letterSpacings.brush[state.letters[$(this).data("index")]]["img"].width / letterSpacings.brush[state.letters[$(this).data("index")]]["img"].height))
+    $(this).width($(this).height() * (letterSpacings[state.letterMaterial][state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letterMaterial][state.letters[$(this).data("index")]]["img"].height))
   })
   $("img.js-letter").each(function() {
-    $(this).width($(this).height() * (letterSpacings.brush[state.letters[$(this).data("index")]]["img"].width / letterSpacings.brush[state.letters[$(this).data("index")]]["img"].height))
+    $(this).width($(this).height() * (letterSpacings[state.letterMaterial][state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letterMaterial][state.letters[$(this).data("index")]]["img"].height))
   })
   $(".js-bag-color-link").each(function() {
     if ($(this).attr('data-loaded')) {
@@ -408,7 +429,7 @@ function render() {
       $(tabSelector).parents('.js-tab-back').after(tab)
 
       letter[0].onload = function() {
-        letter.css({ marginLeft: letter.width() * letterSpacings.brush[l.toUpperCase()]["left"] + "px", marginRight: letter.width() * letterSpacings.brush[l.toUpperCase()]["right"] + "px" })
+        letter.css({ marginLeft: letter.width() * letterSpacings[state.letterMaterial][l.toUpperCase()]["left"] + "px", marginRight: letter.width() * letterSpacings[state.letterMaterial][l.toUpperCase()]["right"] + "px" })
         $('.js-loading').hide()
         if (state.activeLetter === i) {
           $('.js-preview').append(letter.clone())
@@ -416,12 +437,20 @@ function render() {
       }
     })
 
-
+    // render material selector
+    if (state.activeLetter >= -1) {
+      var materialSelector = MaterialSelector({})
+      $(".js-swatches").append(materialSelector)
+      var activeMaterialSelector = ['.js-letter-material[data-material=', state.letterMaterial, ']'].join('')
+      $(activeMaterialSelector).addClass('active')
+    }
     state.activeSwatchSet.forEach(function(s, i) {
       var swatch = Swatch({ material: s })
-
       $(".js-swatches").append(swatch)
     })
+
+
+
 
 
     // render tabs
@@ -461,8 +490,6 @@ function render() {
       console.log($(activeSwatchSelector).length)
     }
 
-
-
     // set value of inputs
     $('.js-bag-input').val(state.letters)
     $('.js-input').val(state.letters[state.activeLetter])
@@ -501,6 +528,19 @@ function Swatch(props) {
   var html = [
     '<div class="swatch js-swatch" data-color="', props.material, '">',
     '<img src="', src, '" alt="', alt, '" class="js-swatch-link" data-color="', props.material, '">',
+    '</div>'
+  ].join('')
+  return $(html)
+}
+
+function MaterialSelector(props) {
+  var html = ['<div class="letter-material-cnr">',
+    '<div class="letter-material js-letter-material" data-material="leather">',
+    'LEATHER',
+    '</div>',
+    '<div class="letter-material js-letter-material" data-material="brush">',
+    'STENCIL',
+    '</div>',
     '</div>'
   ].join('')
   return $(html)

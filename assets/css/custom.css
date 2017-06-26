@@ -163,7 +163,7 @@ body {
   background-size: contain;
   width: 100%;
   margin: 0 auto;
-  height: 40%;
+  height: 50.5%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,7 +216,7 @@ input[type="text"].letters-input {
   text-align: center;
   text-transform: uppercase;
   text-indent: 0;
-  width: 3em;
+  width: 4em;
   height: 100%;
   margin: 0!important;
 }
@@ -232,7 +232,7 @@ input[type="text"].letters-input {
   flex-direction: row;
   width: 100%;
   border-bottom: 1px solid black;
-  height: 10%;
+  height: 7%;
 }
 
 .tab-back {
@@ -321,7 +321,7 @@ input[type="text"].letters-input {
 /* Swatches */
 
 .swatches {
-  height: 25%;
+  height: 17.5%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -332,7 +332,10 @@ input[type="text"].letters-input {
 }
 
 .swatch {
+  display: flex;
   text-align: center;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
   height: 90%;
   width: auto;
@@ -349,6 +352,33 @@ input[type="text"].letters-input {
 .swatch.active img {
   opacity: 1;
   border: 2px solid black !important;
+}
+
+.letter-material-cnr {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  text-align: center;
+}
+
+.letter-material {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: AvenirLT-Heavy;
+  font-size: 50%;
+  height: 50%;
+  border: 1px solid black;
+  border-radius: 10%;
+  padding: 5%;
+  background: white;
+  color: black;
+}
+
+.letter-material.active {
+  background: black;
+  color: white;
 }
 
 @media only screen and (min-width: 769px) {}
