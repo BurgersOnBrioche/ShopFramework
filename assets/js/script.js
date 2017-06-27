@@ -511,8 +511,11 @@ function render() {
     $('.js-input').val(state.letters[state.activeLetter])
   }
   //update shopify variant
-  renderShopify()
-    // update shopify hidden input
+  if (state.hasVariants == true) {
+    renderShopify()
+  }
+
+  // update shopify hidden input
   updateCustomInfo()
   resize()
 }
