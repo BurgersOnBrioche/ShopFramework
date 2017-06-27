@@ -372,13 +372,13 @@ input[type="text"].letters-input {
   border: 1px solid black;
   border-radius: 10%;
   padding: 5%;
-  background: white;
-  color: black;
+  background: black;
+  color: white;
 }
 
 .letter-material.active {
-  background: black;
-  color: white;
+  background: white;
+  color: black;
 }
 
 @media only screen and (min-width: 769px) {}
