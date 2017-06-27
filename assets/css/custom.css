@@ -260,6 +260,11 @@ input[type="text"].letters-input {
   padding: 0;
 }
 
+.tab-back-trim,
+.tab-back-tassel {
+  background: black;
+}
+
 .tab-back-all span,
 .tab-back-tassel span,
 .tab-back-trim span {
