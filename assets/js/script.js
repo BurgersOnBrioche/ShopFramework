@@ -1,14 +1,14 @@
 var isSale = true
 var tutorial = true
-var letterSpacings = {}
+
 var isIE = false
 var swatchSets = {
   letters: {
     leather: ['black', 'white', 'hotpink', 'lightturquoise', 'silver-metallic', 'gold-metallic'],
     brush: ['brush-black', 'brush-white']
   },
-  tassels: ['rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red'],
-  trims: ['batik-blue', 'rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red']
+  tassels: ['rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red', 'pompom-white'],
+  trims: ['batik-blue', 'rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red', 'pompom-white']
 }
 $(document).ready(function() {
 
@@ -56,12 +56,6 @@ $(document).ready(function() {
     $('#custombarBeach').before(html).remove()
   })
 })
-fetch((window.baseUrl || '') + '/assets/js/letter-spacing.json').then(function(response) {
-  response.json().then(function(json) {
-    letterSpacings = json
-  })
-})
-
 
 var lastState = $.extend({}, state);
 
@@ -100,6 +94,26 @@ $(document).on('input', '.js-bag-input', function(evt) {
 })
 $(document).on('focus', '.js-bag-input', autoselect)
 $(document).on('click', '.js-bag-input', autoselect)
+
+$(document).on('click', '.js-letter-material', function(evt) {
+
+  var material = $(this).data('material')
+  var materials = []
+    //TODO: Change Letter names with leather
+  if (material == 'brush') {
+    materials = ['brush-white', 'brush-white', 'brush-white']
+  } else {
+    materials = ['white', 'white', 'white']
+  }
+  var newState = {
+    materials: materials,
+    letterMaterial: material,
+    activeSwatchSet: swatchSets.letters[material],
+
+
+  }
+  setState(newState)
+})
 
 // select material swatch for individual letter
 $(document).on('click', '.js-swatch-link', function(evt) {
@@ -253,12 +267,15 @@ function setState(newState) {
 }
 
 function updateCustomInfo() {
-  var productDescription = capitalize(state.bag.style) + " - " + capitalize(state.bag.color) + " Base"
+  var productDescription = capitalize(state.bag.style) + " - " + capitalize(state.bag.color) + " Base" + '/ Tassel ' + state.tassel + ' / Trim ' + state.trim
   if (state.letters.length > 0) {
     productDescription += [' / ', state.letters[0].toUpperCase(), ' - ', materialName(state.materials[0])].join('')
   }
   if (state.letters.length > 1) {
     productDescription += [' / ', state.letters[1].toUpperCase(), ' - ', materialName(state.materials[1])].join('')
+  }
+  if (state.letters.length > 2) {
+    productDescription += [' / ', state.letters[2].toUpperCase(), ' - ', materialName(state.materials[2])].join('')
   }
   $("#custombar-custom-info").val(productDescription);
 }
@@ -290,9 +307,8 @@ function setImageLoaded(sender) {
 var resizeInterval
 
 function resize() {
-  if ($("#customBarSectionMain").width() < (($(".js-swatch").height() * $(".js-swatch").length) + 40)) {
-    $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / (($(".js-swatch").length - 1)) / 2) + "px" })
-
+  if ($("#customBarSectionMain").width() < (($(".js-swatch").height() * 8) + 20)) {
+    $(".js-swatch>img").css({ maxHeight: ($(".js-swatches").width() / 8) + "px" })
   } else {
     $(".js-swatch>img").css({ maxHeight: ["calc(", $(".js-swatches").height(), "px - 30%)"].join('') })
   }
@@ -422,12 +438,20 @@ function render() {
       }
     })
 
-
+    // render material selector
+    if (state.activeLetter >= -1) {
+      var materialSelector = MaterialSelector({})
+      $(".js-swatches").append(materialSelector)
+      var activeMaterialSelector = ['.js-letter-material[data-material=', state.letterMaterial, ']'].join('')
+      $(activeMaterialSelector).addClass('active')
+    }
     state.activeSwatchSet.forEach(function(s, i) {
       var swatch = Swatch({ material: s })
-
       $(".js-swatches").append(swatch)
     })
+
+
+
 
 
     // render tabs
@@ -467,16 +491,36 @@ function render() {
       console.log($(activeSwatchSelector).length)
     }
 
-
-
     // set value of inputs
     $('.js-bag-input').val(state.letters)
     $('.js-input').val(state.letters[state.activeLetter])
   }
-  // update shopify hidden input
+  //update shopify variant
+  renderShopify()
+    // update shopify hidden input
   updateCustomInfo()
   resize()
 }
+
+
+function renderShopify() {
+  var combo = 0
+  if (state.letterMaterial == "brush" && state.letters.length > 0) {
+    combo = 0
+  } else if (state.letterMaterial == "leather" && state.letters.length > 0 && state.letters.length < 7) {
+    combo = state.letters.length
+  } else if (state.letters.length == 0) {
+    combo = 7
+  }
+  var selectedOption = productOptions.product["dani-beach"]["variants"][combo]
+  $('.selecter-item.selected').removeClass('selected')
+  $('.selecter-item').eq(combo).addClass('selected')
+  $('.selecter-selected').html(selectedOption.label)
+  $('#product-select-10277746125>option').removeAttr('selected')
+  $('#product-select-10277746125>option').eq(combo).attr('selected', 'selected')
+  $('#product-price').html(['$', selectedOption.price].join(''))
+}
+
 
 function autoselect() {
   $(this).select()
@@ -507,6 +551,19 @@ function Swatch(props) {
   var html = [
     '<div class="swatch js-swatch" data-color="', props.material, '">',
     '<img src="', src, '" alt="', alt, '" class="js-swatch-link" data-color="', props.material, '">',
+    '</div>'
+  ].join('')
+  return $(html)
+}
+
+function MaterialSelector(props) {
+  var html = ['<div class="letter-material-cnr">',
+    '<div class="letter-material js-letter-material" data-material="leather">',
+    'LEATHER',
+    '</div>',
+    '<div class="letter-material js-letter-material" data-material="brush">',
+    'STENCIL',
+    '</div>',
     '</div>'
   ].join('')
   return $(html)

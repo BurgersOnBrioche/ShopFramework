@@ -29,6 +29,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.0/es6-promise.auto.min.js"></script>
   <script>
+    var letterSpacings = {}
+    var productOptions = {}
+    fetch((window.baseUrl || '') + '/assets/js/letter-spacing.json').then(function(response) {
+      response.json().then(function(json) {
+        letterSpacings = json
+      })
+    })
+    fetch((window.baseUrl || '') + '/assets/js/product-options.json').then(function(response) {
+      response.json().then(function(json) {
+        productOptions = json
+      })
+    })
+
     var state = {
       bag: {
         color: 'burlap-base-natural',
@@ -41,11 +54,12 @@
         }
       },
       letters: 'AZ',
-      letterAspectHeight: 0.23,
+      letterAspectHeight: 0.20,
       materials: ['brush-white', 'brush-white', 'brush-white', 'brush-white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
       letterMaterial: 'brush',
       tassel: 'rickrack-blue',
       trim: 'rickrack-blue',
+      selectedCombo: 0,
       positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       activeSwatchSet: ['batik-blue', 'rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red'],
       activeLetter: -3,
