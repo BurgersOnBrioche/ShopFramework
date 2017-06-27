@@ -508,7 +508,7 @@ function renderShopify() {
   if (state.letterMaterial == "brush" && state.letters.length > 0) {
     combo = 0
   } else if (state.letterMaterial == "leather" && state.letters.length > 0 && state.letters.length < 7) {
-    combo = letters.length
+    combo = state.letters.length
   } else if (letters.length == 0) {
     combo = 7
   }
