@@ -451,16 +451,19 @@ function render() {
     })
 
     // render material selector
-    if (state.activeLetter >= -1) {
-      var materialSelector = MaterialSelector({})
-      $(".js-swatches").append(materialSelector)
-      var activeMaterialSelector = ['.js-letter-material[data-material=', state.letterMaterial, ']'].join('')
-      $(activeMaterialSelector).addClass('active')
+    if (state.color == "burlap-base-natural") {
+      if (state.activeLetter >= -1) {
+        var materialSelector = MaterialSelector({})
+        $(".js-swatches").append(materialSelector)
+        var activeMaterialSelector = ['.js-letter-material[data-material=', state.letterMaterial, ']'].join('')
+        $(activeMaterialSelector).addClass('active')
+      }
+      state.activeSwatchSet.forEach(function(s, i) {
+        var swatch = Swatch({ material: s })
+        $(".js-swatches").append(swatch)
+      })
     }
-    state.activeSwatchSet.forEach(function(s, i) {
-      var swatch = Swatch({ material: s })
-      $(".js-swatches").append(swatch)
-    })
+
 
 
 
