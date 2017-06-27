@@ -653,3 +653,7 @@ input[type="text"].letters-input {
 #testLink {
   background: url('../img/material-swatches/swatch-hotpink.png') no-repeat center;
 }
+
+.select {
+  display: none;
+}
