@@ -117,7 +117,7 @@ $(document).on('click', '.js-letter-material', function(evt) {
 
 // select material swatch for individual letter
 $(document).on('click', '.js-swatch-link', function(evt) {
-  optionSelectorPr.selectVariant(39436054541)
+  optionSelectorPr.selectVariant(39694693581)
   var materials = state.materials.concat([])
   var color = $(this).data('color')
   if (state.editingBag || state.activeLetter == -1) {
