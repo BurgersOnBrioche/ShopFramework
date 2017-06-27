@@ -30,12 +30,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.0/es6-promise.auto.min.js"></script>
   <script>
     var letterSpacings = {}
+    var productOptions = {}
     fetch((window.baseUrl || '') + '/assets/js/letter-spacing.json').then(function(response) {
       response.json().then(function(json) {
         letterSpacings = json
-        console.log(json)
       })
     })
+    fetch((window.baseUrl || '') + '/assets/js/product-options.json').then(function(response) {
+      response.json().then(function(json) {
+        productOptions = json
+      })
+    })
+
     var state = {
       bag: {
         color: 'burlap-base-natural',
@@ -53,6 +59,7 @@
       letterMaterial: 'brush',
       tassel: 'rickrack-blue',
       trim: 'rickrack-blue',
+      selectedCombo: 0,
       positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       activeSwatchSet: ['batik-blue', 'rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red'],
       activeLetter: -3,

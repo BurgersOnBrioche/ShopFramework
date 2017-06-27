@@ -96,12 +96,7 @@ $(document).on('focus', '.js-bag-input', autoselect)
 $(document).on('click', '.js-bag-input', autoselect)
 
 $(document).on('click', '.js-letter-material', function(evt) {
-  $('.selecter-item.selected').removeClass('selected')
-  $('.selecter-item').eq(0).addClass('selected')
-  $('.selecter-selected').html('Stencil Letters')
-  $('#product-select-10277746125>option').removeAttr('selected')
-  $('#product-select-10277746125>option').eq(0).attr('selected', 'selected')
-  $('#product-price').html('Hello')
+
   var material = $(this).data('material')
   var materials = []
     //TODO: Change Letter names with leather
@@ -500,10 +495,32 @@ function render() {
     $('.js-bag-input').val(state.letters)
     $('.js-input').val(state.letters[state.activeLetter])
   }
-  // update shopify hidden input
+  //update shopify variant
+  renderShopify()
+    // update shopify hidden input
   updateCustomInfo()
   resize()
 }
+
+
+function renderShopify() {
+  var combo = 0
+  if (state.letterMaterial == "brush" && state.letters.length > 0) {
+    combo = 0
+  } else if (state.letterMaterial == "leather" && state.letters.length > 0 && state.letters.length < 7) {
+    combo = letters.length
+  } else if (letters.length == 0) {
+    combo = 7
+  }
+  var selectedOption = productOptions.product["dani-beach"]["variants"][combo]
+  $('.selecter-item.selected').removeClass('selected')
+  $('.selecter-item').eq(combo).addClass('selected')
+  $('.selecter-selected').html(selectedOption.label)
+  $('#product-select-10277746125>option').removeAttr('selected')
+  $('#product-select-10277746125>option').eq(combo).attr('selected', 'selected')
+  $('#product-price').html(['$', selectedOption.price].join(''))
+}
+
 
 function autoselect() {
   $(this).select()
