@@ -267,6 +267,10 @@ input[type="text"].letters-input {
   top: -20px;
 }
 
+.tab-back-tassel {
+  margin-right: 5%;
+}
+
 .tab-back-all.active,
 .tab-back-tassel.active,
 .tab-back-trim.active {
