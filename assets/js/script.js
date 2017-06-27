@@ -7,8 +7,8 @@ var swatchSets = {
     leather: ['black', 'white', 'hotpink', 'lightturquoise', 'silver-metallic', 'gold-metallic'],
     brush: ['brush-black', 'brush-white']
   },
-  tassels: ['rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red'],
-  trims: ['batik-blue', 'rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red']
+  tassels: ['rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red', 'pompom-white'],
+  trims: ['batik-blue', 'rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red', 'pompom-white']
 }
 $(document).ready(function() {
 
