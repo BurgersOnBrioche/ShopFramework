@@ -288,6 +288,18 @@ function updateCustomInfo() {
   if (state.letters.length > 2) {
     productDescription += [' / ', state.letters[2].toUpperCase(), ' - ', materialName(state.materials[2])].join('')
   }
+  if (state.letters.length > 3) {
+    productDescription += [' / ', state.letters[3].toUpperCase(), ' - ', materialName(state.materials[2])].join('')
+  }
+  if (state.letters.length > 4) {
+    productDescription += [' / ', state.letters[4].toUpperCase(), ' - ', materialName(state.materials[2])].join('')
+  }
+  if (state.letters.length > 5) {
+    productDescription += [' / ', state.letters[5].toUpperCase(), ' - ', materialName(state.materials[2])].join('')
+  }
+  if (state.letters.length > 6) {
+    productDescription += [' / ', state.letters[6].toUpperCase(), ' - ', materialName(state.materials[2])].join('')
+  }
   $("#custombar-custom-info").val(productDescription);
 }
 
