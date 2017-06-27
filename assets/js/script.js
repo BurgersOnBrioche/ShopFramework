@@ -98,18 +98,25 @@ $(document).on('click', '.js-bag-input', autoselect)
 $(document).on('click', '.js-letter-material', function(evt) {
 
   var material = $(this).data('material')
+  var maxlen = productOptions.product["dani-beach"]["letterMaterials"][material]["maxlength"]
   var materials = []
+  var letters = state.letters.substring(0, maxlen)
     //TODO: Change Letter names with leather
   if (material == 'brush') {
-    state.letters.forEach(function() {
-      materials.append('brush-white')
-    })
+    $('.js-bag-input').attr('maxlength', maxlen)
+    for (i = 0; i < maxlen; i++) {
+      materials.push('brush-white')
+    }
   } else {
-    state.letters.forEach(function() {
-      materials.append('white')
-    })
+    $('.js-bag-input').attr('maxlength', maxlen)
+    for (i = 0; i < maxlen; i++) {
+      materials.push('white')
+    }
+
+
   }
   var newState = {
+    letters: letters,
     materials: materials,
     letterMaterial: material,
     activeSwatchSet: swatchSets.letters[material],
@@ -426,6 +433,7 @@ function render() {
 
     // render letters in bag and preview and adds tabs
     state.letters.split('').forEach(function(l, i) {
+
       var letter = Letter({ letter: l, material: state.materials[i], index: i })
       var tab = Tab({ letter: l, material: state.materials[i], index: i })
       $('.js-loading').show()
@@ -516,18 +524,9 @@ function renderShopify() {
   } else if (state.letters.length == 0) {
     combo = 7
   }
-
-
   var selectedOption = productOptions.product["dani-beach"]["variants"][combo]["sku"]
   optionSelectorPr.selectVariant(selectedOption)
-    /*
-    $('.selecter-item.selected').removeClass('selected')
-    $('.selecter-item').eq(combo).addClass('selected')
-    $('.selecter-selected').html(selectedOption.label)
-    $('#product-select-10277746125>option').removeAttr('selected')
-    $('#product-select-10277746125>option').eq(combo).attr('selected', 'selected')
-    $('#product-price').html(['$', selectedOption.price].join(''))
-    */
+
 }
 
 

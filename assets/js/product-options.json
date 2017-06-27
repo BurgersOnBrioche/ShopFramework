@@ -1,6 +1,14 @@
 {
   "product": {
     "dani-beach": {
+      "letterMaterials": {
+        "brush": {
+          "maxlength": 5
+        },
+        "leather": {
+          "maxlength": 4
+        }
+      },
       "variants": [{
           "sku": 39392771021,
           "label": "Stenciled Letters",
