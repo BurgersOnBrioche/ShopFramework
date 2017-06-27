@@ -96,7 +96,7 @@ $(document).on('focus', '.js-bag-input', autoselect)
 $(document).on('click', '.js-bag-input', autoselect)
 
 $(document).on('click', '.js-letter-material', function(evt) {
-  $('.selecter-item selected').removeClass('selected')
+  $('.selecter-item.selected').removeClass('selected')
   $('.selecter-item').eq(0).addClass('selected')
   var material = $(this).data('material')
   var materials = []
