@@ -56,13 +56,6 @@ a {
   font-style: normal;
 }
 
-@font-face {
-  font-family: AvenirNext-DemiBold;
-  src: url('../fonts/avenirnext-demibold.eot?#iefix') format('embedded-opentype'), url('../fonts/avenirnext-demibold.woff') format('woff'), url('../fonts/avenirnext-demibold.ttf') format('truetype'), url('../fonts/avenirnext-demibold.svg#AvenirNextDemiBold') format('svg');
-  font-weight: bold;
-  font-style: normal;
-}
-
 html,
 body {
   height: 100%;
