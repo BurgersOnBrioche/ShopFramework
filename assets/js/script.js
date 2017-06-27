@@ -101,9 +101,13 @@ $(document).on('click', '.js-letter-material', function(evt) {
   var materials = []
     //TODO: Change Letter names with leather
   if (material == 'brush') {
-    materials = ['brush-white', 'brush-white', 'brush-white']
+    state.letters.forEach(function() {
+      materials.append('brush-white')
+    })
   } else {
-    materials = ['white', 'white', 'white']
+    state.letters.forEach(function() {
+      materials.append('white')
+    })
   }
   var newState = {
     materials: materials,
