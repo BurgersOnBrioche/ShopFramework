@@ -56,13 +56,6 @@ a {
   font-style: normal;
 }
 
-@font-face {
-  font-family: AvenirNext-DemiBold;
-  src: url('../fonts/avenirnext-demibold.eot?#iefix') format('embedded-opentype'), url('../fonts/avenirnext-demibold.woff') format('woff'), url('../fonts/avenirnext-demibold.ttf') format('truetype'), url('../fonts/avenirnext-demibold.svg#AvenirNextDemiBold') format('svg');
-  font-weight: bold;
-  font-style: normal;
-}
-
 html,
 body {
   height: 100%;
@@ -163,7 +156,7 @@ body {
   background-size: contain;
   width: 100%;
   margin: 0 auto;
-  height: 50.5%;
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -265,6 +258,11 @@ input[type="text"].letters-input {
   color: white;
   font-family: AvenirLT-Heavy;
   padding: 0;
+}
+
+.tab-back-trim,
+.tab-back-tassel {
+  background: black;
 }
 
 .tab-back-all span,
@@ -654,4 +652,8 @@ input[type="text"].letters-input {
 
 #testLink {
   background: url('../img/material-swatches/swatch-hotpink.png') no-repeat center;
+}
+
+.select {
+  display: none;
 }

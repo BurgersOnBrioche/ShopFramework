@@ -98,14 +98,25 @@ $(document).on('click', '.js-bag-input', autoselect)
 $(document).on('click', '.js-letter-material', function(evt) {
 
   var material = $(this).data('material')
+  var maxlen = productOptions.product["dani-beach"]["letterMaterials"][material]["maxlength"]
   var materials = []
+  var letters = state.letters.substring(0, maxlen)
     //TODO: Change Letter names with leather
   if (material == 'brush') {
-    materials = ['brush-white', 'brush-white', 'brush-white']
+    $('.js-bag-input').attr('maxlength', maxlen)
+    for (i = 0; i < maxlen; i++) {
+      materials.push('brush-white')
+    }
   } else {
-    materials = ['white', 'white', 'white']
+    $('.js-bag-input').attr('maxlength', maxlen)
+    for (i = 0; i < maxlen; i++) {
+      materials.push('white')
+    }
+
+
   }
   var newState = {
+    letters: letters,
     materials: materials,
     letterMaterial: material,
     activeSwatchSet: swatchSets.letters[material],
@@ -277,6 +288,18 @@ function updateCustomInfo() {
   if (state.letters.length > 2) {
     productDescription += [' / ', state.letters[2].toUpperCase(), ' - ', materialName(state.materials[2])].join('')
   }
+  if (state.letters.length > 3) {
+    productDescription += [' / ', state.letters[3].toUpperCase(), ' - ', materialName(state.materials[2])].join('')
+  }
+  if (state.letters.length > 4) {
+    productDescription += [' / ', state.letters[4].toUpperCase(), ' - ', materialName(state.materials[2])].join('')
+  }
+  if (state.letters.length > 5) {
+    productDescription += [' / ', state.letters[5].toUpperCase(), ' - ', materialName(state.materials[2])].join('')
+  }
+  if (state.letters.length > 6) {
+    productDescription += [' / ', state.letters[6].toUpperCase(), ' - ', materialName(state.materials[2])].join('')
+  }
   $("#custombar-custom-info").val(productDescription);
 }
 
@@ -312,7 +335,11 @@ function resize() {
   } else {
     $(".js-swatch>img").css({ maxHeight: ["calc(", $(".js-swatches").height(), "px - 30%)"].join('') })
   }
-
+  $(".js-bag-custom").height($(".js-bag-custom").width() * (state.bag.img.height / state.bag.img.width))
+  $(".js-bag-custom-trim").width($(".js-bag-custom").width())
+  $(".js-bag-custom-trim").height($(".js-bag-custom").height())
+  $(".js-bag-custom-tassel").width($(".js-bag-custom").width())
+  $(".js-bag-custom-tassel").height($(".js-bag-custom").height())
 
   $(".js-tab-back:not(.js-tab-back-all, .js-tab-back-tassel, .js-tab-back-trim)").width($(".js-tab-cnr").height())
   $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
@@ -335,6 +362,7 @@ function resize() {
   $(".js-tab-back:not(.js-tab-back-all,.js-tab-back-tassel, .js-tab-back-trim)").each(function() {
     $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letterMaterial][state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letterMaterial][state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
   })
+
   $("img.js-letter").each(function() {
     $(this).width($(this).height() * (letterSpacings[state.letterMaterial][state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letterMaterial][state.letters[$(this).data("index")]]["img"].height))
   })
@@ -346,9 +374,9 @@ function resize() {
       $(this).parents('.js-bag-color-thumb').width($(this).width())
     }
   })
+  console.log($(".js-bag-custom").width())
 
-  $(".js-bag-custom-trim").width($(".js-bag-custom").width())
-  $(".js-bag-custom-trim").height($(".js-bag-custom").height())
+
   if (isIE == true) {
     clearInterval(resizeInterval)
     resizeInterval = setInterval(function() {
@@ -422,6 +450,7 @@ function render() {
 
     // render letters in bag and preview and adds tabs
     state.letters.split('').forEach(function(l, i) {
+
       var letter = Letter({ letter: l, material: state.materials[i], index: i })
       var tab = Tab({ letter: l, material: state.materials[i], index: i })
       $('.js-loading').show()
@@ -439,17 +468,19 @@ function render() {
     })
 
     // render material selector
-    if (state.activeLetter >= -1) {
-      var materialSelector = MaterialSelector({})
-      $(".js-swatches").append(materialSelector)
-      var activeMaterialSelector = ['.js-letter-material[data-material=', state.letterMaterial, ']'].join('')
-      $(activeMaterialSelector).addClass('active')
+    if (state.bag.color == "burlap-base-natural") {
+      if (state.activeLetter >= -1) {
+        var materialSelector = MaterialSelector({})
+        $(".js-swatches").append(materialSelector)
+        var activeMaterialSelector = ['.js-letter-material[data-material=', state.letterMaterial, ']'].join('')
+        $(activeMaterialSelector).addClass('active')
+      }
     }
+
     state.activeSwatchSet.forEach(function(s, i) {
       var swatch = Swatch({ material: s })
       $(".js-swatches").append(swatch)
     })
-
 
 
 
@@ -496,8 +527,11 @@ function render() {
     $('.js-input').val(state.letters[state.activeLetter])
   }
   //update shopify variant
-  renderShopify()
-    // update shopify hidden input
+  if (state.hasVariants == true) {
+    renderShopify()
+  }
+
+  // update shopify hidden input
   updateCustomInfo()
   resize()
 }
@@ -512,13 +546,9 @@ function renderShopify() {
   } else if (state.letters.length == 0) {
     combo = 7
   }
-  var selectedOption = productOptions.product["dani-beach"]["variants"][combo]
-  $('.selecter-item.selected').removeClass('selected')
-  $('.selecter-item').eq(combo).addClass('selected')
-  $('.selecter-selected').html(selectedOption.label)
-  $('#product-select-10277746125>option').removeAttr('selected')
-  $('#product-select-10277746125>option').eq(combo).attr('selected', 'selected')
-  $('#product-price').html(['$', selectedOption.price].join(''))
+  var selectedOption = productOptions.product["dani-beach"]["variants"][combo]["sku"]
+  optionSelectorPr.selectVariant(selectedOption)
+
 }
 
 
@@ -567,4 +597,18 @@ function MaterialSelector(props) {
     '</div>'
   ].join('')
   return $(html)
+}
+
+function downloadImage() {
+  var node = document.getElementById('customBag');
+
+  domtoimage.toPng(node)
+    .then(function(dataUrl) {
+      var img = new Image();
+      img.src = dataUrl;
+      document.body.appendChild(img);
+    })
+    .catch(function(error) {
+      console.error('oops, something went wrong!', error);
+    });
 }
