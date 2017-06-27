@@ -335,7 +335,11 @@ function resize() {
   } else {
     $(".js-swatch>img").css({ maxHeight: ["calc(", $(".js-swatches").height(), "px - 30%)"].join('') })
   }
-
+  $(".js-bag-custom").height($(".js-bag-custom").width() * (state.bag.img.height / state.bag.img.width))
+  $(".js-bag-custom-trim").width($(".js-bag-custom").width())
+  $(".js-bag-custom-trim").height($(".js-bag-custom").height())
+  $(".js-bag-custom-tassel").width($(".js-bag-custom").width())
+  $(".js-bag-custom-tassel").height($(".js-bag-custom").height())
 
   $(".js-tab-back:not(.js-tab-back-all, .js-tab-back-tassel, .js-tab-back-trim)").width($(".js-tab-cnr").height())
   $(".js-tab-back-all").width($(".js-tab-cnr").height() * 2)
@@ -358,6 +362,7 @@ function resize() {
   $(".js-tab-back:not(.js-tab-back-all,.js-tab-back-tassel, .js-tab-back-trim)").each(function() {
     $(this).children(".js-tab").width($(this).children(".js-tab").height() * (letterSpacings[state.letterMaterial][state.letters[$(this).children(".js-tab").data("index")]]["img"].width / letterSpacings[state.letterMaterial][state.letters[$(this).children(".js-tab").data("index")]]["img"].height))
   })
+
   $("img.js-letter").each(function() {
     $(this).width($(this).height() * (letterSpacings[state.letterMaterial][state.letters[$(this).data("index")]]["img"].width / letterSpacings[state.letterMaterial][state.letters[$(this).data("index")]]["img"].height))
   })
@@ -369,9 +374,9 @@ function resize() {
       $(this).parents('.js-bag-color-thumb').width($(this).width())
     }
   })
+  console.log($(".js-bag-custom").width())
 
-  $(".js-bag-custom-trim").width($(".js-bag-custom").width())
-  $(".js-bag-custom-trim").height($(".js-bag-custom").height())
+
   if (isIE == true) {
     clearInterval(resizeInterval)
     resizeInterval = setInterval(function() {
