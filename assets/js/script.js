@@ -516,8 +516,8 @@ function renderShopify() {
   $('.selecter-item.selected').removeClass('selected')
   $('.selecter-item').eq(combo).addClass('selected')
   $('.selecter-selected').html(selectedOption.label)
-  $('#product-select-10277746125>option').removeAttr('selected')
-  $('#product-select-10277746125>option').eq(combo).attr('selected', 'selected')
+    //$('#product-select-10277746125>option').removeAttr('selected')
+    //$('#product-select-10277746125>option').eq(combo).attr('selected', 'selected')
   $('#product-price').html(['$', selectedOption.price].join(''))
 }
 
