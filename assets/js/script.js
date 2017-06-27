@@ -509,7 +509,7 @@ function renderShopify() {
     combo = 0
   } else if (state.letterMaterial == "leather" && state.letters.length > 0 && state.letters.length < 7) {
     combo = state.letters.length
-  } else if (letters.length == 0) {
+  } else if (state.letters.length == 0) {
     combo = 7
   }
   var selectedOption = productOptions.product["dani-beach"]["variants"][combo]
