@@ -451,15 +451,13 @@ function render() {
     })
 
     // render material selector
-    if (state.color == "burlap-base-natural") {
-
+    if (state.bag.color == "burlap-base-natural") {
       if (state.activeLetter >= -1) {
         var materialSelector = MaterialSelector({})
         $(".js-swatches").append(materialSelector)
         var activeMaterialSelector = ['.js-letter-material[data-material=', state.letterMaterial, ']'].join('')
         $(activeMaterialSelector).addClass('active')
       }
-
     }
 
     state.activeSwatchSet.forEach(function(s, i) {
