@@ -117,7 +117,6 @@ $(document).on('click', '.js-letter-material', function(evt) {
 
 // select material swatch for individual letter
 $(document).on('click', '.js-swatch-link', function(evt) {
-  optionSelectorPr.selectVariant(39694693581)
   var materials = state.materials.concat([])
   var color = $(this).data('color')
   if (state.editingBag || state.activeLetter == -1) {
@@ -513,13 +512,18 @@ function renderShopify() {
   } else if (state.letters.length == 0) {
     combo = 7
   }
-  var selectedOption = productOptions.product["dani-beach"]["variants"][combo]
-  $('.selecter-item.selected').removeClass('selected')
-  $('.selecter-item').eq(combo).addClass('selected')
-  $('.selecter-selected').html(selectedOption.label)
-    //$('#product-select-10277746125>option').removeAttr('selected')
-    //$('#product-select-10277746125>option').eq(combo).attr('selected', 'selected')
-  $('#product-price').html(['$', selectedOption.price].join(''))
+
+
+  var selectedOption = productOptions.product["dani-beach"]["variants"][combo]["sku"]
+  optionSelectorPr.selectVariant(selectedOption)
+    /*
+    $('.selecter-item.selected').removeClass('selected')
+    $('.selecter-item').eq(combo).addClass('selected')
+    $('.selecter-selected').html(selectedOption.label)
+    $('#product-select-10277746125>option').removeAttr('selected')
+    $('#product-select-10277746125>option').eq(combo).attr('selected', 'selected')
+    $('#product-price').html(['$', selectedOption.price].join(''))
+    */
 }
 
 
