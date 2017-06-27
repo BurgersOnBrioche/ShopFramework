@@ -101,7 +101,7 @@ $(document).on('click', '.js-letter-material', function(evt) {
   $('.selecter-selected').html('Stencil Letters')
   $('#product-select-10277746125>option').removeAttr('selected')
   $('#product-select-10277746125>option').eq(0).attr('selected', 'selected')
-  $('.product-description>.product-price').html('Hello')
+  $('product-price').html('Hello')
   var material = $(this).data('material')
   var materials = []
     //TODO: Change Letter names with leather
