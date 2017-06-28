@@ -289,6 +289,7 @@ input[type="text"].letters-input {
 .tab-back-trim.active,
 .tab-back-tassel.active {
   background: #F0F0F0;
+  border-bottom: 1px solid #F0F0F0;
 }
 
 .tab {
