@@ -534,6 +534,11 @@ function render() {
   // update shopify hidden input
   updateCustomInfo()
   resize()
+
+  //color change for tabs
+  if (state.activeLetter > -1) {
+    $(".swatches").css({ background: "#F0F0F0" })
+  }
 }
 
 
