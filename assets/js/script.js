@@ -538,7 +538,7 @@ function render() {
   //color change for tabs
   if (state.activeLetter < -1) {
     $(".swatches").css({ background: "#F0F0F0" })
-    alert("")
+
   }
 }
 
