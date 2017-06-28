@@ -359,6 +359,8 @@ input[type="text"].letters-input {
 
 .letter-material-cnr {
   display: flex;
+  position: relative;
+  left: 3%;
   flex-direction: column;
   height: 80%;
   text-align: center;
