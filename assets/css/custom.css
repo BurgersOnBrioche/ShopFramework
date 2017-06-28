@@ -264,6 +264,11 @@ input[type="text"].letters-input {
   background: black;
 }
 
+.tab-back-trim.active,
+.tab-back-tassel.active {
+  background: #DFDFDF;
+}
+
 .tab-back-all span,
 .tab-back-tassel span,
 .tab-back-trim span {
