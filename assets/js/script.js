@@ -1,6 +1,6 @@
 var isSale = true
 var tutorial = true
-
+var isDefaultText = true
 var isIE = false
 var swatchSets = {
   letters: {
@@ -11,7 +11,6 @@ var swatchSets = {
   trims: ['batik-blue', 'rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red', 'pompom-white']
 }
 $(document).ready(function() {
-
   //check if browser is IE
   var ua = window.navigator.userAgent;
   var trident = ua.indexOf("Trident/")
@@ -75,6 +74,7 @@ $(document).on('click', '.js-bag', function(evt) {
 
 // input to change both letters
 $(document).on('input', '.js-bag-input', function(evt) {
+  isDefaultText = false
   if ($(this).val().match(/[^A-z]/)) { return $(this).val(state.letters) }
   var newState = {
     letters: $(this).val().toUpperCase(),
@@ -96,7 +96,6 @@ $(document).on('focus', '.js-bag-input', autoselect)
 $(document).on('click', '.js-bag-input', autoselect)
 
 $(document).on('click', '.js-letter-material', function(evt) {
-
   var material = $(this).data('material')
   var maxlen = productOptions.product["dani-beach"]["letterMaterials"][material]["maxlength"]
   var materials = []
@@ -104,24 +103,26 @@ $(document).on('click', '.js-letter-material', function(evt) {
     //TODO: Change Letter names with leather
   if (material == 'brush') {
     $('.js-bag-input').attr('maxlength', maxlen)
+    if (isDefaultText == true) {
+      state.letters = "HELLO"
+    }
     for (i = 0; i < maxlen; i++) {
       materials.push('brush-white')
     }
   } else {
+    if (isDefaultText == true) {
+      state.letters = "COOL"
+    }
     $('.js-bag-input').attr('maxlength', maxlen)
     for (i = 0; i < maxlen; i++) {
       materials.push('white')
     }
-
-
   }
   var newState = {
     letters: letters,
     materials: materials,
     letterMaterial: material,
     activeSwatchSet: swatchSets.letters[material],
-
-
   }
   setState(newState)
 })
@@ -139,7 +140,6 @@ $(document).on('click', '.js-swatch-link', function(evt) {
   } else if (state.activeLetter == -3) {
     state.trim = color
   }
-
 
   var newState = {
     materials: materials,
@@ -504,9 +504,7 @@ function render() {
     const activeTabSelector = ['.js-tab[data-index=', state.activeLetter, ']'].join('')
     $(activeTabSelector).addClass('active').parents('.js-tab-back').addClass('active')
 
-
     // TODO: render swatch background 
-
 
 
     // render active swatch
