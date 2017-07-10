@@ -162,6 +162,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  max-height: 45vh;
 }
 
 .letters {
@@ -213,6 +214,7 @@ input[type="text"].letters-input {
   width: 4em;
   height: 100%;
   margin: 0!important;
+  max-height: 5vh;
 }
 
 
@@ -227,6 +229,7 @@ input[type="text"].letters-input {
   width: 100%;
   border-bottom: 1px solid black;
   height: 7%;
+  max-height: 5vh;
 }
 
 .tab-back {
@@ -334,6 +337,7 @@ input[type="text"].letters-input {
   border: 1px solid black;
   border-width: 0 1px 1px 1px;
   background: lightgray;
+  max-height: 5vh;
 }
 
 .swatch {
