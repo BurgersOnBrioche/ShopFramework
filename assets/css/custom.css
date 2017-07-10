@@ -66,6 +66,8 @@ body {
   justify-content: center;
   flex-direction: row;
   margin-top: 1%;
+  height: 10%;
+  max-height: 2vh;
 }
 
 #customBarSectionMain {
@@ -73,6 +75,7 @@ body {
   height: 65vh;
   width: 100%;
   min-width: 291px;
+  overflow: scroll;
 }
 
 #styleViewSection {
@@ -160,6 +163,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  max-height: 43vh;
 }
 
 .letters {
@@ -211,6 +215,7 @@ input[type="text"].letters-input {
   width: 4em;
   height: 100%;
   margin: 0!important;
+  max-height: 5vh;
 }
 
 
@@ -225,6 +230,7 @@ input[type="text"].letters-input {
   width: 100%;
   border-bottom: 1px solid black;
   height: 7%;
+  max-height: 5vh;
 }
 
 .tab-back {
@@ -286,6 +292,12 @@ input[type="text"].letters-input {
   border-right: 1px solid black;
 }
 
+.tab-back-trim.active,
+.tab-back-tassel.active {
+  background: #F0F0F0;
+  border-bottom: 1px solid #F0F0F0;
+}
+
 .tab {
   height: 70%;
   width: auto;
@@ -326,6 +338,7 @@ input[type="text"].letters-input {
   border: 1px solid black;
   border-width: 0 1px 1px 1px;
   background: lightgray;
+  max-height: 8vh;
 }
 
 .swatch {
@@ -353,9 +366,10 @@ input[type="text"].letters-input {
 
 .letter-material-cnr {
   display: flex;
+  position: relative;
+  left: 0px;
   flex-direction: column;
   height: 80%;
-  text-align: center;
 }
 
 .letter-material {
