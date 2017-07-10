@@ -215,6 +215,7 @@ $(document).on('click', '.js-letter', function(evt) {
       editing: true,
       editingBag: false,
       activeLetter: $(this).data('index'),
+      activeSwatchSet: swatchSets.letters[state.letterMaterial]
     })
   }
 })
