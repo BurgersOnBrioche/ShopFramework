@@ -67,6 +67,7 @@ body {
   flex-direction: row;
   margin-top: 1%;
   height: 10%;
+  max-height: 2vh;
 }
 
 #customBarSectionMain {
@@ -162,7 +163,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  max-height: 45vh;
+  max-height: 43vh;
 }
 
 .letters {
