@@ -66,11 +66,12 @@ body {
   justify-content: center;
   flex-direction: row;
   margin-top: 1%;
+  height: 10vh;
 }
 
 #customBarSectionMain {
   display: none;
-  height: 65vh;
+  height: 55vh;
   width: 100%;
   min-width: 291px;
   overflow: scroll;
