@@ -74,7 +74,6 @@ $(document).on('click', '.js-bag', function(evt) {
 
 // input to change both letters
 $(document).on('input', '.js-bag-input', function(evt) {
-  isDefaultText = false
   if ($(this).val().match(/[^A-z]/)) { return $(this).val(state.letters) }
   var newState = {
     letters: $(this).val().toUpperCase(),
@@ -91,6 +90,7 @@ $(document).on('input', '.js-bag-input', function(evt) {
   }
 
   setState(newState)
+  isDefaultText = false
 })
 $(document).on('focus', '.js-bag-input', autoselect)
 $(document).on('click', '.js-bag-input', autoselect)
