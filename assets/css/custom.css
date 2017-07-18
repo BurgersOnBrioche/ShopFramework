@@ -186,6 +186,10 @@ body {
   width: auto;
 }
 
+.letters.liz {
+  align-items: flex-start;
+}
+
 .letters img {
   height: 100%;
   width: auto;
