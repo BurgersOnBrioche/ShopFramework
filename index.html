@@ -34,6 +34,11 @@
         letterSpacings = json
       })
     })
+    fetch((window.baseUrl || '') + '/assets/js/product-options.json').then(function(response) {
+      response.json().then(function(json) {
+        productOptions = json
+      })
+    })
 
     var state = {
       bag: {

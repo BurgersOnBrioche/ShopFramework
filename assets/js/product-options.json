@@ -93,6 +93,16 @@
           "price": 85.00
         }
       ]
+    },
+    "dani": {
+      "letterMaterials": {
+        "leather": {
+          "maxlength": 2
+        }
+      },
+      "variants": [
+
+      ]
     }
   }
 }

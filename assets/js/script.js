@@ -104,7 +104,7 @@ $(document).on('click', '.js-bag-input', autoselect)
 
 $(document).on('click', '.js-letter-material', function(evt) {
   var material = $(this).data('material')
-  var maxlen = productOptions.product[state.bag.altName]["letterMaterials"][material]["maxlength"]
+  var maxlen = productOptions.product["dani-beach"]["letterMaterials"][material]["maxlength"]
   var materials = []
   var letters = state.letters.substring(0, maxlen)
     //TODO: Change Letter names with leather
@@ -182,6 +182,7 @@ $(document).on('click', '.js-bag-color-link', function(evt) {
     bag: {
       color: $(this).data('color'),
       style: state.bag.style,
+      altName: state.bag.altName,
       height: state.bag.height,
       width: state.bag.width,
       img: {
@@ -286,14 +287,14 @@ function setState(newState) {
 }
 
 function updateCustomInfo() {
-  var productDescription = ""
+  var productDescription = [capitalize(state.bag.style), " - ", capitalize(state.bag.color), " Base /"].join('')
 
   if (state.bag.altName == "dani-beach") {
-    productDescription += [capitalize(state.bag.style), '- ', capitalize(state.bag.color), ' Base', '/ Tassel ', state.tassel, ' / Trim ', state.trim].join('')
-  }
+    productDescription += [' Tassel ', state.tassel, ' / Trim ', state.trim, ' / ', ].join('')
 
+  }
   if (state.letters.length > 0) {
-    productDescription += [' / ', state.letters[0].toUpperCase(), ' - ', materialName(state.materials[0])].join('')
+    productDescription += [state.letters[0].toUpperCase(), ' - ', materialName(state.materials[0])].join('')
   }
   if (state.letters.length > 1) {
     productDescription += [' / ', state.letters[1].toUpperCase(), ' - ', materialName(state.materials[1])].join('')
@@ -568,7 +569,15 @@ function renderShopify() {
     combo = 7
   }
   var selectedOption = productOptions.product[state.bag.altName]["variants"][combo]["sku"]
-  optionSelectorPr.selectVariant(selectedOption)
+
+
+  try {
+    optionSelectorPr.selectVariant(selectedOption)
+
+  } catch (e) {
+
+  }
+
 
 }
 
