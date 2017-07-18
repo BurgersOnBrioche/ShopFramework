@@ -349,8 +349,9 @@ function resize() {
   } else {
     $(".js-swatch>img").css({ maxHeight: ["calc(", $(".js-swatches").height(), "px - 30%)"].join('') })
   }
+  $(".js-bag-custom").height($(".js-bag-custom").width() * (state.bag.img.height / state.bag.img.width))
+
   if (state.bag.color == "burlap-base-natural") {
-    $(".js-bag-custom").height($(".js-bag-custom").width() * (state.bag.img.height / state.bag.img.width))
     $(".js-bag-custom-trim").width($(".js-bag-custom").width())
     $(".js-bag-custom-trim").height($(".js-bag-custom").height())
     $(".js-bag-custom-tassel").width($(".js-bag-custom").width())

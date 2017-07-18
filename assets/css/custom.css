@@ -147,23 +147,23 @@ body {
   background-size: contain;
   width: 100%;
   margin: 0 auto;
-  height: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  max-height: 43vh;
 }
 
 .bag-custom.liz {
   background: url('../img/bags/liz-python-silver.png') no-repeat center;
   background-size: contain;
-  width: 100%;
   margin: 0 auto;
-  height: 40%;
+  width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   position: relative;
+  max-height: 43vh;
 }
 
 .bag-custom.dani-beach {
