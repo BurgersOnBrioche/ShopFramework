@@ -161,7 +161,7 @@ body {
   margin: 0 auto;
   height: 40%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: relative;
 }
@@ -187,7 +187,8 @@ body {
 }
 
 .letters.liz {
-  align-items: flex-start;
+  position: relative;
+  top: 5%;
 }
 
 .letters img {

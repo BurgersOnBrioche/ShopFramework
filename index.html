@@ -20,14 +20,12 @@
 
   <!--customBarHeaderMain-->
   <div style="height: 90%; position: relative;">
-    <div id="custombarBeach"></div>
+    <div id="custombarLiz"></div>
   </div>
   <input type="text" placeholder="debugging input for shopify connection" id="custombar-custom-info" style="width: 100%; position: fixed; bottom: 0; border: 0; background-color: transparent; " />
   <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.0/es6-promise.auto.min.js"></script>
-
-
   <script>
     var letterSpacings = {}
     var productOptions = {}
@@ -36,36 +34,28 @@
         letterSpacings = json
       })
     })
-    fetch((window.baseUrl || '') + '/assets/js/product-options.json').then(function(response) {
-      response.json().then(function(json) {
-        productOptions = json
-      })
-    })
 
     var state = {
       bag: {
-        color: 'burlap-base-natural',
-        style: 'dani',
-        height: 9.5,
-        width: 12,
+        color: 'python-silver',
+        style: 'liz',
+        height: 5.5,
+        width: 8.5,
         img: {
-          height: 600,
-          width: 1050
+          height: 592,
+          width: 906
         }
       },
-      letters: 'AZ',
-      hasVariants: false,
-      letterAspectHeight: 0.22,
-      materials: ['brush-white', 'brush-white', 'brush-white', 'brush-white', 'brush-white', 'brush-white', 'brush-white', 'white', 'white', 'white', 'white', 'white'],
-      letterMaterial: 'brush',
-      tassel: 'rickrack-blue',
-      trim: 'rickrack-blue',
-      selectedCombo: 0,
+      letters: 'COOL',
+      letterMaterial: 'leather',
+      letterAspectHeight: 0.366,
+      activeSwatchSet: ['black', 'white', 'hotpink', 'lightturquoise', 'silver-metallic', 'gold-metallic'],
+      materials: ['white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white', 'white'],
       positions: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      activeSwatchSet: ['batik-blue', 'rickrack-blue', 'rickrack-orange', 'rickrack-pink', 'rickrack-red', 'pompom-white'],
-      activeLetter: -3,
+      hasVariants: false,
+      activeLetter: -1,
       editing: false,
-      editingBag: false,
+      editingBag: true,
       step: "custom-bar",
       navActive: false,
       arrow: {
