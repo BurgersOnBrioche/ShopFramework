@@ -54,6 +54,13 @@ $(document).ready(function() {
     $('#custombarBeach').parent().css({ position: 'relative' })
     $('#custombarBeach').before(html).remove()
   })
+  fetch((window.baseUrl || '') + '/assets/html/custombar-liz.html').then(function(response) {
+    return response.text()
+  }).then(function(html) {
+    html = html.replace(/assets\/img\//g, (window.baseUrl || '') + 'assets/img/')
+    $('#custombarLiz').parent().css({ position: 'relative' })
+    $('#custombarLiz').before(html).remove()
+  })
 })
 
 var lastState = $.extend({}, state);

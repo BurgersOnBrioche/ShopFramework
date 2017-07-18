@@ -1,0 +1,104 @@
+<section id="styleViewSection">
+  <div class="bag-style-thumbs-cnr">
+    <div class="bag-style">
+      <div class="bag-style-thumb">
+        <img src="assets/img/bags/dani-black.png" class="js-bag-style-link" data-style="dani" />
+      </div>
+      <div class="bag-style-thumb">
+        <img src="assets/img/bags/dani-black.png" class="js-bag-style-link" data-style="dani" />
+      </div>
+      <div class="bag-style-thumb">
+        <img src="assets/img/bags/dani-black.png" class="js-bag-style-link" data-style="dani" />
+      </div>
+    </div>
+  </div>
+  <div class="bag-style-cnr">
+    <div class="bag-style-details-thumb-cnr">
+      <div class="bag-style-details-thumb">
+        <img src="assets/img/bags/dani-black.png" alt="">
+      </div>
+      <div class="bag-style-details-thumb">
+        <img src="assets/img/bags/dani-black.png" alt="">
+      </div>
+      <div class="bag-style-details-thumb">
+        <img src="assets/img/bags/dani-black.png" alt="">
+      </div>
+      <div class="bag-style-details-thumb">
+        <img src="assets/img/bags/dani-black.png" alt="">
+      </div>
+    </div>
+    <div class="bag-style-main">
+
+    </div>
+  </div>
+</section>
+<section id="customBarSectionMain">
+  <div class="bag-color-thumbs-cnr js-bag-color-thumbs-cnr">
+    <div class="bag-color js-bag-color">
+      <i class="fa fa-arrow-right right-arrow-animating"></i>
+      <div class="bag-color-thumb js-bag-color-thumb">
+        <img src="assets/img/bags/liz-gold.png" class="js-bag-color-link" data-color="black" data-loaded="false" onload="setImageLoaded(this);" />
+      </div>
+      <div class="bag-color-thumb js-bag-color-thumb">
+        <img src="assets/img/bags/liz-silver.png" class="js-bag-color-link" data-color="white" data-loaded="false" onload="setImageLoaded(this);" />
+      </div>
+      <i class="fa fa-arrow-left left-arrow-animating"></i>
+    </div>
+  </div>
+  <div class="bag-custom liz js-bag-custom">
+    <div class="letters js-letters"></div>
+    <div class="spinner js-loading">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+
+  <label class="letter-label js-letter-label">
+        <i class="fa fa-arrow-right right-arrow-animating"></i>
+        <input class="js-bag-input letters-input " type="text" maxLength="2"  placeholder="A-Z"/>
+        <i class="fa fa-arrow-left left-arrow-animating"></i>
+  </label>
+  <div class="tab-cnr js-tab-cnr">
+    <i class="fa fa-arrow-right right-arrow-animating"></i>
+    <div class="tab-back js-tab-back js-tab-back-all tab-back-all">
+      <div class="tab tab-all js-tab js-tab-all js-click" data-index="-1">ALL</div>
+    </div>
+    <i class="fa fa-arrow-left left-arrow-animating"></i>
+  </div>
+  <div class="swatches js-swatches">
+    <i class="fa fa-arrow-right right-arrow-animating"></i>
+    <div class="swatch js-swatch" data-color="black">
+      <img src="assets/img/material-swatches/swatch-black.png" alt="black" class="js-swatch-link" data-color="black" />
+    </div>
+    <div class="swatch js-swatch" data-color="white">
+      <img src="assets/img/material-swatches/swatch-white.png" alt="white" class="js-swatch-link" data-color="white" />
+    </div>
+    <div class="swatch js-swatch" data-color="hotpink">
+      <img src="assets/img/material-swatches/swatch-hotpink.png" alt="hotpink" class="js-swatch-link" data-color="hotpink" />
+    </div>
+    <div class="swatch js-swatch" data-color="lightturquoise">
+      <img src="assets/img/material-swatches/swatch-lightturquoise.png" alt="lightturquoise" class="js-swatch-link" data-color="lightturquoise" />
+    </div>
+    <div class="swatch js-swatch" data-color="silver-metallic">
+      <img src="assets/img/material-swatches/swatch-silver-metallic.png" alt="silver-metallic" class="js-swatch-link" data-color="silver-metallic" />
+    </div>
+    <div class="swatch js-swatch" data-color="gold-metallic">
+      <img src="assets/img/material-swatches/swatch-gold-metallic.png" alt="gold-metallic" class="js-swatch-link" data-color="gold-metallic" />
+    </div>
+    <i class="fa fa-arrow-left left-arrow-animating"></i>
+  </div>
+</section>
+<section id="custombarNav">
+  <div class="js-show-custom-bar js-click show-custom-bar"><span>CUSTOMIZE ME    <i class="fa fa-chevron-right"></i></span></div>
+  <div class="js-back-to-bag-styles js-click back-to-bag-styles"><span><i class="fa fa-chevron-left"></i>       STYLES</span></div>
+  <div class="check-my-custom-out"><span>TAKE ME      <i class="fa fa-chevron-right"></i></span></div>
+</section>
+<script>
+  window.render()
+    // There are some race conditions with the DOM height sizing that make this setTimeout necessary.
+    // To reproduce: cmd+r in chrome incognito window on embedded shopify site
+  setTimeout(function() {
+    window.resize()
+  }, 1000)
+</script>
