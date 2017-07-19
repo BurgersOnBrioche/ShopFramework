@@ -151,7 +151,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  max-height: 43vh;
+  max-height: 35vh;
 }
 
 .bag-custom.liz {
@@ -163,7 +163,7 @@ body {
   align-items: flex-start;
   justify-content: center;
   position: relative;
-  max-height: 43vh;
+  max-height: 35vh;
 }
 
 .bag-custom.dani-beach {
