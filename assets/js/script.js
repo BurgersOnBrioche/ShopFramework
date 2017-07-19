@@ -569,14 +569,19 @@ function renderShopify() {
   } else if (state.letters.length == 0) {
     combo = 7
   }
-  var selectedOption = productOptions.product[state.bag.altName]["variants"][combo]["sku"]
 
+  var selectedOption
+
+  try {
+    selectedOption = productOptions.product[state.bag.altName]["variants"][combo]["sku"]
+  } catch (e) {
+    console.log(e)
+  }
 
   try {
     optionSelectorPr.selectVariant(selectedOption)
-
   } catch (e) {
-
+    console.log(e)
   }
 
 

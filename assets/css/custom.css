@@ -187,8 +187,8 @@ body {
 }
 
 .letters.liz {
-  position: relative;
-  top: 5%;
+  position: absolute;
+  top: 14%;
 }
 
 .letters img {
