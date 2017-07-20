@@ -72,7 +72,7 @@ body {
 
 #customBarSectionMain {
   display: none;
-  height: 65vh;
+  height: 75vh;
   width: 100%;
   min-width: 291px;
   overflow: scroll;
