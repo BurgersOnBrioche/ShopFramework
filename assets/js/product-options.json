@@ -63,34 +63,29 @@
         }
       },
       "variants": [{
-          "sku": 39436054349,
-          "label": "1 Leather Letter/Symbol",
-          "price": 95.00
+          "sku": 40591381773,
+          "label": "None",
+          "price": 395.00
         },
         {
-          "sku": 39436054413,
-          "label": "2 Leather Letter/Symbol",
-          "price": 105.00
+          "sku": 40591391245,
+          "label": "One",
+          "price": 410.00
         },
         {
-          "sku": 39436054477,
-          "label": "3 Leather Letter/Symbol",
-          "price": 115.00
+          "sku": 40591391309,
+          "label": "Two",
+          "price": 425.00
         },
         {
-          "sku": 39436054541,
-          "label": "4 Leather Letter/Symbol",
-          "price": 125.00
+          "sku": 40591391373,
+          "label": "Three",
+          "price": 440.00
         },
         {
-          "sku": 39436054733,
-          "label": "Plain",
-          "price": 85.00
-        },
-        {
-          "sku": 39694693581,
-          "label": "No Letters",
-          "price": 85.00
+          "sku": 40591391437,
+          "label": "Four",
+          "price": 455.00
         }
       ]
     },
